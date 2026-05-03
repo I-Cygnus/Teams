@@ -67,42 +67,20 @@ export default function Team() {
                 aria-label={`${m.name} — ${m.role}`}
                 className={`group w-full flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-10 lg:gap-16 text-left outline-none`}
               >
-                {/* Portrait card */}
-                <div className="lg:w-[44%] w-full">
+                {/* Portrait — freestanding circular avatar */}
+                <div className="lg:w-[44%] w-full flex justify-center lg:justify-start">
                   <motion.div
                     layoutId={`avatar-${m.id}`}
                     transition={{ duration: SHARED_DURATION, ease }}
-                    className="relative aspect-[4/5] rounded-[32px] overflow-hidden flex items-end justify-center"
-                    style={{
-                      background: `linear-gradient(160deg, ${m.accent}28 0%, #fff 78%)`,
-                    }}
+                    className="relative"
                   >
-                    <div
-                      className="absolute -inset-12 rounded-full blur-3xl opacity-25 transition-opacity duration-700"
-                      style={{ background: m.accent, opacity: isHover ? 0.32 : 0.18 }}
-                    />
                     <Avatar
                       member={m}
                       hover={isHover}
-                      size={m.image ? 360 : 280}
-                      rounded={m.image ? '3xl' : 'full'}
+                      size={340}
+                      rounded="full"
                       className="relative"
                     />
-
-                    {/* Role chip */}
-                    <motion.span
-                      layoutId={`role-${m.id}`}
-                      transition={{ duration: SHARED_DURATION, ease }}
-                      className="absolute top-6 left-6 px-3.5 py-1.5 rounded-full text-[10px] font-bold tracking-[0.22em] uppercase bg-white/95 backdrop-blur shadow-sm"
-                      style={{ color: m.accent }}
-                    >
-                      {m.role}
-                    </motion.span>
-
-                    {/* Index badge */}
-                    <span className="absolute top-6 right-6 px-3 py-1 rounded-full bg-[#0b0b0d]/85 text-white text-[10px] font-bold tracking-[0.18em] tabular-nums">
-                      0{i + 1}
-                    </span>
                   </motion.div>
                 </div>
 

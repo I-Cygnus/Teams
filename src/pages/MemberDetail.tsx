@@ -43,35 +43,19 @@ export default function MemberDetail() {
 
         {/* Hero — editorial: portrait left, identity right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          {/* Portrait */}
-          <div className="lg:col-span-5">
+          {/* Portrait — freestanding circular avatar */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-start">
             <motion.div
               layoutId={`avatar-${member.id}`}
               transition={{ duration: SHARED_DURATION, ease }}
-              className="relative aspect-[4/5] rounded-[32px] overflow-hidden flex items-end justify-center"
-              style={{
-                background: `linear-gradient(160deg, ${member.accent}33 0%, #fff 78%)`,
-              }}
+              className="relative"
             >
-              <div
-                className="absolute -inset-10 rounded-full blur-3xl opacity-30"
-                style={{ background: member.accent }}
-              />
               <Avatar
                 member={member}
-                size={member.image ? 380 : 280}
-                rounded={member.image ? '3xl' : 'full'}
+                size={360}
+                rounded="full"
                 className="relative"
               />
-
-              <motion.span
-                layoutId={`role-${member.id}`}
-                transition={{ duration: SHARED_DURATION, ease }}
-                className="absolute top-6 left-6 px-3.5 py-1.5 rounded-full text-[10px] font-bold tracking-[0.22em] uppercase bg-white/95 backdrop-blur shadow-sm"
-                style={{ color: member.accent }}
-              >
-                {member.role}
-              </motion.span>
             </motion.div>
           </div>
 

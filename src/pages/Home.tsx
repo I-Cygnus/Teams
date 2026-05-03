@@ -109,23 +109,8 @@ export default function Home() {
       {/* ───────── TEAM (compact, circular) ───────── */}
       <section className="px-6 border-y border-[#eee] bg-white py-20 sm:py-24">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-end justify-between mb-12 gap-6 flex-wrap">
-            <div>
-              <p className="text-[11px] font-semibold tracking-[0.28em] text-[#999] uppercase mb-3">Members</p>
-              <h2 className="text-[clamp(1.8rem,3.6vw,2.4rem)] font-bold tracking-[-0.025em] text-[#111]">
-                세 사람, 세 시선.
-              </h2>
-            </div>
-            <Link
-              to="/team"
-              className="text-[12px] font-semibold text-[#666] hover:text-[#111] transition-colors flex items-center gap-1.5"
-            >
-              팀원 전체 보기 <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
           <div
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-y-12 gap-x-10 sm:gap-x-16 lg:gap-x-24"
             onMouseLeave={() => setHovered(null)}
           >
             {teamMembers.map((m, idx) => {
@@ -142,7 +127,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.6, delay: idx * 0.08, ease }}
-                  className="group relative flex flex-col items-center text-center px-6 py-9 rounded-3xl bg-white border border-[#ececec] hover:border-[#0b0b0d]/35 hover:-translate-y-1 hover:shadow-[0_24px_50px_-25px_rgba(0,0,0,0.18)] transition-all"
+                  className="group relative flex flex-col items-center text-center px-4 py-6 hover:-translate-y-1 transition-transform"
                   aria-label={`${m.name} — ${m.role}`}
                 >
                   {/* Circular avatar with halo */}
@@ -164,7 +149,7 @@ export default function Home() {
                     <motion.div
                       animate={{ y: isHover ? -4 : 0, scale: isHover ? 1.04 : 1 }}
                       transition={{ duration: 0.5, ease }}
-                      className="relative w-[150px] h-[150px] rounded-full overflow-hidden flex items-center justify-center"
+                      className="relative w-[220px] h-[220px] sm:w-[240px] sm:h-[240px] rounded-full overflow-hidden flex items-center justify-center"
                       style={{
                         background: `radial-gradient(circle at 30% 25%, ${m.accent}40 0%, ${m.accent}15 45%, #fff 90%)`,
                         boxShadow: `inset 0 0 0 1px ${m.accent}25`,
@@ -173,7 +158,7 @@ export default function Home() {
                       <Avatar
                         member={m}
                         hover={isHover}
-                        size={150}
+                        size={240}
                         rounded="full"
                       />
                     </motion.div>
