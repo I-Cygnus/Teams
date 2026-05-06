@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
-import { blogPosts, teamMembers, troubleshootings } from '../data';
+import { teamMembers, troubleshootings } from '../data';
 import type { MemberId } from '../data';
+import { blogPosts } from '../blog';
 import Avatar from '../components/Avatar';
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -297,7 +298,12 @@ export default function Home() {
               .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
               .slice(0, 3)
               .map((p, i) => {
-                const author = teamMembers.find((m) => m.id === p.authorId);
+                const teamAuthor = teamMembers.find((m) => m.id === p.authorId);
+                const author = p.authorOverride
+                  ? { name: p.authorOverride.name, accent: p.authorOverride.accent }
+                  : teamAuthor
+                    ? { name: teamAuthor.name, accent: teamAuthor.accent }
+                    : { name: 'Team', accent: '#888' };
                 const d = new Date(p.publishedAt);
                 const dateStr = `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, '0')}. ${String(d.getDate()).padStart(2, '0')}`;
                 return (
@@ -306,7 +312,7 @@ export default function Home() {
                     initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }}
                     custom={i} variants={fade}
                   >
-                    <Link to={`/blog/${p.id}`} className="group block">
+                    <Link to={`/blog/${p.package}/${p.id}`} className="group block">
                       <div className="aspect-[5/3] rounded-2xl overflow-hidden mb-5">
                         <div
                           className="w-full h-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"

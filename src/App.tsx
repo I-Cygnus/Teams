@@ -10,6 +10,7 @@ import TroubleshootingPage from './pages/Troubleshooting';
 import TroubleshootingDetail from './pages/TroubleshootingDetail';
 import Resume from './pages/Resume';
 import Blog from './pages/Blog';
+import BlogPackagePage from './pages/BlogPackagePage';
 import BlogDetail from './pages/BlogDetail';
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -34,7 +35,8 @@ function AnimatedShell() {
               <Route path="/troubleshooting" element={<TroubleshootingPage />} />
               <Route path="/troubleshooting/:id" element={<TroubleshootingDetail />} />
               <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogDetail />} />
+              <Route path="/blog/:pkg" element={<BlogPackagePage />} />
+              <Route path="/blog/:pkg/:id" element={<BlogDetail />} />
               <Route path="/choi/*" element={<ChoiRedirect />} />
             </Routes>
           </motion.div>
