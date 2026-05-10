@@ -1,4 +1,4 @@
-export type MemberId = 'hyeonsu' | 'member-b' | 'member-c';
+export type MemberId = 'hyeonsu' | 'member-b' | 'min';
 export type Gender = 'male' | 'female';
 
 export interface Project {
@@ -99,41 +99,25 @@ export const teamMembers: TeamMember[] = [
     ],
   },
   {
-    id: 'member-c',
-    name: '팀원 C',
-    role: 'PM · Strategist',
+    id: 'min',
+    name: 'min',
+    role: 'Fullstack Developer',
     gender: 'female',
-    tagline: '데이터와 공감으로 길을 찾는 전략가',
-    taglineExt: ' — 숫자와 이야기 사이에서 팀의 방향을 설계하는.',
-    brief: '데이터로 이야기하고 공감으로 설계하는 전략가',
-    bio: '팀의 방향을 잡고 사용자의 목소리를 제품에 담습니다. 좋은 기획은 좋은 질문에서 시작된다는 철학으로, 끊임없이 묻고 검증합니다.',
-    tags: ['Strategy', 'User Research', 'Data Analysis', 'Agile'],
-    quote: '좋은 기획은 좋은 질문에서 시작됩니다.',
+    tagline: '아이디어와 구현 사이를 잇는 개발자',
+    taglineExt: ' — 기획의 흐름을 코드와 데이터로 연결하는 사람.',
+    brief: '서비스 흐름을 이해하고 직접 구현하는 풀스택 개발자',
+    bio: '콘텐츠 기획과 운영 경험을 바탕으로 사용자의 흐름과 서비스 정책을 이해하고, 이를 실제 기능과 데이터 구조로 구현하는 개발자입니다.',
+    tags: ['Java', 'Spring Boot', 'JPA', 'MySQL', 'React', 'TypeScript'],
+    quote: '아이디어를 그리고, 흐름을 만들고, 코드로 연결합니다.',
     accent: '#8B5CF6',
     projects: [
       {
-        id: 'roadmap-2025',
-        title: '2025 프로덕트 로드맵',
+        id: 'ipoten-learning-platform',
+        title: 'I-Poten 학습 플랫폼',
         period: '2025',
-        role: 'Product Strategy',
-        summary: '3개 분기에 걸친 OKR 설계와 우선순위 프레임워크를 수립, 팀의 집중도와 실행 속도를 동시에 높임.',
-        tags: ['Strategy', 'OKR', 'Roadmap'],
-      },
-      {
-        id: 'user-insight',
-        title: '사용자 인사이트 리서치',
-        period: '2024',
-        role: 'Research Lead',
-        summary: '심층 인터뷰 24회 + 정량 분석을 결합, 핵심 페르소나 3종을 정의하고 제품 방향을 재정렬.',
-        tags: ['Research', 'Interview', 'Persona'],
-      },
-      {
-        id: 'process-reform',
-        title: '프로세스 개선 프로젝트',
-        period: '2024',
-        role: 'Program Manager',
-        summary: '재작업률 30% → 8%로 낮춘 커뮤니케이션 구조 재설계. 스프린트 완료율 90% 달성.',
-        tags: ['Process', 'Agile', 'Communication'],
+        role: 'Fullstack Developer',
+        summary: 'IT 개발자 취업 준비생을 위한 학습 플랫폼에서 용어 검색, 개인 단어장 저장, 복습, 퀴즈 기능을 구현하며 화면과 API, 데이터베이스 흐름을 연결했습니다.',
+        tags: ['Spring Boot', 'JPA', 'MySQL', 'React', 'TypeScript'],
       },
     ],
   },
@@ -141,7 +125,7 @@ export const teamMembers: TeamMember[] = [
 
 export type BlogCategory = 'Frontend' | 'Design' | 'Product' | 'Culture' | 'Backend';
 
-export type BlogPackage = 'choi' | 'common';
+export type BlogPackage = 'choi' | 'common' | 'min';
 
 export interface BlogBlock {
   type: 'h2' | 'h3' | 'p' | 'quote' | 'list' | 'code' | 'table' | 'hr';
