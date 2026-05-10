@@ -1,10 +1,12 @@
 import type { BlogPackage, BlogPost } from '../data';
 import { choiPosts } from './choi';
 import { commonPosts } from './common';
+import { minPosts } from "./min";
 
 export const blogPosts: BlogPost[] = [
   ...choiPosts,
   ...commonPosts,
+  ...minPosts,
 ];
 
 export const PACKAGES: { id: BlogPackage; label: string; description: string }[] = [
@@ -17,6 +19,11 @@ export const PACKAGES: { id: BlogPackage; label: string; description: string }[]
     id: 'common',
     label: 'Common',
     description: '팀이 함께 모은 프론트엔드·디자인·프로덕트 기록.',
+  },
+  {
+    id: 'min',
+    label: 'min',
+    description: 'idea와 ideal 사이를 기록하다.',
   },
 ];
 

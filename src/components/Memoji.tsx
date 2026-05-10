@@ -24,7 +24,7 @@ const PALETTE: Record<MemberId, { bgFrom: string; bgTo: string; ring: string; sk
     hair: '#3A2A1F',
     accent: '#F59E0B',
   },
-  'member-c': {
+  'min': {
     bgFrom: '#F1E8FF',
     bgTo: '#CBB4F6',
     ring: 'rgba(139, 92, 246, 0.18)',
@@ -76,7 +76,7 @@ export default function Memoji({ id, hover = false, size = 200 }: MemojiProps) {
         <g clipPath={`url(#clip-${id})`}>
           {id === 'hyeonsu' && <FaceHyeonsu palette={p} hover={hover} />}
           {id === 'member-b' && <FaceMemberB palette={p} hover={hover} />}
-          {id === 'member-c' && <FaceMemberC palette={p} hover={hover} />}
+          {id === 'min' && <FaceMemberC palette={p} hover={hover} />}
         </g>
       </svg>
     </div>
