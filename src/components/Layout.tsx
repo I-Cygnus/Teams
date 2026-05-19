@@ -6,6 +6,7 @@ const links = [
   { to: '/team', label: 'Team' },
   { to: '/blog', label: 'Blog' },
   { to: '/troubleshooting', label: 'Troubleshooting' },
+  { to: '/data', label: 'ERD' },
 ];
 
 export default function Layout({ children }: { children: ReactNode }) {

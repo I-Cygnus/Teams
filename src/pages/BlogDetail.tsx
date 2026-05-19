@@ -140,6 +140,23 @@ function Block({ block, isFirstParagraph, accent }: { block: BlogBlock; isFirstP
           </table>
         </div>
       );
+    case 'image':
+      return (
+        <figure className="my-10">
+          <div className="rounded-2xl overflow-hidden border border-[#eee] bg-[#fafafa]">
+            <img
+              src={block.src}
+              alt={block.alt ?? ''}
+              className="w-full h-auto object-contain"
+            />
+          </div>
+          {block.caption && (
+            <figcaption className="mt-3 text-center text-[12.5px] text-[#999] leading-[1.6]">
+              {block.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
     case 'hr':
       return (
         <div className="my-12 flex items-center justify-center">

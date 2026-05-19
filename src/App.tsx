@@ -12,6 +12,7 @@ import Resume from './pages/Resume';
 import Blog from './pages/Blog';
 import BlogPackagePage from './pages/BlogPackagePage';
 import BlogDetail from './pages/BlogDetail';
+import ERDEditor from './pages/ERDEditor';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -30,13 +31,13 @@ function AnimatedShell() {
             <Routes location={location}>
               <Route path="/" element={<Home />} />
               <Route path="/team" element={<Team />} />
-              <Route path="/team/hyeonsu/resume" element={<Resume />} />
               <Route path="/team/:id" element={<MemberDetail />} />
               <Route path="/troubleshooting" element={<TroubleshootingPage />} />
               <Route path="/troubleshooting/:id" element={<TroubleshootingDetail />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:pkg" element={<BlogPackagePage />} />
               <Route path="/blog/:pkg/:id" element={<BlogDetail />} />
+              <Route path="/data" element={<ERDEditor />} />
               <Route path="/choi/*" element={<ChoiRedirect />} />
             </Routes>
           </motion.div>
@@ -53,13 +54,24 @@ function ChoiRedirect() {
   return null;
 }
 
+function ShellRouter() {
+  const location = useLocation();
+
+  if (location.pathname === '/team/hyeonsu/resume') {
+    return <Resume />;
+  }
+
+  return <AnimatedShell />;
+}
+
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
+  const isResume = typeof window !== 'undefined' && window.location.pathname === '/team/hyeonsu/resume';
 
   return (
     <BrowserRouter>
-      {showIntro && <IntroAnimation onComplete={() => setShowIntro(false)} />}
-      <AnimatedShell />
+      {showIntro && !isResume && <IntroAnimation onComplete={() => setShowIntro(false)} />}
+      <ShellRouter />
     </BrowserRouter>
   );
 }

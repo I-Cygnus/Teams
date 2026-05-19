@@ -1,0 +1,558 @@
+/* Scoped styles for /team/hyeonsu/resume page (port of gemini resume) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+.resume-page {
+  --primary-color: #2664A6;
+  --text-dark: #2A2A2A;
+  --text-gray: #7E8691;
+  --text-light-gray: #A0A5AD;
+  --bg-color: #FAFBFC;
+  --border-color: #E6E8EA;
+  --timeline-line: #A2C4E9;
+  --timeline-dot: #8EACCC;
+
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.resume-page * {
+  box-sizing: border-box;
+}
+
+.resume-page .resume-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.resume-page .resume-content {
+  padding: 60px 100px 80px;
+  position: relative;
+}
+
+.resume-page .resume-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50px;
+  pointer-events: none;
+}
+
+.resume-page .section-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 40px 0;
+}
+
+.resume-page .section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 28px 0;
+  display: flex;
+  align-items: baseline;
+}
+
+.resume-page .section-title .subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-gray);
+  margin-left: 16px;
+  position: relative;
+}
+
+.resume-page .section-title .subtitle::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 14px;
+  width: 1px;
+  background-color: var(--text-gray);
+}
+
+/* Profile */
+.resume-page .profile-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.resume-page .profile-info {
+  flex: 1;
+}
+
+.resume-page .profile-name-area {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 15px;
+}
+
+.resume-page .profile-name-kr {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: -2px;
+  margin: 0;
+  line-height: 1;
+}
+
+.resume-page .profile-name-en {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  margin-left: 15px;
+}
+
+.resume-page .profile-title-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-color);
+  margin-bottom: 25px;
+}
+
+.resume-page .profile-motto {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.resume-page .profile-motto-en {
+  font-size: 1rem;
+  color: #4A535E;
+  font-weight: 400;
+  line-height: 1.8;
+  max-width: 640px;
+  margin-bottom: 30px;
+  letter-spacing: -0.1px;
+}
+
+.resume-page .profile-motto-en p {
+  margin: 0 0 14px 0;
+}
+
+.resume-page .profile-motto-en p:last-child {
+  margin-bottom: 0;
+}
+
+.resume-page .profile-motto-en strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.resume-page .profile-contact {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 28px;
+  row-gap: 12px;
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.resume-page .contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resume-page .contact-item svg {
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.resume-page a.contact-item {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.resume-page a.contact-item:hover {
+  color: var(--primary-color);
+}
+
+.resume-page .profile-image-container {
+  width: 240px;
+  height: 240px;
+  border-radius: 50% 0 50% 50%;
+  overflow: hidden;
+  background-color: #E8F0F8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(38, 100, 166, 0.15);
+  margin-left: 40px;
+  flex-shrink: 0;
+}
+
+.resume-page .profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Skills */
+.resume-page .skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resume-page .skill-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.resume-page .skill-row:last-child {
+  border-bottom: none;
+}
+
+.resume-page .skill-level {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 230px;
+  flex-shrink: 0;
+}
+
+.resume-page .skill-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+}
+
+.resume-page .skill-row .tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+}
+
+.resume-page .skill-row .tag {
+  background-color: #E8F0F8;
+  color: var(--primary-color);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Projects */
+.resume-page .project-card {
+  margin-bottom: 50px;
+}
+
+.resume-page .project-card:last-child {
+  margin-bottom: 0;
+}
+
+.resume-page .project-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: var(--text-dark);
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  letter-spacing: -0.5px;
+}
+
+.resume-page .project-role {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-gray);
+  margin-left: 16px;
+  position: relative;
+}
+
+.resume-page .project-role::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 14px;
+  width: 1px;
+  background-color: var(--border-color);
+}
+
+.resume-page .project-subtitle {
+  font-size: 1rem;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.resume-page .project-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.resume-page .project-link:hover {
+  border-bottom-color: var(--primary-color);
+}
+
+.resume-page .project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--bg-color);
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.resume-page .project-row {
+  display: flex;
+  gap: 20px;
+}
+
+.resume-page .project-label {
+  min-width: 100px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.resume-page .project-desc {
+  flex: 1;
+  color: var(--text-dark);
+}
+
+.resume-page .project-desc ul {
+  padding-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.resume-page .project-desc li {
+  margin-bottom: 6px;
+}
+
+.resume-page .tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resume-page .tag {
+  background-color: #E8F0F8;
+  color: var(--primary-color);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Education */
+.resume-page .education-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.resume-page .edu-section {
+  width: 100%;
+}
+
+.resume-page .edu-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.resume-page .edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.resume-page .edu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.resume-page .edu-info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.resume-page .edu-school {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.resume-page .edu-score {
+  font-weight: 500;
+  color: var(--text-gray);
+}
+
+.resume-page .edu-date {
+  color: var(--text-light-gray);
+  font-weight: 400;
+}
+
+.resume-page .edu-bullet-row ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.resume-page .edu-bullet-row li {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+/* Print toolbar */
+.resume-page .print-toolbar {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(38, 100, 166, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.resume-page .print-toolbar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(38, 100, 166, 0.14);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .resume-page .resume-content {
+    padding: 40px 28px 60px;
+  }
+  .resume-page .profile-section {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .resume-page .profile-image-container {
+    width: 160px;
+    height: 160px;
+    margin-left: 0;
+  }
+  .resume-page .profile-name-kr {
+    font-size: 2.6rem;
+  }
+  .resume-page .profile-name-en {
+    font-size: 1.2rem;
+    margin-left: 10px;
+  }
+  .resume-page .section-title {
+    font-size: 1.5rem;
+  }
+  .resume-page .project-title {
+    font-size: 1.5rem;
+  }
+  .resume-page .skill-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .resume-page .skill-level {
+    min-width: 0;
+  }
+  .resume-page .project-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .resume-page .edu-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+/* Print */
+@page {
+  size: 1100px 1556px;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 1100px;
+    background: #FFFFFF;
+  }
+  .resume-page * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  .resume-page .resume-container {
+    max-width: 1100px;
+    width: 1100px;
+    margin: 0;
+    box-shadow: none;
+    min-height: auto;
+  }
+  .resume-page a,
+  .resume-page a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+  .resume-page .project-link,
+  .resume-page a.contact-item {
+    color: var(--primary-color);
+  }
+  .resume-page .project-card,
+  .resume-page .skill-row,
+  .resume-page .edu-row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .resume-page .section-title,
+  .resume-page .edu-title {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  .resume-page .profile-image-container {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  .resume-page .profile-image {
+    border-radius: 50% 0 50% 50%;
+  }
+  .resume-page .print-toolbar {
+    display: none !important;
+  }
+}

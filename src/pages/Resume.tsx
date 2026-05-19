@@ -1,412 +1,449 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Phone, Mail, Code, ExternalLink, Printer } from 'lucide-react';
-import Memoji from '../components/Memoji';
+import { useEffect } from 'react';
+import { Phone, Mail, BookOpen, Calendar, Briefcase, Printer } from 'lucide-react';
+import './Resume.css';
 
-const ease = [0.22, 1, 0.36, 1] as const;
-const ACCENT = '#4C6EF5';
-
-const fade = {
-  hidden: { opacity: 0, y: 18 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, delay: i * 0.06, ease },
-  }),
-};
-
-type Project = {
-  title: string;
-  subtitle?: string;
-  period: string;
-  link?: string;
-  stack: string[];
-  bullets: string[];
-};
-
-const projects: Project[] = [
-  {
-    title: 'I-Poten (Job-Spoon)',
-    period: '2025.08 ~ 2026.02',
-    link: 'https://i-poten.com',
-    stack: ['Spring Boot', 'Redis', 'AWS', 'FastAPI', 'JPA', 'MFE', 'Django', 'React', 'CloudFront', 'OAuth2.0'],
-    bullets: [
-      'DDD 기반 도메인 중심 설계 Spring 기반 API 구현',
-      'PM 부재 환경에서 500여 개 백로그 관리 및 스프린트 플래닝 주도',
-      'RAG + Agent 기반 AI 면접 파이프라인 설계 및 구현',
-      '멀티 컨테이너 아키텍처 구축 (Spring · FastAPI · Frontend)',
-      'Django → Spring Boot 전환 및 도메인 구조 재설계',
-      'Spring Security 없이 Interceptor + 커스텀 어노테이션으로 인증 파이프라인 구현',
-      'HttpOnly 쿠키 특성을 활용한 Nginx 레벨 차단 정책 설계·적용 — 인증 트래픽 약 90% 감소, 응답 시간 ~200ms → <1ms',
-      'OAuth2 기반 6개 소셜 로그인 (Google · Kakao · Naver · GitHub · Apple · Meta)',
-      'AWS · Docker · CI/CD 기반 서비스 배포 및 운영',
-      'Spring 반복 폴링 → FastAPI · SES 비동기 알림 전환으로 서버 리소스 절감',
-    ],
-  },
-  {
-    title: 'I-Fence (Core-Sync)',
-    subtitle: 'HR + Agile 협업 툴, Cygnus 팀이 실제로 사용 중인 협업 플랫폼',
-    period: '2025.10.10 ~ 2025.10.23',
-    stack: ['Spring Boot', 'Redis', 'AWS', 'WebSocket', 'JPA', 'React'],
-    bullets: [
-      '프로젝트 A–Z 전 과정 수행 및 REST API 구축',
-      'Notion 기반 애자일 프로세스와 협업 환경을 직접 구현',
-      'MSA 구조 → 모노 기반 전환 후 실제 서비스 배포 · 팀 내 사용',
-      'AWS Route53, CloudFront, ALB, S3, EC2 기반 HTTPS 실도메인 배포',
-      '부트캠프 최단기간 · 최소인원 최우수 프로젝트 선정',
-    ],
-  },
-  {
-    title: 'TTP (Time To Play)',
-    subtitle: '웹소켓 기반 실시간 멀티플레이 게임 플랫폼 · 개인 프로젝트',
-    period: '2024.11 ~ 진행중',
-    stack: ['Spring Boot', 'Redis', 'AWS', 'WebSocket', 'JPA', 'React'],
-    bullets: [
-      '실 사용자 140명 달성',
-      'WebSocket 기반 실시간 멀티 게임 상호작용 구조 설계 및 구현',
-      '콘텐츠 생성 · 게임 · 통계까지 단일 사용자 흐름으로 연결',
-      '브라우저 ID 기반 사용자 간 실시간 상태 동기화 안정화',
-      '웹소켓 최적화로 불필요한 연결 감소 및 성능 개선',
-      'End-to-End: 기획 · 개발 · 배포 · 개선 전 과정 수행',
-    ],
-  },
-  {
-    title: 'IntellyCosm',
-    subtitle: 'AI 기반 화장품 성분 분석 및 맞춤 추천 플랫폼',
-    period: '2024.03 ~ 2024.06',
-    stack: ['Spring Boot', 'JPA', 'MySQL', 'Redis', 'AWS', 'Kafka', 'React'],
-    bullets: [
-      'Java 백엔드 ↔ Python AI 스크립트 ↔ OpenAI API AI 파이프라인 구축',
-      '피부 타입별 성분 적합도 점수 알고리즘 설계',
-      '배치 크기 / 스레드 수 조합 테스트로 처리량 2.4배 향상',
-      'Redis TTL 차별화 + 캐시 무효화 정책 설계',
-      'Auto Scaling + ALB + RDS + ElastiCache 기반 AWS 인프라 운영',
-      '전체 76개 REST API Spec 설계 및 구현',
-      'Python 기반 OCR 모듈 통합, 대량 성분 데이터 Redis 캐싱 레이어 도입',
-    ],
-  },
-];
-
-const education = [
-  {
-    school: '가천대학교 (편입)',
-    major: '컴퓨터공학과 · 학사',
-    period: '2023.03 ~ 2025.02',
-    gpa: '3.87 / 4.5',
-  },
-  {
-    school: '군산대학교',
-    major: '소프트웨어공학과 · 학사',
-    period: '2018.03 ~ 2020.02',
-    gpa: '4.03 / 4.5',
-  },
-  {
-    school: '엔코아 플레이데이터',
-    major: '풀스택 개발자 양성과정 10회차',
-    period: '2025.04 ~ 2025.10 수료',
-  },
-];
-
-const about = [
-  {
-    heading: '저는 이런 사람이에요',
-    body: [
-      '어릴 때부터 선택과 책임을 중요하게 생각하며, 스스로 길을 찾고 만들어가는 삶을 살아왔습니다. 학원이나 과외 없이 방법을 고민하고 직접 실행하며 성장했고, 그 과정에서 얻은 경험들이 지금의 저를 만들었습니다. 정해진 방식에 의존하지 않고 스스로 해결해 나가는 힘을 기를 수 있었습니다.',
-      '20살부터는 등록금과 생활비를 스스로 해결해왔습니다. 조금 다른 길을 걸으며 어려움도 겪었지만, 그 경험 덕분에 누구보다 당당하고 강한 마음을 가질 수 있었습니다. 스스로 선택한 길에 책임을 지는 것이 결국 저를 더 단단하게 만들었다고 생각합니다.',
-      '저는 새로운 도전을 즐깁니다. 실패를 두려워하지 않으며, 작은 성공들이 쌓여 큰 변화를 만든다고 믿습니다. 편입, 대학 우수 프로젝트 선정, 교내 프로젝트 심사위원 개인 초청까지 — 하나하나의 성취가 더 큰 도약의 발판이 되었습니다.',
-    ],
-  },
-  {
-    heading: '저는 이렇게 어려움을 해결해나가요',
-    body: [
-      '프로젝트를 진행하며 팀워크와 리더십의 어려움을 직접 경험하고, 이를 극복하기 위해 노력해왔습니다. 초기 프로젝트에서 리더로서 일정 계획과 업무 분배를 맡았지만, 참여도 낮은 팀원들로 인해 진행이 지연되는 상황이 있었습니다. 포기할 수 없었던 저는 부족한 부분을 직접 메우기 위해 새로운 기술을 익히고 밤을 새워 개발을 완수했고, 좋은 평가를 받을 수 있었습니다.',
-      '이후 『장사의 신』을 비롯한 리더십 서적과 조언을 참고하며 "사람에게 주인의식을 느끼게 하는 것"의 중요성을 깨달았습니다. 내가 만드는 서비스에 애정을 가지는 태도가 당연한 것이 아니라 저의 강점임을 인식하게 되었고, 이를 팀원들과 공유하며 모두가 주인의식을 가질 수 있도록 이끄는 리더십의 중요성을 이해하게 되었습니다.',
-      'I-Poten 등 이후 프로젝트에서는 프로젝트 핵심 목표와 필수 기능을 명확히 정의하고, 서비스 관점에서 정기적으로 논의하는 시간을 마련했습니다. 아이디어 → 구현 → 사용자 관점 개선 → 기술적 개선의 플로우로 진행하며, 팀원들이 개인 성과가 아닌 서비스 완성도와 사용자 경험을 최우선으로 고려하도록 유도했습니다.',
-    ],
-  },
-  {
-    heading: '저는 이렇게 성장해요',
-    body: [
-      '여러 서비스를 직접 만들며 제게 가장 부족한 부분이 협업·소통·기초라는 것을 깨달았습니다. 항상 혼자 공부하던 저는, 누군가에게 배우고 평가받으며 함께 성장하고 싶었고, 이를 위해 엔코아 부트캠프에 참여했습니다.',
-      '부트캠프에서 4번의 팀 프로젝트에서 팀장을 맡으며 많은 호평을 받았고, 별도로 동료들과 진행한 프로젝트에서는 팔로워로서의 연구·협업을 경험하며 균형 잡힌 역량을 쌓았습니다. 서비스 완성에만 급급하지 않고 백로그 관리와 코드 리뷰를 통해 코드 품질과 재사용성을 높이는 법을 배웠습니다.',
-      '또한 Eddi 개발자 그룹에서 매일 평균 다섯 건 이상의 질문과 토론을 이어가며, 선생님·선배 개발자분들에게 배우는 과정은 제게 큰 즐거움과 빠른 성장을 가능하게 했습니다.',
-      '저는 단순히 개발자가 되는 것을 넘어, 인정받고 누군가에게 인사이트를 줄 수 있는 개발자로 성장하기 위해 앞으로도 꾸준히 배우고 도전할 것입니다.',
-    ],
-  },
-];
+function Github({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18.91-.25 1.89-.38 2.86-.38.97 0 1.95.13 2.86.38 2.18-1.49 3.14-1.18 3.14-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z" />
+    </svg>
+  );
+}
 
 export default function Resume() {
+  useEffect(() => {
+    const prev = document.body.style.background;
+    document.body.style.background = '#FAFBFC';
+    return () => {
+      document.body.style.background = prev;
+    };
+  }, []);
+
   return (
-    <div className="pt-24 sm:pt-28 pb-32 px-6 bg-[#fafafa]">
-      <div className="max-w-3xl mx-auto">
-        {/* Top bar */}
-        <div className="flex items-center justify-between mb-14 print:hidden">
-          <motion.div initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, ease }}>
-            <Link
-              to="/team/hyeonsu"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#999] hover:text-[#111] transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> 프로필로 돌아가기
-            </Link>
-          </motion.div>
-          <motion.button
-            type="button"
-            onClick={() => window.print()}
-            initial={{ opacity: 0, x: 6 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, ease }}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-[#555] hover:text-[#111] px-3 py-1.5 rounded-md border border-[#e5e5e5] hover:border-[#ccc] bg-white transition-colors"
-          >
-            <Printer className="w-3.5 h-3.5" /> 인쇄 · PDF 저장
-          </motion.button>
+    <div className="resume-page">
+      <button
+        type="button"
+        onClick={() => window.print()}
+        className="print-toolbar"
+        aria-label="인쇄 또는 PDF 저장"
+      >
+        <Printer size={14} />
+        인쇄 · PDF
+      </button>
+
+      <div className="resume-container">
+        <div className="resume-content">
+          <main>
+            <Profile />
+
+            <div className="section-divider" />
+
+            <section className="skills-section">
+              <h2 className="section-title">
+                Skills <span className="subtitle">| 기술 역량</span>
+              </h2>
+              <Skills />
+            </section>
+
+            <div className="section-divider" />
+
+            <section className="experience-section">
+              <h2 className="section-title">
+                Experience <span className="subtitle">| 인턴 · 실무 경험</span>
+              </h2>
+              <Experience />
+            </section>
+
+            <div className="section-divider" />
+
+            <section className="projects-section">
+              <h2 className="section-title">
+                Projects <span className="subtitle">| 주요 프로젝트</span>
+              </h2>
+              <Projects />
+            </section>
+
+            <div className="section-divider" />
+
+            <section className="education-section">
+              <Education />
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Profile() {
+  return (
+    <section className="profile-section">
+      <div className="profile-info">
+        <div className="profile-name-area">
+          <h1 className="profile-name-kr">최현수</h1>
+          <span className="profile-name-en" style={{ fontSize: '1.4rem' }}>
+            FullStack/Backend 개발자
+          </span>
         </div>
 
-        {/* Header */}
-        <motion.header
-          initial="hidden" animate="visible" custom={0} variants={fade}
-          className="relative mb-16 sm:mb-20"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-end gap-8">
-            <div className="flex-shrink-0 mx-auto sm:mx-0">
-              <Memoji id="hyeonsu" size={120} />
-            </div>
-            <div className="flex-1 min-w-0 text-center sm:text-left">
-              <p className="text-[11px] font-medium tracking-[0.28em] uppercase mb-3" style={{ color: ACCENT }}>
-                Resume
-              </p>
-              <h1 className="text-[clamp(2.25rem,5vw,3.25rem)] font-bold tracking-tight leading-[1.05] text-[#0b0b0d] mb-2">
-                최현수
-              </h1>
-              <p className="text-base text-[#555] font-medium mb-4">Backend Developer</p>
-              <p className="text-sm text-[#888] font-mono tracking-tight" style={{ fontStyle: 'italic' }}>
-                <span style={{ color: ACCENT }}>{'<>'}</span> 이유를 찾고 이유를 만들어가는 개발자 <span style={{ color: ACCENT }}>{'</>'}</span>
-              </p>
-            </div>
-          </div>
+        <div className="profile-title-line" />
 
-          {/* Contact row */}
-          <motion.div
-            initial="hidden" animate="visible" custom={1} variants={fade}
-            className="mt-10 pt-8 border-t border-[#ececec] grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm"
+        <div className="profile-motto">이유를 찾고 이유를 만들어가는 개발자</div>
+        <div className="profile-motto-en">
+          <p>트렌드에서 이유를 찾고, 트레이드오프에서 이유를 만들어가는 백엔드 개발자입니다.</p>
+          <p>
+            <strong>Spring Boot·React</strong> 기반으로 B2C 서비스(I-Poten)를 End-to-End로 구축해{' '}
+            <strong>오픈 베타 1개월만에 누적 회원 500명 돌파 후 현재 MAU 600+ 를 유지하고 있습니다.</strong> AWS 인프라와 LLM 기반 기능 연동까지 경험했습니다.
+          </p>
+          <p>
+            해당 프로젝트에서 <strong>500여 개 백로그 관리와 스프린트 플래닝</strong>을 주도하며{' '}
+            <strong>실서비스 3회 배포·운영</strong>을 이어왔고, 현재는 기업 인턴으로{' '}
+            <strong>B2B 데이터 검출 플랫폼의 MVP 개발</strong>을 담당하고 있습니다.
+          </p>
+        </div>
+
+        <div className="profile-contact">
+          <div className="contact-item">
+            <Phone size={18} />
+            <span>010-2651-9025</span>
+          </div>
+          <div className="contact-item">
+            <Mail size={18} />
+            <span>gustn9025@naver.com</span>
+          </div>
+          <div className="contact-item">
+            <Calendar size={18} />
+            <span>1999.08.23</span>
+          </div>
+          <a
+            href="https://github.com/IMCODER0000"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="contact-item"
           >
-            <ContactItem icon={<Phone className="w-3.5 h-3.5" />} label="Phone" value="010-2651-9025" />
-            <ContactItem icon={<Mail className="w-3.5 h-3.5" />} label="Email" value="gustn9025@naver.com" href="mailto:gustn9025@naver.com" />
-            <ContactItem icon={<Code className="w-3.5 h-3.5" />} label="Channel" value="GitHub · Notion · Portfolio" />
-          </motion.div>
-        </motion.header>
+            <Github size={18} />
+            <span>GitHub</span>
+          </a>
+          <a
+            href="https://canary-marquis-2c0.notion.site/98adf07bd8c78273bd668192d126bb90?source=copy_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="contact-item"
+          >
+            <BookOpen size={18} />
+            <span>Notion</span>
+          </a>
+          <a
+            href="https://xn--x-cc6e584ceubi3h0reda.com/choi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="contact-item"
+          >
+            <Briefcase size={18} />
+            <span>포트폴리오</span>
+          </a>
+        </div>
+      </div>
 
-        {/* Intro */}
-        <motion.section initial="hidden" animate="visible" custom={2} variants={fade} className="mb-20">
-          <div className="space-y-5 text-[15px] text-[#444] leading-[1.85]">
-            <p>
-              사용자 관점에서 문제를 바라보고 개선을 고민하는 개발자 <strong className="text-[#111]">최현수</strong>입니다.
-              다양한 생각과 기술을 수용하는 자세로 배우며, 이유를 찾고 더 나아가 <em className="not-italic" style={{ color: ACCENT }}>이유를 만드는 개발자</em>가 되고 싶습니다.
-            </p>
-            <p>
-              MAU 100+ 규모 서비스를 기획 · 디자인 · 개발 · 팀 운영까지 함께하며 성장시키고 있습니다.
-              현재는 B2B 환경의 데이터 보안 신규 서비스 MVP 개발을 담당하며, 사용자 플로우 기반으로 데이터 탐지부터 결과 시각화까지의 전 과정을 설계하고 구현하고 있습니다.
-            </p>
+      <div className="profile-image-container">
+        <img src="/team/hyeonsu-resume.jpeg" alt="프로필" className="profile-image" />
+      </div>
+    </section>
+  );
+}
+
+function Skills() {
+  const categories = [
+    {
+      title: 'PROFICIENT',
+      skills: ['Java / Spring Boot', 'MySQL / MariaDB'],
+    },
+    {
+      title: 'DEMONSTRATING',
+      skills: ['Docker', 'AWS (EC2, RDS, ALB)', 'React / JavaScript', 'JPA', 'Git / GitHub', 'Redis'],
+    },
+    {
+      title: 'BASIC',
+      skills: ['MyBatis', 'Flutter'],
+    },
+  ];
+
+  return (
+    <div className="skills-list">
+      {categories.map((cat) => (
+        <div className="skill-row" key={cat.title}>
+          <div className="skill-level">
+            <span className="skill-title">{cat.title}</span>
           </div>
-        </motion.section>
-
-        {/* Skills */}
-        <Section title="Skills" index={3}>
-          <div className="space-y-6">
-            <SkillGroup label="Main" items={['Java', 'Spring', 'MySQL (MariaDB)', 'JPA', 'MyBatis']} strong />
-            <SkillGroup
-              label="Knowledgeable"
-              items={['JavaScript', 'React', 'AWS · CloudFront · RDS · EC2 · ALB · Route53', 'Redis', 'Docker', 'Flutter']}
-            />
+          <div className="tag-list">
+            {cat.skills.map((skill) => (
+              <span className="tag" key={skill}>
+                {skill}
+              </span>
+            ))}
           </div>
-        </Section>
+        </div>
+      ))}
+    </div>
+  );
+}
 
-        {/* Current */}
-        <Section title="Current" index={4}>
-          <div className="rounded-2xl border border-[#ececec] bg-white p-6 sm:p-7">
-            <p className="text-[11px] font-medium tracking-[0.22em] uppercase mb-3" style={{ color: ACCENT }}>
-              B2B · 데이터 보안 신규 서비스 MVP
-            </p>
-            <ul className="space-y-2 text-sm text-[#555] leading-relaxed">
-              {[
-                '사용자 플로우 기반 전 과정 설계 및 구현',
-                'React + Spring 기반 백엔드 API 설계 · 개발 포함 풀스택 수행',
-                '검출 결과를 직관적으로 전달하기 위한 대시보드 및 리포트 개발',
-                '기존 서비스 구조를 분석하며 유지보수 프로세스를 학습',
-              ].map((t) => (
-                <li key={t} className="flex gap-2">
-                  <span className="flex-shrink-0 mt-2 w-1 h-1 rounded-full" style={{ background: ACCENT }} />
-                  <span>{t}</span>
+function Experience() {
+  return (
+    <div className="projects-container">
+      <div className="project-card">
+        <h3 className="project-title">
+          신규 프로덕트 MVP <span className="project-role">엔코아</span>
+        </h3>
+        <div className="project-subtitle">2026.02 ~ </div>
+
+        <div className="project-content">
+          <div className="project-row">
+            <div className="project-label">Role</div>
+            <div className="project-desc">
+              <ul>
+                <li>B2B 신규 프로덕트 MVP 개발 담당</li>
+                <li>사용자 플로우 기반 서비스 전 과정 설계 및 구현</li>
+                <li>React + Spring 기반 풀스택 개발 수행 (API 설계·구현 포함)</li>
+                <li>멀티 작업·DB 환경의 집계 정합성 정책 설계 및 대시보드 구현</li>
+                <li>진행 과정을 사용자에게 실시간으로 전달하기 위해 SSE 기반 단방향 스트리밍 구조를 설계·구현</li>
+                <li>기존 서비스 구조 분석을 통한 유지보수 프로세스 학습</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Projects() {
+  return (
+    <div className="projects-container">
+      <div className="project-card">
+        <h3 className="project-title">
+          I-Poten <span className="project-role">Fullstack 개발 / 팀장 (3인)</span>
+        </h3>
+        <div className="project-subtitle">
+          2025.10 – 진행 중 |{' '}
+          <a href="https://i-poten.com" target="_blank" rel="noopener noreferrer" className="project-link">
+            https://i-poten.com
+          </a>{' '}
+          |{' '}
+          <a
+            href="https://play.google.com/store/apps/details?id=com.cygnus.i_poten_app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            Google Play
+          </a>{' '}
+          |{' '}
+          <a
+            href="https://apps.apple.com/kr/app/i-poten-ai-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EB%A9%B4%EC%A0%91-%EC%BD%94%EC%B9%98/id6760929145"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            App Store
+          </a>{' '}
+          |{' '}
+          <a href="https://github.com/I-Cygnus" target="_blank" rel="noopener noreferrer" className="project-link">
+            GitHub
+          </a>{' '}
+          |{' '}
+          <a
+            href="https://docs.google.com/presentation/d/12YWUWL9c0SISre9TtYxZrNucs6-bakej/edit?slide=id.p61#slide=id.p61"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            개요
+          </a>
+          <br />
+          AI 모의 면접, IT 용어 학습, 퀴즈·오답노트 기능을 갖춘 IT 취업 준비 플랫폼
+        </div>
+
+        <div className="project-content">
+          <div className="project-row">
+            <div className="project-label">Key Results</div>
+            <div className="project-desc">
+              <ul>
+                <li>
+                  세션 인증 구조에서 SPA 라우팅마다 발생하던 로그인 상태 조회를 HttpOnly 쿠키 기반 Nginx 차단 정책으로 처리 — 평균 응답 시간 약 2ms로 단축
                 </li>
-              ))}
+                <li>
+                  Interceptor + 커스텀 어노테이션 + ArgumentResolver로 인증 파이프라인을 구현 — 컨트롤러 71곳의 인증 로직 제거, 공개·내부 호출·사용자 요청을 어노테이션으로 명시화
+                </li>
+                <li>
+                  면접 종류와 질문 순서를 Strategy 패턴으로 분리하고 Spring Bean 이름으로 매핑 — 분기문 없이 클래스만 추가하면 확장되는 구조 설계 및 구현
+                </li>
+                <li>
+                  Spring(오케스트레이션) ↔ FastAPI(AI 추론) 분리 구성 — AI 추론 작업이 Spring 스레드를 점유하던 상황 개선
+                </li>
+                <li>약 60여 개 도메인 피처 단위로 패키지 수직 분할, 계층 분리 - 팀원 간 병렬 개발 시 충돌 최소화</li>
+                <li>Spring · FastAPI · Frontend 멀티 컨테이너로 구성, Docker + GitHub Actions로 배포 자동화</li>
+                <li>PM 부재 환경에서 스크럼 리드 — 약 500여 개 백로그 관리 및 매일 스프린트 플래닝 주도</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="project-card">
+        <h3 className="project-title">
+          I-Fence (Core-Sync) <span className="project-role">End-to-End / Solo</span>
+        </h3>
+        <div className="project-subtitle">
+          2025.09 ~ 2025.10 |{' '}
+          <a href="https://github.com/I-Cygnus" target="_blank" rel="noopener noreferrer" className="project-link">
+            GitHub
+          </a>{' '}
+          |{' '}
+          <a
+            href="https://docs.google.com/presentation/d/1Bb_VQojOtseq6GtjVtz6_Fsn3xMA42rm/edit?slide=id.p14#slide=id.p14"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            개요
+          </a>
+          <br />
+          Agile 프로세스 + HR기반 협업 툴
+        </div>
+
+        <div className="project-content">
+          <div className="project-row">
+            <div className="project-label">Key Results</div>
+            <div className="project-desc">
+              <ul>
+                <li>팀에서 사용하는 협업툴 I-Fence를 백/프론트/인프라/AI 전부 직접 만들어 배포</li>
+                <li>실제 운영을 위해 Spring Boot MSA 3개 서비스를 단일 모노로 재설계</li>
+                <li>커밋 → AI → 백로그 자동 작성, 티켓 ↔ 커밋 양방향 매핑으로 업무-코드 추적성 확보</li>
+                <li>
+                  백로그 작성 시 또는 작성 후 Git 커밋을 기반으로 AI가 자동으로 '변경점·기능·버그·다음단계' 구조의 백로그 문서를 작성해주는 AI 파이프라인 설계
+                </li>
+                <li>
+                  데일리스크럼·백로그·스프린트 등 애자일 프로세스를 실제 운용 가능한 도구로 프레임워크화
+                  <br />
+                  → 팀이 매일 쓰는 실전 프레임워크로 구현 — 칸반 7단계 상태(백로그→스프린트→진행→리뷰→완료) + 회의 관리 + AI 백로그 자동화를 유기적으로 연동
+                </li>
+                <li>
+                  팀원별 회의 일정·출퇴근·연차·업무를 한 플랫폼에서 통합 관리하는 구조를 설계
+                  <br />
+                  → '누가 언제 뭘 하는지' 공유 비용이 사라지며 실사용 중인 2인 팀의 협업 속도 실질 개선
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="project-card">
+        <h3 className="project-title">
+          TTP (Time To Play) <span className="project-role">End-to-End / Solo</span>
+        </h3>
+        <div className="project-subtitle">
+          2024.11 ~ 2025.02 |{' '}
+          <a
+            href="https://three-yarrow-9df.notion.site/TTP-project-194a23f0db9b806f8f7bf015def3f98c?source=copy_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            개요 및 소개
+          </a>
+          <br />
+          간단한 미니게임과 웹소켓 기반의 실시간 멀티플레이 게임 플랫폼
+        </div>
+
+        <div className="project-content">
+          <div className="project-row">
+            <div className="project-label">Key Results</div>
+            <div className="project-desc">
+              <ul>
+                <li>실 사용자 220명 달성</li>
+                <li>
+                  WebSocket 기반 실시간 멀티플레이 구조 설계·구현 — 브라우저 ID 기반 사용자 간 상태 동기화, 불필요한 연결 정리로 안정성 개선
+                </li>
+                <li>End-to-End 개발 경험 → 기획부터 개발, 배포, 개선까지 전 과정 수행</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="project-card">
+        <h3 className="project-title">
+          IntellyCosm <span className="project-role">Full-stack / 팀장 (2인)</span>
+        </h3>
+        <div className="project-subtitle">
+          2024.03 ~ 2024.07
+          <br />
+          AI(OCR+LLM) 기반 화장품 성분 분석 및 맞춤 추천 플랫폼
+        </div>
+
+        <div className="project-content">
+          <div className="project-row">
+            <div className="project-label">Key Results</div>
+            <div className="project-desc">
+              <ul>
+                <li>화장품 성분표 사진을 찍으면 AI가 성분을 읽고 내 피부에 맞는지 점수로 알려주는 AI 백엔드 시스템 개발</li>
+                <li>Java ↔ Python 프로세스 연동으로 AI 파이프라인 구축 (JSON 기반 데이터 교환)</li>
+                <li>
+                  약 2만 건 규모 성분사전의 반복 조회 패턴을 분석하여 Redis 캐싱 레이어 도입
+                  <br />
+                  → 캐시 적중률 약 88%, 평균 응답 시간 120ms → 11ms (약 91% 단축), DB 조회 요청 약 88% 감소
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Education() {
+  return (
+    <div className="education-container">
+      <section className="edu-section">
+        <h2 className="edu-title">학력</h2>
+        <div className="edu-list">
+          <div className="edu-row">
+            <div className="edu-info">
+              <span className="edu-school">가천대학교 (편입) · 컴퓨터공학과</span>
+              <span className="edu-score">3.87 / 4.5</span>
+            </div>
+            <div className="edu-date">2023.03 – 2025.02</div>
+          </div>
+          <div className="edu-row">
+            <div className="edu-info">
+              <span className="edu-school">군산대학교 · 소프트웨어공학과</span>
+              <span className="edu-score">4.03 / 4.5</span>
+            </div>
+            <div className="edu-date">2018.03 – 2020.02</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="edu-section">
+        <h2 className="edu-title">교육</h2>
+        <div className="edu-list">
+          <div className="edu-bullet-row">
+            <ul>
+              <li>플레이데이터평생교육원 풀스택 백엔드 개발자 양성 과정 | 2025.04 - 2025.10 수료</li>
             </ul>
           </div>
-        </Section>
-
-        {/* Projects */}
-        <Section title="Projects" index={5}>
-          <div className="space-y-5">
-            {projects.map((p, i) => (
-              <motion.article
-                key={p.title}
-                initial="hidden" animate="visible" custom={6 + i} variants={fade}
-                className="relative rounded-2xl border border-[#ececec] bg-white p-6 sm:p-7"
-              >
-                <div className="flex items-start justify-between gap-4 flex-wrap mb-3">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-lg font-bold tracking-tight text-[#111]">{p.title}</h3>
-                      {p.link && (
-                        <a
-                          href={p.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-0.5 text-[11px] text-[#888] hover:text-[#111] transition-colors"
-                        >
-                          {p.link.replace(/^https?:\/\//, '')} <ExternalLink className="w-2.5 h-2.5" />
-                        </a>
-                      )}
-                    </div>
-                    {p.subtitle && <p className="text-xs text-[#888] leading-relaxed">{p.subtitle}</p>}
-                  </div>
-                  <span className="text-[11px] font-medium text-[#aaa] tracking-tight whitespace-nowrap">{p.period}</span>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {p.stack.map((s) => (
-                    <span
-                      key={s}
-                      className="text-[10px] font-medium text-[#666] px-2 py-0.5 rounded-full bg-[#f4f4f6]"
-                    >
-                      #{s}
-                    </span>
-                  ))}
-                </div>
-
-                <ul className="space-y-1.5 text-sm text-[#555] leading-relaxed">
-                  {p.bullets.map((b) => (
-                    <li key={b} className="flex gap-2.5">
-                      <span className="flex-shrink-0 text-[#ccc] leading-relaxed">—</span>
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.article>
-            ))}
-          </div>
-        </Section>
-
-        {/* Education */}
-        <Section title="Education" index={10}>
-          <div className="divide-y divide-[#ececec] border-y border-[#ececec]">
-            {education.map((e) => (
-              <div key={e.school} className="py-5 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <div>
-                  <h3 className="text-base font-semibold text-[#111]">
-                    {e.school}
-                    {e.gpa && <span className="ml-2 text-xs font-medium text-[#888]">{e.gpa}</span>}
-                  </h3>
-                  <p className="text-sm text-[#777]">{e.major}</p>
-                </div>
-                <span className="text-[11px] font-medium text-[#aaa] tracking-tight whitespace-nowrap">{e.period}</span>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* About / self-intro */}
-        <Section title="About" index={11}>
-          <div className="space-y-12">
-            {about.map((a) => (
-              <div key={a.heading}>
-                <h3 className="text-lg font-bold tracking-tight text-[#111] mb-5 flex items-center gap-2">
-                  <span className="inline-block w-1 h-4 rounded-full" style={{ background: ACCENT }} />
-                  {a.heading}
-                </h3>
-                <div className="space-y-4 text-[15px] text-[#555] leading-[1.85] pl-3">
-                  {a.body.map((p, i) => (
-                    <p key={i}>{p}</p>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* Footer */}
-        <motion.div
-          initial="hidden" animate="visible" custom={14} variants={fade}
-          className="mt-24 pt-10 border-t border-[#ececec] text-center"
-        >
-          <p className="text-xs text-[#aaa]">
-            읽어주셔서 감사합니다. <span style={{ color: ACCENT }}>—</span> 최현수
-          </p>
-        </motion.div>
-      </div>
+        </div>
+      </section>
     </div>
   );
-}
-
-function Section({ title, index, children }: { title: string; index: number; children: React.ReactNode }) {
-  return (
-    <motion.section
-      initial="hidden" animate="visible" custom={index} variants={fade}
-      className="mb-20"
-    >
-      <div className="flex items-baseline justify-between mb-8">
-        <h2 className="text-[11px] font-medium tracking-[0.32em] uppercase text-[#999]">{title}</h2>
-        <div className="flex-1 ml-5 h-px bg-[#ececec]" />
-      </div>
-      {children}
-    </motion.section>
-  );
-}
-
-function SkillGroup({ label, items, strong }: { label: string; items: string[]; strong?: boolean }) {
-  return (
-    <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
-      <div className="sm:w-32 flex-shrink-0">
-        <span className="text-[11px] font-medium tracking-[0.22em] uppercase text-[#999]">{label}</span>
-      </div>
-      <div className="flex flex-wrap gap-1.5">
-        {items.map((s) => (
-          <span
-            key={s}
-            className={`text-xs px-2.5 py-1 rounded-full ${
-              strong ? 'bg-[#111] text-white font-medium' : 'bg-white border border-[#e5e5e5] text-[#555]'
-            }`}
-          >
-            {s}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ContactItem({
-  icon,
-  label,
-  value,
-  href,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  href?: string;
-}) {
-  const content = (
-    <div className="flex items-start gap-2.5">
-      <div className="mt-0.5 text-[#aaa]">{icon}</div>
-      <div className="min-w-0">
-        <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#aaa] mb-0.5">{label}</p>
-        <p className="text-sm text-[#333] truncate">{value}</p>
-      </div>
-    </div>
-  );
-  if (href) {
-    return (
-      <a href={href} className="hover:opacity-70 transition-opacity">
-        {content}
-      </a>
-    );
-  }
-  return content;
 }

@@ -128,12 +128,15 @@ export type BlogCategory = 'Frontend' | 'Design' | 'Product' | 'Culture' | 'Back
 export type BlogPackage = 'choi' | 'common' | 'min';
 
 export interface BlogBlock {
-  type: 'h2' | 'h3' | 'p' | 'quote' | 'list' | 'code' | 'table' | 'hr';
+  type: 'h2' | 'h3' | 'p' | 'quote' | 'list' | 'code' | 'table' | 'hr' | 'image';
   text?: string;
   items?: string[];
   language?: string;
   headers?: string[];
   rows?: string[][];
+  src?: string;
+  alt?: string;
+  caption?: string;
 }
 
 export interface BlogAuthorOverride {
