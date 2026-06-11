@@ -63,7 +63,7 @@ export const commonPosts: BlogPost[] = [
     excerpt:
       '분기마다 OKR을 세우지만 실행과 따로 노는 팀이 많습니다. OKR을 살아있는 문서로 만들기 위해 우리가 시도한 것들.',
     category: 'Product',
-    authorId: 'member-c',
+    authorId: 'hyeonsu',
     publishedAt: '2025-03-15',
     readingMinutes: 7,
     cover: 'linear-gradient(135deg,#8B5CF6 0%,#EC4899 100%)',
@@ -115,7 +115,7 @@ export const commonPosts: BlogPost[] = [
     excerpt:
       '문서 없는 팀은 빠르지만 사라집니다. 3인 팀이 의사결정을 잃지 않기 위해 만든 4가지 의식.',
     category: 'Culture',
-    authorId: 'member-c',
+    authorId: 'hyeonsu',
     publishedAt: '2025-02-10',
     readingMinutes: 5,
     cover: 'linear-gradient(135deg,#F472B6 0%,#A78BFA 100%)',
