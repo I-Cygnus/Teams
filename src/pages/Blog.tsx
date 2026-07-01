@@ -1,46 +1,41 @@
-import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Clock } from 'lucide-react';
-import { teamMembers } from '../data';
-import type { BlogPost } from '../data';
-import { PACKAGES, blogPosts, postsByPackage } from '../blog';
+import type { BlogPackage } from '../data';
+import { blogPosts, PACKAGES, postsByPackage } from '../blog';
+import { Byline, Cover, fade } from '../blog/ui';
 
-const ease = [0.22, 1, 0.36, 1] as const;
+type Tab = 'all' | BlogPackage;
 
-const fade = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, delay: i * 0.06, ease },
-  }),
-};
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  return `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, '0')}. ${String(
-    d.getDate(),
-  ).padStart(2, '0')}`;
-}
-
-function authorOf(p: BlogPost) {
-  if (p.authorOverride) {
-    return { name: p.authorOverride.name, accent: p.authorOverride.accent, role: p.authorOverride.role };
-  }
-  const m = teamMembers.find((tm) => tm.id === p.authorId);
-  if (m) return { name: m.name, accent: m.accent, role: m.role };
-  return { name: 'Team', accent: '#888', role: '' };
-}
+const isPackage = (v: string | undefined): v is BlogPackage =>
+  PACKAGES.some((p) => p.id === v);
 
 export default function Blog() {
-  const sorted = useMemo(
-    () =>
-      [...blogPosts].sort(
-        (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-      ),
-    [],
-  );
+  // Deep links like /blog/choi open with that package pre-selected; in-page
+  // tab clicks just filter locally so switching feels instant, not like a
+  // full page transition.
+  const { pkg } = useParams<{ pkg: string }>();
+  const [tab, setTab] = useState<Tab>(() => (isPackage(pkg) ? pkg : 'all'));
+
+  const posts = useMemo(() => {
+    const base = tab === 'all' ? [...blogPosts] : postsByPackage(tab);
+    return base.sort(
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    );
+  }, [tab]);
+
+  const activePkg = tab === 'all' ? null : PACKAGES.find((p) => p.id === tab) ?? null;
+  const featured = posts[0];
+  const rest = posts.slice(1);
+
+  const tabs: { id: Tab; label: string; count: number }[] = [
+    { id: 'all', label: '전체', count: blogPosts.length },
+    ...PACKAGES.map((p) => ({
+      id: p.id,
+      label: p.label,
+      count: postsByPackage(p.id).length,
+    })),
+  ];
 
   return (
     <motion.div
@@ -48,147 +43,128 @@ export default function Blog() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
-      className="pt-28 sm:pt-36 pb-32 px-6"
+      className="blog min-h-screen bg-[var(--bg)] pt-24 sm:pt-32 pb-32 px-4"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div initial="hidden" animate="visible" custom={0} variants={fade} className="max-w-3xl mb-20">
-          <p className="text-[11px] font-semibold tracking-[0.28em] text-[#999] uppercase mb-6">
-            Engineering Blog
-          </p>
-          <h1 className="text-[clamp(2.4rem,6vw,4.5rem)] font-bold tracking-[-0.035em] text-[#0b0b0d] leading-[1.05] mb-7">
-            우리가 만들면서<br />
-            <span className="text-[#999] font-light italic">배운 것</span>을 적습니다.
-          </h1>
-          <p className="text-[17px] sm:text-lg text-[#666] leading-[1.7] max-w-xl">
-            제품을 만드는 과정에서 만난 문제, 시도한 방법, 거기서 얻은 인사이트.
-            짧지 않아도 정직한 글을 쓰려고 합니다.
-          </p>
-
-          <div className="mt-10 flex items-center gap-5 text-[12px] text-[#aaa] tabular-nums">
-            <span>총 <span className="text-[#111] font-semibold">{blogPosts.length}</span>개의 글</span>
-            <span className="w-px h-3 bg-[#e5e5e5]" />
-            <span>최근 업데이트 {formatDate(sorted[0].publishedAt)}</span>
+        {/* ── Header ────────────────────────────────────────────── */}
+        <header>
+          <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+            <h1 className="display text-[clamp(2.4rem,5.6vw,3.6rem)] font-bold leading-[1.0] tracking-[-0.035em] text-[var(--ink)]">
+              Blog
+            </h1>
+            <p className="pb-1.5 font-mono text-[12.5px] tracking-tight text-[var(--ink-faint)]">
+              {String(blogPosts.length).padStart(2, '0')} Articles
+              <span className="mx-1.5 text-[var(--line)]">/</span>
+              Team Cygnus
+            </p>
           </div>
-        </motion.div>
+          <p className="mt-6 max-w-[52ch] text-[16px] leading-[1.75] text-[var(--ink-soft)] sm:text-[16.5px]">
+            제품을 개발하며 내린 기술적 의사결정과 구현 과정, 그리고 그 판단의 근거를 정리합니다.
+          </p>
+        </header>
 
-        {/* Packages */}
-        <motion.div initial="hidden" animate="visible" custom={1} variants={fade} className="mb-20">
-          <p className="text-[11px] font-semibold tracking-[0.28em] text-[#999] uppercase mb-6">Packages</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {PACKAGES.map((pkg) => {
-              const items = postsByPackage(pkg.id);
-              const latest = items[0];
-              const accent = pkg.id === 'choi' ? '#0EA5E9' : '#0b0b0d';
+        {/* ── Package tabs — selectable, low profile ───────────── */}
+        <nav className="mt-8 border-b border-[var(--line)]">
+          <div className="flex flex-wrap items-center gap-x-7">
+            {tabs.map((t) => {
+              const on = tab === t.id;
               return (
-                <Link
-                  key={pkg.id}
-                  to={`/blog/${pkg.id}`}
-                  className="group relative block p-7 sm:p-8 rounded-3xl bg-white border border-[#ececec] hover:border-[#0b0b0d]/30 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-25px_rgba(0,0,0,0.18)] transition-all overflow-hidden"
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => setTab(t.id)}
+                  className={`group relative pb-3 pt-1 text-[14.5px] font-medium transition-colors ${
+                    on
+                      ? 'text-[var(--ink)]'
+                      : 'text-[var(--ink-faint)] hover:text-[var(--ink-soft)]'
+                  }`}
                 >
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute -top-20 -right-20 w-72 h-72 rounded-full blur-3xl opacity-[0.18]"
-                    style={{ background: accent }}
-                  />
-                  <div className="relative">
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent }} />
-                      <span className="text-[11px] font-bold tracking-[0.22em] uppercase" style={{ color: accent }}>
-                        /{pkg.id}
-                      </span>
-                      <span className="ml-auto text-[11px] text-[#aaa] tabular-nums">
-                        {items.length} posts
-                      </span>
-                    </div>
-                    <h3 className="text-[22px] font-bold tracking-[-0.02em] text-[#0b0b0d] mb-2 leading-tight">
-                      {pkg.label}
-                    </h3>
-                    <p className="text-[14px] text-[#666] leading-[1.7] mb-6">{pkg.description}</p>
-
-                    {latest && (
-                      <div className="pt-5 border-t border-[#eee]">
-                        <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-[#aaa] mb-2">
-                          Latest
-                        </p>
-                        <p className="text-[14px] font-semibold text-[#222] line-clamp-2 mb-1.5 tracking-tight">
-                          {latest.title}
-                        </p>
-                        <p className="text-[11.5px] text-[#999] tabular-nums">
-                          {formatDate(latest.publishedAt)}
-                        </p>
-                      </div>
-                    )}
-
-                    <div className="mt-6 inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#0b0b0d] opacity-60 group-hover:opacity-100 transition-opacity">
-                      패키지 둘러보기 <ArrowUpRight className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-                </Link>
+                  {t.label}
+                  <span className="ml-1.5 align-top text-[11px] tabular-nums text-[var(--ink-faint)]">
+                    {t.count}
+                  </span>
+                  {on && (
+                    <motion.span
+                      layoutId="blog-tab-underline"
+                      className="absolute inset-x-0 -bottom-px h-[2px] rounded-full bg-[var(--ink)]"
+                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                </button>
               );
             })}
           </div>
-        </motion.div>
+        </nav>
 
-        {/* Recent across all */}
-        <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
-          <h2 className="text-[15px] font-semibold tracking-tight text-[#111]">
-            Recent
-            <span className="ml-2 text-[#bbb] font-normal tabular-nums">{sorted.length}</span>
-          </h2>
-        </div>
+        {/* One-line package note — never a big landing block */}
+        {activePkg && (
+          <p className="mt-5 text-[13.5px] leading-[1.6] text-[var(--ink-faint)]">
+            {activePkg.description}
+          </p>
+        )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-16">
-          {sorted.map((p, i) => {
-            const author = authorOf(p);
-            return (
-              <motion.div
-                key={`${p.package}/${p.id}`}
-                initial="hidden" animate="visible" custom={i + 2} variants={fade}
+        {/* ── Posts ─────────────────────────────────────────────── */}
+        <div key={tab}>
+          {featured && (
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              variants={fade}
+              className="mt-9"
+            >
+              <Link
+                to={`/blog/${featured.package}/${featured.id}`}
+                className="group grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-6 lg:gap-10 items-center"
               >
-                <Link to={`/blog/${p.package}/${p.id}`} className="group block">
-                  <div className="relative aspect-[5/3] rounded-2xl overflow-hidden mb-6">
-                    <div
-                      className="absolute inset-0 transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
-                      style={{ background: p.cover }}
-                    />
-                    <span className="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase bg-white/95 text-[#111]">
-                      /{p.package}
+                <Cover post={featured} size="wide" />
+                <div>
+                  <p className="text-[16px] leading-[1.8] text-[var(--ink-soft)] line-clamp-4">
+                    {featured.excerpt}
+                  </p>
+                  <div className="mt-6 flex items-center justify-between">
+                    <Byline post={featured} />
+                    <span
+                      aria-hidden
+                      className="text-[var(--ink-faint)] transition-all duration-300 group-hover:text-[var(--accent)] group-hover:translate-x-1"
+                    >
+                      →
                     </span>
                   </div>
+                </div>
+              </Link>
+            </motion.div>
+          )}
 
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="w-1 h-1 rounded-full" style={{ background: author.accent }} />
-                    <p className="text-[10.5px] font-semibold tracking-[0.22em] uppercase" style={{ color: author.accent }}>
-                      {p.category}
+          {rest.length > 0 && (
+            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+              {rest.map((p, i) => (
+                <motion.article
+                  key={`${p.package}/${p.id}`}
+                  initial="hidden"
+                  animate="visible"
+                  custom={i + 1}
+                  variants={fade}
+                >
+                  <Link to={`/blog/${p.package}/${p.id}`} className="group block">
+                    <Cover post={p} />
+                    <p className="mt-4 text-[14.5px] leading-[1.6] text-[var(--ink-soft)] line-clamp-2">
+                      {p.excerpt}
                     </p>
-                  </div>
+                    <div className="mt-3.5">
+                      <Byline post={p} />
+                    </div>
+                  </Link>
+                </motion.article>
+              ))}
+            </div>
+          )}
 
-                  <h3 className="text-[19px] font-bold tracking-[-0.015em] text-[#111] leading-[1.35] mb-3 group-hover:text-[#3b3b3b] transition-colors line-clamp-2">
-                    {p.title}
-                  </h3>
-                  <p className="text-[14px] text-[#888] leading-[1.7] line-clamp-2 mb-5">{p.excerpt}</p>
-
-                  <div className="flex items-center gap-2 text-[11.5px] text-[#aaa] tabular-nums">
-                    <span className="text-[#555] font-medium tracking-tight">{author.name}</span>
-                    <span className="text-[#ddd]">·</span>
-                    <span>{formatDate(p.publishedAt)}</span>
-                    <span className="text-[#ddd]">·</span>
-                    <span className="inline-flex items-center gap-1"><Clock className="w-2.5 h-2.5" />{p.readingMinutes}분</span>
-                  </div>
-                </Link>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        <div className="mt-20 flex justify-center">
-          <Link
-            to="/blog/common"
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#666] hover:text-[#111] transition-colors"
-          >
-            모든 패키지 둘러보기 <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          {posts.length === 0 && (
+            <p className="py-24 text-center text-[14.5px] text-[var(--ink-faint)]">
+              아직 이 패키지에 글이 없습니다.
+            </p>
+          )}
         </div>
       </div>
     </motion.div>

@@ -2,34 +2,6 @@ import type { BlogPost } from '../data';
 
 export const commonPosts: BlogPost[] = [
   {
-    id: 'react-19-transitions',
-    package: 'common',
-    title: 'React 19의 useTransition으로 다듬은 페이지 전환',
-    excerpt:
-      '레이아웃 점프와 깜빡임을 없애기 위해 라우팅 단위에 useTransition을 적용하면서 배운 것들을 정리합니다.',
-    category: 'Frontend',
-    authorId: 'hyeonsu',
-    publishedAt: '2025-04-12',
-    readingMinutes: 8,
-    cover: 'linear-gradient(135deg,#4C6EF5 0%,#15AABF 100%)',
-    tags: ['React', 'Performance', 'Animation'],
-    body: [
-      { type: 'p', text: '페이지 전환은 작은 디테일처럼 보이지만, 실제로는 사용자가 가장 자주 마주치는 인터랙션입니다. 클릭과 화면 사이의 60~120ms를 어떻게 다루느냐에 따라 제품의 인상은 완전히 달라집니다.' },
-      { type: 'h2', text: '문제: 라우팅이 끝난 뒤에야 데이터가 도착한다' },
-      { type: 'p', text: '기존 구조에서는 링크를 클릭하면 즉시 새 화면이 마운트되었고, 그 안에서 데이터를 fetch했습니다. 결과적으로 "빈 화면이 잠깐 보였다가 콘텐츠가 채워지는" 전형적인 깜빡임이 발생했습니다.' },
-      { type: 'h2', text: '해결: 전환을 "보류"하는 useTransition' },
-      { type: 'p', text: 'React 19의 useTransition은 상태 업데이트의 우선순위를 낮춰, 데이터가 준비될 때까지 이전 화면을 유지할 수 있게 해줍니다. 이를 라우터의 navigate 호출과 묶으면, 사용자에게는 마치 "다음 화면이 자연스럽게 페이드되어 들어오는" 것처럼 보입니다.' },
-      { type: 'list', items: [
-        '클릭 → isPending = true (이전 화면 유지)',
-        '데이터 로딩 → 기존 화면을 살짝 dim 처리',
-        '준비 완료 → 새 화면으로 부드럽게 교체',
-      ]},
-      { type: 'h2', text: '결과' },
-      { type: 'p', text: 'TTI 체감 시간이 약 35% 줄었고, "어디로 이동했는지 모르겠다"는 사용자 리포트가 사라졌습니다. 코드는 더 단순해졌고, Suspense와도 자연스럽게 결합됩니다.' },
-      { type: 'quote', text: '좋은 전환은 사용자가 의식하지 못하는 전환입니다.' },
-    ],
-  },
-  {
     id: 'design-tokens-v2',
     package: 'common',
     title: '디자인 토큰을 다시 설계한 이야기',
@@ -130,32 +102,6 @@ export const commonPosts: BlogPost[] = [
         '분기마다 리츄얼 자체를 회고한다 — 의식이 의식 자체로 굳지 않게',
       ]},
       { type: 'p', text: '의식은 도구입니다. 도구는 일을 위해 존재하지, 일이 도구를 위해 존재하지 않습니다.' },
-    ],
-  },
-  {
-    id: 'image-pipeline',
-    package: 'common',
-    title: '이미지 파이프라인을 다시 만들면서 배운 것',
-    excerpt:
-      'CDN, WebP/AVIF, 반응형 이미지를 묶은 파이프라인을 새로 짜면서 LCP를 절반으로 줄인 과정.',
-    category: 'Frontend',
-    authorId: 'hyeonsu',
-    publishedAt: '2025-01-22',
-    readingMinutes: 9,
-    cover: 'linear-gradient(135deg,#0EA5E9 0%,#6366F1 100%)',
-    tags: ['Performance', 'CDN', 'Image'],
-    body: [
-      { type: 'p', text: '이미지는 가장 무거운 자산이면서도 가장 손이 덜 가는 자산입니다. 파이프라인을 다시 짜면서 LCP를 1.6초에서 0.8초로 줄였습니다.' },
-      { type: 'h2', text: '단계별 최적화' },
-      { type: 'list', items: [
-        '원본은 한 곳(원본 버킷)에만 둔다',
-        '요청 시 변환(on-the-fly transform)으로 width/format을 결정',
-        '<picture>로 AVIF → WebP → JPEG 폴백 체인을 명시',
-        'srcset과 sizes를 항상 함께 쓴다',
-      ]},
-      { type: 'h2', text: 'fetchpriority="high"는 마법이 아니다' },
-      { type: 'p', text: 'LCP 이미지에 fetchpriority="high"를 붙이는 것은 효과적이지만, 동시에 prefetch link를 남용하면 의미가 사라집니다. 브라우저의 우선순위 큐를 이해하지 않고 사용하면 오히려 느려질 수 있습니다.' },
-      { type: 'quote', text: '성능 최적화는 도구의 문제가 아니라 우선순위의 문제입니다.' },
     ],
   },
 ];

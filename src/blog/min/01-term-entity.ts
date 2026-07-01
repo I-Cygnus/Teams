@@ -15,6 +15,7 @@ export const post01: BlogPost = {
     publishedAt: '2026-05-10',
     readingMinutes: 12,
     cover: 'linear-gradient(135deg,#10B981 0%,#0369A1 55%,#0F172A 100%)',
+    coverImage: '/blog/min/01/term.png',
     tags: ['Spring Boot', 'JPA', 'Domain Design', 'Search'],
     body: [
         { type: 'p', text: '여러분은 "용어 사전" 기능을 만든다면 어떤 테이블부터 떠올리시나요?' },

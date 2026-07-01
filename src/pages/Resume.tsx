@@ -56,7 +56,7 @@ export default function Resume() {
 
             <section className="experience-section">
               <h2 className="section-title">
-                Experience <span className="subtitle">| 인턴 · 실무 경험</span>
+                Experience <span className="subtitle">| 실무 경험</span>
               </h2>
               <Experience />
             </section>
@@ -200,7 +200,7 @@ function Experience() {
     <div className="projects-container">
       <div className="project-card">
         <h3 className="project-title">
-          신규 프로덕트 MVP <span className="project-role">엔코아</span>
+          신규 서비스 개발 <span className="project-role">엔코아</span>
         </h3>
         <div className="project-subtitle">2026.02 ~ </div>
 
@@ -209,7 +209,7 @@ function Experience() {
             <div className="project-label">Role</div>
             <div className="project-desc">
               <ul>
-                <li>B2B 신규 프로덕트 MVP 개발 담당</li>
+                <li>B2B 신규 서비스 개발 담당</li>
                 <li>사용자 플로우 기반 서비스 전 과정 설계 및 구현</li>
                 <li>React + Spring 기반 풀스택 개발 수행 (API 설계·구현 포함)</li>
                 <li>멀티 작업·DB 환경의 집계 정합성 정책 설계 및 대시보드 구현</li>
@@ -227,6 +227,52 @@ function Experience() {
 function Projects() {
   return (
     <div className="projects-container">
+      <div className="project-card">
+        <h3 className="project-title">
+          Claude Control <span className="project-role">개인 프로젝트 / Solo</span>
+        </h3>
+        <div className="project-subtitle">
+          브라우저에서 원격 PC의 AI CLI(Claude Code · Codex)를 조작하는 웹 원격 제어 패널
+        </div>
+
+        <div className="project-content">
+          <div className="project-row">
+            <div className="project-label">소개</div>
+            <div className="project-desc">
+              <ul>
+                <li>메인 PC에 설치된 AI 코딩 도구(Claude Code · Codex)를, 밖에서 다른 노트북이나 폰으로도 브라우저만 있으면 그대로 사용하기 위해 만든 개인용 원격 제어 도구</li>
+                <li>윈도우 노트북 · 폰 · 태블릿 어디서든 접속해, 진행 중인 작업을 이어서 지시하고 결과를 실시간으로 확인</li>
+                <li>Claude와 ChatGPT(Codex)를 한 화면에서 세션 단위로 전환하며 사용하고, 여러 계정도 나눠서 관리</li>
+                <li>모든 대화가 자동 저장되어 다시 열면 그대로 복원되고, PC의 파일을 탐색해 작업 폴더를 고른 뒤 바로 새 작업을 시작</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="project-card">
+        <h3 className="project-title">
+          Content Engine <span className="project-role">개인 프로젝트 / Solo</span>
+        </h3>
+        <div className="project-subtitle">
+          한국어 SNS용 글자 카드 · 캐러셀 이미지를 생성하는 콘텐츠 제작 도구
+        </div>
+
+        <div className="project-content">
+          <div className="project-row">
+            <div className="project-label">소개</div>
+            <div className="project-desc">
+              <ul>
+                <li>문구만 입력하면 인스타그램 · 스레드에 올릴 글자 카드와 여러 장짜리 캐러셀 이미지를 자동으로 만들어 주는 개인 콘텐츠 제작 도구</li>
+                <li>AI 이미지 생성과 달리 글자가 깨지지 않고 또렷하게 나오고, 한국어 줄바꿈 · 여백까지 다듬어 '템플릿 티' 없는 결과물을 제공</li>
+                <li>색 · 서체 · 레이아웃 프리셋을 골라 원클릭으로 스타일을 바꾸고, 실시간 미리보기로 확인</li>
+                <li>완성한 카드는 바로 저장하거나 이미지로 복사해 SNS에 업로드</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="project-card">
         <h3 className="project-title">
           I-Poten <span className="project-role">Fullstack 개발 / 팀장 (3인)</span>
@@ -277,20 +323,42 @@ function Projects() {
             <div className="project-desc">
               <ul>
                 <li>
-                  세션 인증 구조에서 SPA 라우팅마다 발생하던 로그인 상태 조회를 HttpOnly 쿠키 기반 Nginx 차단 정책으로 처리 — 평균 응답 시간 약 2ms로 단축
+                  세션 인증 구조에서 SPA 라우팅마다 발생하던 로그인 상태 조회를 HttpOnly 쿠키 기반 Nginx 차단 정책으로 처리
+                  <ul>
+                    <li>평균 응답 시간 약 2ms로 단축</li>
+                  </ul>
                 </li>
                 <li>
-                  Interceptor + 커스텀 어노테이션 + ArgumentResolver로 인증 파이프라인을 구현 — 컨트롤러 71곳의 인증 로직 제거, 공개·내부 호출·사용자 요청을 어노테이션으로 명시화
+                  Interceptor + 커스텀 어노테이션 + ArgumentResolver로 인증 파이프라인을 구현
+                  <ul>
+                    <li>컨트롤러 71곳의 인증 로직 제거, 공개·내부 호출·사용자 요청을 어노테이션으로 명시화</li>
+                  </ul>
                 </li>
                 <li>
-                  면접 종류와 질문 순서를 Strategy 패턴으로 분리하고 Spring Bean 이름으로 매핑 — 분기문 없이 클래스만 추가하면 확장되는 구조 설계 및 구현
+                  면접 종류와 질문 순서를 Strategy 패턴으로 분리하고 Spring Bean 이름으로 매핑
+                  <ul>
+                    <li>분기문 없이 클래스만 추가하면 확장되는 구조 설계 및 구현</li>
+                  </ul>
                 </li>
                 <li>
-                  Spring(오케스트레이션) ↔ FastAPI(AI 추론) 분리 구성 — AI 추론 작업이 Spring 스레드를 점유하던 상황 개선
+                  Spring(오케스트레이션) ↔ FastAPI(AI 추론) 분리 구성
+                  <ul>
+                    <li>AI 추론 작업이 Spring 스레드를 점유하던 상황 개선</li>
+                  </ul>
                 </li>
-                <li>약 60여 개 도메인 피처 단위로 패키지 수직 분할, 계층 분리 - 팀원 간 병렬 개발 시 충돌 최소화</li>
+                <li>
+                  약 60여 개 도메인 피처 단위로 패키지 수직 분할, 계층 분리
+                  <ul>
+                    <li>팀원 간 병렬 개발 시 충돌 최소화</li>
+                  </ul>
+                </li>
                 <li>Spring · FastAPI · Frontend 멀티 컨테이너로 구성, Docker + GitHub Actions로 배포 자동화</li>
-                <li>PM 부재 환경에서 스크럼 리드 — 약 500여 개 백로그 관리 및 매일 스프린트 플래닝 주도</li>
+                <li>
+                  PM 부재 환경에서 스크럼 리드
+                  <ul>
+                    <li>약 500여 개 백로그 관리 및 매일 스프린트 플래닝 주도</li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -332,13 +400,15 @@ function Projects() {
                 </li>
                 <li>
                   데일리스크럼·백로그·스프린트 등 애자일 프로세스를 실제 운용 가능한 도구로 프레임워크화
-                  <br />
-                  → 팀이 매일 쓰는 실전 프레임워크로 구현 — 칸반 7단계 상태(백로그→스프린트→진행→리뷰→완료) + 회의 관리 + AI 백로그 자동화를 유기적으로 연동
+                  <ul>
+                    <li>팀이 매일 쓰는 실전 프레임워크로 구현 — 칸반 7단계 상태(백로그→스프린트→진행→리뷰→완료) + 회의 관리 + AI 백로그 자동화를 유기적으로 연동</li>
+                  </ul>
                 </li>
                 <li>
                   팀원별 회의 일정·출퇴근·연차·업무를 한 플랫폼에서 통합 관리하는 구조를 설계
-                  <br />
-                  → '누가 언제 뭘 하는지' 공유 비용이 사라지며 실사용 중인 2인 팀의 협업 속도 실질 개선
+                  <ul>
+                    <li>'누가 언제 뭘 하는지' 공유 비용이 사라지며 실사용 중인 2인 팀의 협업 속도 실질 개선</li>
+                  </ul>
                 </li>
               </ul>
             </div>
@@ -371,9 +441,17 @@ function Projects() {
               <ul>
                 <li>실 사용자 220명 달성</li>
                 <li>
-                  WebSocket 기반 실시간 멀티플레이 구조 설계·구현 — 브라우저 ID 기반 사용자 간 상태 동기화, 불필요한 연결 정리로 안정성 개선
+                  WebSocket 기반 실시간 멀티플레이 구조 설계·구현
+                  <ul>
+                    <li>브라우저 ID 기반 사용자 간 상태 동기화, 불필요한 연결 정리로 안정성 개선</li>
+                  </ul>
                 </li>
-                <li>End-to-End 개발 경험 → 기획부터 개발, 배포, 개선까지 전 과정 수행</li>
+                <li>
+                  End-to-End 개발 경험
+                  <ul>
+                    <li>기획부터 개발, 배포, 개선까지 전 과정 수행</li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -399,8 +477,9 @@ function Projects() {
                 <li>Java ↔ Python 프로세스 연동으로 AI 파이프라인 구축 (JSON 기반 데이터 교환)</li>
                 <li>
                   약 2만 건 규모 성분사전의 반복 조회 패턴을 분석하여 Redis 캐싱 레이어 도입
-                  <br />
-                  → 캐시 적중률 약 88%, 평균 응답 시간 120ms → 11ms (약 91% 단축), DB 조회 요청 약 88% 감소
+                  <ul>
+                    <li>캐시 적중률 약 88%, 평균 응답 시간 120ms → 11ms (약 91% 단축), DB 조회 요청 약 88% 감소</li>
+                  </ul>
                 </li>
               </ul>
             </div>

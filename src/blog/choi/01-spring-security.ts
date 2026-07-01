@@ -15,6 +15,7 @@ export const post01: BlogPost = {
   publishedAt: '2026-04-19',
   readingMinutes: 14,
   cover: 'linear-gradient(135deg,#0EA5E9 0%,#1E3A8A 60%,#0F172A 100%)',
+  coverImage: '/blog/choi/01/secu.png',
   tags: ['Spring Boot', 'Auth', 'Nginx', 'Architecture'],
   body: [
     { type: 'p', text: '여러분은 로그인 기능을 만들 때 어떤 선택을 하시나요?' },

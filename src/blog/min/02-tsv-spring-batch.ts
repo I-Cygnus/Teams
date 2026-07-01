@@ -15,6 +15,7 @@ export const post02: BlogPost = {
     publishedAt: '2026-05-16',
     readingMinutes: 13,
     cover: 'linear-gradient(135deg,#3B82F6 0%,#6366F1 50%,#0F172A 100%)',
+    coverImage: '/blog/min/02/tsv.png',
     tags: ['Spring Boot', 'Spring Batch', 'TSV', 'Data Import', 'MySQL'],
     body: [
         { type: 'p', text: 'I-Poten은 IT 개발자 취업 준비생을 위한 용어 학습과 퀴즈 기반 학습 서비스입니다.' },

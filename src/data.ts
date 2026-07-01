@@ -156,6 +156,8 @@ export interface BlogPost {
   publishedAt: string;
   readingMinutes: number;
   cover: string;
+  /** Optional real image used as the list/related thumbnail. */
+  coverImage?: string;
   tags: string[];
   body: BlogBlock[];
 }

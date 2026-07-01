@@ -1,120 +1,146 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, Clock } from 'lucide-react';
-import { teamMembers } from '../data';
+import { Check, Copy } from 'lucide-react';
 import type { BlogBlock, BlogPackage, BlogPost } from '../data';
 import { blogPosts, findPost } from '../blog';
+import { Avatar, authorOf, Byline, Chip, Cover, fade, formatDate, packageLabel } from '../blog/ui';
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
-const fade = {
-  hidden: { opacity: 0, y: 16 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, delay: i * 0.06, ease },
-  }),
-};
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  return `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, '0')}. ${String(
-    d.getDate(),
-  ).padStart(2, '0')}`;
-}
-
-function authorOf(p: BlogPost) {
-  if (p.authorOverride) {
-    return { name: p.authorOverride.name, accent: p.authorOverride.accent, role: p.authorOverride.role, brief: '' };
-  }
-  const m = teamMembers.find((tm) => tm.id === p.authorId);
-  if (m) return { name: m.name, accent: m.accent, role: m.role, brief: m.brief };
-  return { name: 'Team', accent: '#888', role: '', brief: '' };
-}
+/* ── Inline: **bold** and `code` ─────────────────────────────────── */
 
 function renderInline(text: string) {
-  // Parse **bold** markers, fall back to plain text
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
   return parts.map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return (
-        <strong key={i} className="font-bold text-[#0b0b0d]">
+        <strong key={i} className="font-bold text-[var(--ink)]">
           {part.slice(2, -2)}
         </strong>
+      );
+    }
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code
+          key={i}
+          className="rounded-[5px] px-[6px] py-[2px] font-mono text-[0.86em] font-medium text-[var(--accent-strong)]"
+          style={{ background: '#eef1fb' }}
+        >
+          {part.slice(1, -1)}
+        </code>
       );
     }
     return <span key={i}>{part}</span>;
   });
 }
 
-function Block({ block, isFirstParagraph, accent }: { block: BlogBlock; isFirstParagraph: boolean; accent: string }) {
+/* ── Code block — dark, with language label + copy ───────────────── */
+
+function CodeBlock({ block }: { block: BlogBlock }) {
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    navigator.clipboard?.writeText(block.text ?? '').then(() => {
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    });
+  };
+  return (
+    <div className="my-8 overflow-hidden rounded-xl border border-[#1f2430] bg-[#0d1117]">
+      <div className="flex items-center justify-between border-b border-[#1f2430] px-4 py-2.5">
+        <span className="font-mono text-[12px] tracking-wide text-[#7d8590]">
+          {block.language ?? 'code'}
+        </span>
+        <button
+          type="button"
+          onClick={copy}
+          className="inline-flex items-center gap-1.5 rounded-md px-1.5 py-1 text-[12px] font-medium text-[#7d8590] transition-colors hover:text-[#e6edf3]"
+        >
+          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+          {copied ? '복사됨' : '복사'}
+        </button>
+      </div>
+      <pre className="overflow-x-auto px-5 py-4 text-[13px] leading-[1.75]">
+        <code className="block whitespace-pre font-mono text-[#e6edf3]">{block.text}</code>
+      </pre>
+    </div>
+  );
+}
+
+/* ── One content block ───────────────────────────────────────────── */
+
+function Block({ block, id, lead }: { block: BlogBlock; id?: string; lead?: boolean }) {
   switch (block.type) {
     case 'h2':
       return (
-        <h2 className="mt-20 mb-7 text-[24px] sm:text-[28px] font-bold tracking-[-0.025em] text-[#111] leading-[1.3]">
-          {block.text}
+        <h2
+          id={id}
+          className="group display scroll-mt-28 mt-16 mb-5 text-[24px] sm:text-[28px] font-bold tracking-[-0.02em] leading-[1.35] text-[var(--ink)]"
+        >
+          <a href={`#${id}`} className="inline-flex items-baseline">
+            <span
+              aria-hidden
+              className="-ml-6 hidden w-6 select-none pr-1 text-[var(--accent)] opacity-0 transition-opacity group-hover:opacity-100 sm:inline"
+            >
+              #
+            </span>
+            {block.text}
+          </a>
         </h2>
       );
     case 'h3':
       return (
-        <h3 className="mt-12 mb-5 text-[18px] sm:text-[20px] font-bold tracking-[-0.02em] text-[#111] leading-[1.4]">
-          {block.text}
+        <h3
+          id={id}
+          className="group scroll-mt-28 mt-11 mb-3.5 text-[18px] sm:text-[20px] font-bold tracking-[-0.015em] leading-[1.45] text-[var(--ink)]"
+        >
+          <a href={`#${id}`} className="inline-flex items-baseline">
+            <span
+              aria-hidden
+              className="-ml-5 hidden w-5 select-none pr-1 text-[var(--accent)] opacity-0 transition-opacity group-hover:opacity-100 sm:inline"
+            >
+              #
+            </span>
+            {block.text}
+          </a>
         </h3>
       );
     case 'p':
-      return (
-        <p
-          className={`text-[16.5px] sm:text-[17px] text-[#2a2a2a] leading-[1.95] mb-7 ${
-            isFirstParagraph ? 'first-paragraph' : ''
-          }`}
-        >
+      return lead ? (
+        <p className="mb-8 text-[19px] sm:text-[21px] leading-[1.65] text-[var(--ink)]">
+          {renderInline(block.text ?? '')}
+        </p>
+      ) : (
+        <p className="mb-6 text-[16px] sm:text-[17px] leading-[1.85] text-[#374151]">
           {renderInline(block.text ?? '')}
         </p>
       );
     case 'quote':
       return (
-        <blockquote className="my-12 relative pl-7 py-2">
-          <span className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full" style={{ background: accent }} />
-          <p className="text-[18px] sm:text-[22px] text-[#1a1a1a] leading-[1.55] font-bold tracking-[-0.015em]">
-            “{block.text}”
-          </p>
+        <blockquote className="my-9 border-l-[3px] border-[var(--accent)] pl-5 sm:pl-6 text-[18px] sm:text-[20px] font-medium italic leading-[1.6] text-[var(--ink)]">
+          {renderInline(block.text ?? '')}
         </blockquote>
       );
     case 'list':
       return (
-        <ul className="my-7 space-y-3">
+        <ul className="my-6 space-y-2.5 pl-5 list-disc marker:text-[var(--accent)]">
           {block.items?.map((it, idx) => (
-            <li key={idx} className="flex gap-4 text-[16px] text-[#2a2a2a] leading-[1.75]">
-              <span className="flex-shrink-0 mt-[14px] w-4 h-px bg-[#bbb]" aria-hidden />
-              <span className="flex-1">{renderInline(it)}</span>
+            <li key={idx} className="pl-1.5 text-[16px] leading-[1.75] text-[#374151]">
+              {renderInline(it)}
             </li>
           ))}
         </ul>
       );
     case 'code':
-      return (
-        <div className="my-7 rounded-2xl overflow-hidden border border-[#1f2937] bg-[#0b1020] text-[#e5e7eb]">
-          {block.language && (
-            <div className="px-5 py-2.5 text-[10.5px] font-bold tracking-[0.22em] uppercase text-[#94a3b8] border-b border-white/[0.06] bg-white/[0.02]">
-              {block.language}
-            </div>
-          )}
-          <pre className="px-5 py-5 overflow-x-auto text-[13px] leading-[1.7] font-mono">
-            <code className="block whitespace-pre">{block.text}</code>
-          </pre>
-        </div>
-      );
+      return <CodeBlock block={block} />;
     case 'table':
       return (
-        <div className="my-9 overflow-x-auto rounded-2xl border border-[#eee]">
-          <table className="w-full text-[14px] tabular-nums">
-            <thead className="bg-[#fafafa]">
+        <div className="my-8 overflow-x-auto rounded-2xl border border-[var(--line)]">
+          <table className="w-full text-[14px]">
+            <thead style={{ background: '#f6f8fa' }}>
               <tr>
                 {block.headers?.map((h, i) => (
                   <th
                     key={i}
-                    className="text-left px-5 py-3.5 text-[11px] font-bold tracking-[0.16em] uppercase text-[#666] border-b border-[#eee]"
+                    className="border-b border-[var(--line)] px-5 py-3 text-left text-[13px] font-semibold text-[var(--ink-soft)]"
                   >
                     {h}
                   </th>
@@ -123,12 +149,12 @@ function Block({ block, isFirstParagraph, accent }: { block: BlogBlock; isFirstP
             </thead>
             <tbody>
               {block.rows?.map((row, ri) => (
-                <tr key={ri} className="border-b border-[#f1f1f1] last:border-b-0">
+                <tr key={ri} className="border-b border-[var(--line)] last:border-b-0">
                   {row.map((cell, ci) => (
                     <td
                       key={ci}
-                      className={`px-5 py-3.5 leading-[1.6] ${
-                        ci === 0 ? 'font-semibold text-[#111]' : 'text-[#444]'
+                      className={`px-5 py-3 leading-[1.6] ${
+                        ci === 0 ? 'font-semibold text-[var(--ink)]' : 'text-[var(--ink-soft)]'
                       }`}
                     >
                       {renderInline(cell)}
@@ -142,47 +168,41 @@ function Block({ block, isFirstParagraph, accent }: { block: BlogBlock; isFirstP
       );
     case 'image':
       return (
-        <figure className="my-10">
-          <div className="rounded-2xl overflow-hidden border border-[#eee] bg-[#fafafa]">
-            <img
-              src={block.src}
-              alt={block.alt ?? ''}
-              className="w-full h-auto object-contain"
-            />
+        <figure className="my-10 lg:relative lg:left-1/2 lg:w-[min(1040px,calc(100vw-8rem))] lg:-translate-x-1/2 xl:left-[calc(50%-7rem)] xl:w-[min(940px,calc(100vw-24rem))]">
+          <div className="overflow-hidden rounded-2xl border border-[var(--line)]" style={{ background: '#f6f8fa' }}>
+            <img src={block.src} alt={block.alt ?? ''} className="h-auto w-full object-contain" />
           </div>
           {block.caption && (
-            <figcaption className="mt-3 text-center text-[12.5px] text-[#999] leading-[1.6]">
+            <figcaption className="mt-3 text-center text-[13px] leading-[1.6] text-[var(--ink-faint)]">
               {block.caption}
             </figcaption>
           )}
         </figure>
       );
     case 'hr':
-      return (
-        <div className="my-12 flex items-center justify-center">
-          <span className="inline-flex gap-1.5">
-            <span className="w-1 h-1 rounded-full bg-[#ccc]" />
-            <span className="w-1 h-1 rounded-full bg-[#ccc]" />
-            <span className="w-1 h-1 rounded-full bg-[#ccc]" />
-          </span>
-        </div>
-      );
+      return <div className="my-12 h-px bg-[var(--line)]" />;
     default:
       return null;
   }
 }
 
+/* ── Related posts ───────────────────────────────────────────────── */
+
 function getRelated(current: BlogPost) {
   return blogPosts
     .filter((p) => !(p.package === current.package && p.id === current.id))
     .sort((a, b) => {
-      const samePkgA = a.package === current.package ? 2 : 0;
-      const samePkgB = b.package === current.package ? 2 : 0;
-      const sameCatA = a.category === current.category ? 1 : 0;
-      const sameCatB = b.category === current.category ? 1 : 0;
-      return (samePkgB + sameCatB) - (samePkgA + sameCatA);
+      const scoreA = (a.package === current.package ? 2 : 0) + (a.category === current.category ? 1 : 0);
+      const scoreB = (b.package === current.package ? 2 : 0) + (b.category === current.category ? 1 : 0);
+      return scoreB - scoreA;
     })
     .slice(0, 3);
+}
+
+interface Heading {
+  id: string;
+  text: string;
+  level: 2 | 3;
 }
 
 export default function BlogDetail() {
@@ -192,18 +212,43 @@ export default function BlogDetail() {
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
 
-  const [firstPIndex, setFirstPIndex] = useState<number>(-1);
+  const headings: Heading[] = useMemo(
+    () =>
+      (post?.body ?? [])
+        .map((b, i) => ({ b, i }))
+        .filter(({ b }) => b.type === 'h2' || b.type === 'h3')
+        .map(({ b, i }) => ({
+          id: `sec-${i}`,
+          text: b.text ?? '',
+          level: (b.type === 'h2' ? 2 : 3) as 2 | 3,
+        })),
+    [post],
+  );
 
+  const [activeId, setActiveId] = useState('');
   useEffect(() => {
-    if (!post) return;
-    const idx = post.body.findIndex((b) => b.type === 'p');
-    setFirstPIndex(idx);
-  }, [post]);
+    if (headings.length === 0) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActiveId(visible[0].target.id);
+      },
+      { rootMargin: '-15% 0px -70% 0px', threshold: 0 },
+    );
+    headings.forEach((h) => {
+      const el = document.getElementById(h.id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [headings]);
 
   if (!post) return <Navigate to="/blog" replace />;
 
   const author = authorOf(post);
   const related = getRelated(post);
+  const firstParagraph = post.body.findIndex((b) => b.type === 'p');
 
   return (
     <motion.div
@@ -211,198 +256,173 @@ export default function BlogDetail() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
+      className="blog min-h-screen bg-[var(--bg)]"
     >
-      {/* Reading progress bar */}
+      {/* Reading progress */}
       <motion.div
-        className="fixed top-14 left-0 right-0 h-[2px] origin-left z-30"
-        style={{
-          scaleX: progress,
-          background: author.accent,
-        }}
+        className="fixed top-14 left-0 right-0 z-30 h-[2px] origin-left bg-[var(--accent)]"
+        style={{ scaleX: progress }}
       />
 
-      {/* Drop cap */}
-      <style>{`
-        .first-paragraph::first-letter {
-          font-size: 3.4em;
-          line-height: 0.95;
-          float: left;
-          margin: 0.08em 0.12em 0 -0.04em;
-          font-weight: 700;
-          color: ${author.accent};
-        }
-      `}</style>
-
-      {/* Hero */}
-      <section className="pt-24 sm:pt-32 px-6">
-        <div className="max-w-[760px] mx-auto">
+      {/* ── Hero ─────────────────────────────────────────────── */}
+      <section className="px-4 pt-24 sm:pt-32">
+        <div className="mx-auto max-w-[720px]">
           <motion.div initial="hidden" animate="visible" custom={0} variants={fade}>
             <Link
               to={`/blog/${post.package}`}
-              className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#999] hover:text-[#111] transition-colors mb-12"
+              className="group mb-9 inline-flex items-center gap-1.5 text-[13.5px] text-[var(--ink-faint)] transition-colors hover:text-[var(--ink)]"
             >
-              <ArrowLeft className="w-3.5 h-3.5" /> /{post.package} package
+              <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">←</span>
+              {packageLabel(post.package)}
             </Link>
           </motion.div>
 
-          <motion.div
-            initial="hidden" animate="visible" custom={1} variants={fade}
-            className="flex items-center gap-2.5 mb-6"
-          >
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: author.accent }} />
-            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase" style={{ color: author.accent }}>
-              {post.category}
-            </p>
+          <motion.div initial="hidden" animate="visible" custom={1} variants={fade} className="mb-5">
+            <Chip category={post.category} solid />
           </motion.div>
 
           <motion.h1
-            initial="hidden" animate="visible" custom={2} variants={fade}
-            className="text-[32px] sm:text-[44px] lg:text-[52px] font-bold tracking-[-0.035em] leading-[1.15] text-[#0b0b0d] mb-7"
+            initial="hidden"
+            animate="visible"
+            custom={2}
+            variants={fade}
+            className="display mb-6 text-[30px] font-bold leading-[1.2] tracking-[-0.025em] text-[var(--ink)] sm:text-[40px] lg:text-[46px]"
           >
             {post.title}
           </motion.h1>
 
           <motion.p
-            initial="hidden" animate="visible" custom={3} variants={fade}
-            className="text-[17px] sm:text-[19px] text-[#666] leading-[1.7] mb-12"
+            initial="hidden"
+            animate="visible"
+            custom={3}
+            variants={fade}
+            className="mb-9 text-[17px] leading-[1.7] text-[var(--ink-soft)] sm:text-[18px]"
           >
             {post.excerpt}
           </motion.p>
 
           <motion.div
-            initial="hidden" animate="visible" custom={4} variants={fade}
-            className="flex items-center justify-between pb-10 mb-12 border-b border-[#eee] gap-4 flex-wrap"
+            initial="hidden"
+            animate="visible"
+            custom={4}
+            variants={fade}
+            className="mb-14 flex items-center gap-3 border-b border-[var(--line)] pb-9"
           >
-            <div className="flex items-center gap-3">
-              <div
-                className="w-11 h-11 rounded-full grid place-items-center text-[14px] font-bold text-white shadow-sm flex-shrink-0"
-                style={{ background: author.accent }}
-              >
-                {author.name.slice(0, 1)}
-              </div>
-              <div className="min-w-0">
-                <p className="text-[14px] font-semibold text-[#111] tracking-tight">{author.name}</p>
-                <p className="text-[12px] text-[#999] tracking-tight">{author.role}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 text-[12px] text-[#999] tabular-nums">
-              <span>{formatDate(post.publishedAt)}</span>
-              <span className="w-px h-3 bg-[#e5e5e5]" />
-              <span className="inline-flex items-center gap-1.5">
-                <Clock className="w-3 h-3" />
-                {post.readingMinutes}분 분량
-              </span>
+            <Avatar name={author.name} size="lg" />
+            <div className="min-w-0">
+              <p className="text-[14.5px] font-semibold text-[var(--ink)]">{author.name}</p>
+              <p className="text-[12.5px] text-[var(--ink-faint)]">
+                {author.role && <>{author.role} · </>}
+                {formatDate(post.publishedAt)} · {post.readingMinutes}분 읽기
+              </p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Cover */}
-      <motion.div
-        initial="hidden" animate="visible" custom={5} variants={fade}
-        className="px-6 mb-16"
-      >
-        <div className="max-w-4xl mx-auto aspect-[21/9] rounded-3xl overflow-hidden">
-          <div className="w-full h-full" style={{ background: post.cover }} />
-        </div>
-      </motion.div>
-
-      {/* Body */}
-      <article className="px-6 pb-24">
-        <motion.div
-          initial="hidden" animate="visible" custom={6} variants={fade}
-          className="max-w-[720px] mx-auto"
-        >
+      {/* ── Body + Table of contents ─────────────────────────── */}
+      <div className="relative mx-auto max-w-[720px] px-4 pb-20">
+        <motion.article initial="hidden" animate="visible" custom={5} variants={fade}>
           {post.body.map((b, i) => (
-            <Block key={i} block={b} isFirstParagraph={i === firstPIndex} accent={author.accent} />
+            <Block key={i} block={b} id={`sec-${i}`} lead={i === firstParagraph} />
           ))}
 
           {/* Tags */}
-          <div className="mt-20 pt-8 border-t border-[#eee] flex flex-wrap gap-2">
+          <div className="mt-16 flex flex-wrap gap-2 border-t border-[var(--line)] pt-7">
             {post.tags.map((t) => (
               <span
                 key={t}
-                className="px-3.5 py-1.5 rounded-full bg-[#f3f3f3] text-[12px] font-medium text-[#555] tracking-tight hover:bg-[#ececec] transition-colors"
+                className="rounded-full px-3 py-1.5 text-[12.5px] text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)]"
+                style={{ background: '#f1f3f5' }}
               >
                 #{t}
               </span>
             ))}
           </div>
 
-          {/* Author footer card */}
-          <div className="mt-14 p-7 sm:p-8 rounded-3xl border border-[#eee] bg-white flex flex-col sm:flex-row gap-5 sm:items-center">
-            <div
-              className="w-14 h-14 rounded-2xl grid place-items-center text-[18px] font-bold text-white shadow-sm flex-shrink-0"
-              style={{ background: author.accent }}
-            >
-              {author.name.slice(0, 1)}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[10px] font-semibold tracking-[0.24em] uppercase text-[#aaa] mb-1.5">Author</p>
-              <p className="text-[16px] font-bold text-[#111] tracking-tight">
-                {author.name} {author.role && <span className="font-medium text-[#888]">· {author.role}</span>}
+          {/* Author card */}
+          <div
+            className="mt-10 flex items-center gap-4 rounded-2xl bg-[var(--card)] p-6"
+            style={{ border: '1px solid var(--line)' }}
+          >
+            <Avatar name={author.name} size="lg" />
+            <div className="min-w-0 flex-1">
+              <p className="text-[15px] font-bold text-[var(--ink)]">
+                {author.name}
+                {author.role && <span className="font-medium text-[var(--ink-soft)]"> · {author.role}</span>}
               </p>
               {author.brief && (
-                <p className="mt-2 text-[13.5px] text-[#666] leading-[1.65]">{author.brief}</p>
+                <p className="mt-1.5 text-[13.5px] leading-[1.6] text-[var(--ink-soft)]">{author.brief}</p>
               )}
             </div>
             <Link
               to={`/blog/${post.package}`}
-              className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#111] hover:underline"
+              className="group hidden items-center gap-1.5 whitespace-nowrap text-[13.5px] font-medium text-[var(--accent)] sm:inline-flex"
             >
-              /{post.package} 패키지 더 보기
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              더 보기
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
           </div>
-        </motion.div>
-      </article>
+        </motion.article>
 
-      {/* Related */}
+        {/* Sticky TOC — floats in the right gutter on wide screens */}
+        {headings.length > 1 && (
+          <aside className="pointer-events-none absolute left-full top-0 ml-10 hidden h-full w-56 xl:block">
+            <nav className="pointer-events-auto sticky top-28">
+              <p className="mb-3 text-[11.5px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-faint)]">
+                목차
+              </p>
+              <ul className="space-y-1.5 border-l border-[var(--line)]">
+                {headings.map((h) => {
+                  const on = activeId === h.id;
+                  return (
+                    <li key={h.id}>
+                      <a
+                        href={`#${h.id}`}
+                        className={`-ml-px block border-l-[1.5px] py-1 text-[13px] leading-[1.5] transition-colors ${
+                          h.level === 3 ? 'pl-6' : 'pl-3.5'
+                        } ${
+                          on
+                            ? 'border-[var(--accent)] font-medium text-[var(--accent)]'
+                            : 'border-transparent text-[var(--ink-faint)] hover:text-[var(--ink-soft)]'
+                        }`}
+                      >
+                        {h.text}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </aside>
+        )}
+      </div>
+
+      {/* ── Read next ────────────────────────────────────────── */}
       {related.length > 0 && (
-        <section className="px-6 pb-32 border-t border-[#eee] pt-24 bg-[#fafafa]">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex items-end justify-between mb-12">
-              <div>
-                <p className="text-[11px] font-semibold tracking-[0.28em] text-[#999] uppercase mb-2">Read next</p>
-                <h2 className="text-[22px] sm:text-[26px] font-bold tracking-[-0.02em] text-[#111]">이어서 읽기</h2>
-              </div>
-              <Link to="/blog" className="text-[12px] font-medium text-[#999] hover:text-[#111] transition-colors">
-                전체 보기 →
+        <section className="border-t border-[var(--line)] bg-[var(--card)] px-4 pb-28 pt-16">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-8 flex items-baseline justify-between">
+              <h2 className="display text-[20px] font-bold text-[var(--ink)]">이어서 읽기</h2>
+              <Link
+                to="/blog"
+                className="text-[13.5px] font-medium text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
+              >
+                전체 글 →
               </Link>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {related.map((r) => {
-                const a = authorOf(r);
-                return (
-                  <Link
-                    key={`${r.package}/${r.id}`}
-                    to={`/blog/${r.package}/${r.id}`}
-                    className="group block p-5 rounded-2xl bg-white border border-[#eee] hover:border-[#ccc] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.08)] transition-all"
-                  >
-                    <div className="aspect-[16/10] rounded-xl mb-5 overflow-hidden">
-                      <div
-                        className="w-full h-full transition-transform duration-700 group-hover:scale-[1.04]"
-                        style={{ background: r.cover }}
-                      />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="w-1 h-1 rounded-full" style={{ background: a.accent }} />
-                      <p className="text-[10px] font-semibold tracking-[0.22em] uppercase" style={{ color: a.accent }}>
-                        {r.category}
-                      </p>
-                    </div>
-                    <h3 className="text-[16px] font-bold text-[#111] tracking-[-0.015em] leading-snug mb-3 group-hover:text-[#444] transition-colors line-clamp-2">
-                      {r.title}
-                    </h3>
-                    <div className="flex items-center justify-between text-[11.5px] text-[#999] tabular-nums">
-                      <span>{a.name} · {formatDate(r.publishedAt)}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#ccc] group-hover:text-[#111] transition-colors" />
-                    </div>
-                  </Link>
-                );
-              })}
+            <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((r) => (
+                <Link key={`${r.package}/${r.id}`} to={`/blog/${r.package}/${r.id}`} className="group block">
+                  <Cover post={r} />
+                  <p className="mt-4 line-clamp-2 text-[14.5px] leading-[1.6] text-[var(--ink-soft)]">
+                    {r.excerpt}
+                  </p>
+                  <div className="mt-3.5">
+                    <Byline post={r} />
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

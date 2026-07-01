@@ -280,7 +280,6 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-end justify-between mb-14 gap-6 flex-wrap">
             <div>
-              <p className="text-[11px] font-semibold tracking-[0.28em] text-[#999] uppercase mb-3">Engineering Blog</p>
               <h2 className="text-[clamp(1.8rem,3.6vw,2.4rem)] font-bold tracking-[-0.025em] text-[#111] leading-tight">
                 우리가 만들면서 배운 것
               </h2>
@@ -321,7 +320,7 @@ export default function Home() {
                       </div>
                       <div className="flex items-center gap-2 mb-2.5">
                         <span className="w-1 h-1 rounded-full" style={{ background: author?.accent }} />
-                        <p className="text-[10.5px] font-semibold tracking-[0.22em] uppercase" style={{ color: author?.accent }}>
+                        <p className="text-[11.5px] font-semibold" style={{ color: author?.accent }}>
                           {p.category}
                         </p>
                       </div>

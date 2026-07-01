@@ -10,7 +10,6 @@ import TroubleshootingPage from './pages/Troubleshooting';
 import TroubleshootingDetail from './pages/TroubleshootingDetail';
 import Resume from './pages/Resume';
 import Blog from './pages/Blog';
-import BlogPackagePage from './pages/BlogPackagePage';
 import BlogDetail from './pages/BlogDetail';
 import ERDEditor from './pages/ERDEditor';
 
@@ -35,7 +34,7 @@ function AnimatedShell() {
               <Route path="/troubleshooting" element={<TroubleshootingPage />} />
               <Route path="/troubleshooting/:id" element={<TroubleshootingDetail />} />
               <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:pkg" element={<BlogPackagePage />} />
+              <Route path="/blog/:pkg" element={<Blog />} />
               <Route path="/blog/:pkg/:id" element={<BlogDetail />} />
               <Route path="/data" element={<ERDEditor />} />
               <Route path="/choi/*" element={<ChoiRedirect />} />
@@ -65,7 +64,9 @@ function ShellRouter() {
 }
 
 export default function App() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(
+    () => typeof window === 'undefined' || !new URLSearchParams(window.location.search).has('nointro'),
+  );
   const isResume = typeof window !== 'undefined' && window.location.pathname === '/team/hyeonsu/resume';
 
   return (

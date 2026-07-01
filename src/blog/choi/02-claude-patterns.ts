@@ -15,6 +15,7 @@ export const post02: BlogPost = {
   publishedAt: '2026-05-19',
   readingMinutes: 18,
   cover: 'linear-gradient(135deg,#6366f1 0%,#0EA5E9 50%,#0f172a 100%)',
+  coverImage: '/blog/choi/02/claude.png',
   tags: ['AI', 'Claude', 'Workflow', 'Productivity', '총균쇠'],
   body: [
     {
@@ -229,6 +230,12 @@ export const post02: BlogPost = {
     {
       type: 'p',
       text: '세 패턴은 따로 떼어 써도 효과가 있지만, **셋을 결합할 때 가속이 가장 크게 붙습니다**.',
+    },
+    {
+      type: 'image',
+      src: '/blog/choi/02/claude.png',
+      alt: 'Claude와 일하는 세 가지 패턴',
+      caption: '컨텍스트 자산화 · 세션 분리 · 3단계 흐름 — Claude와 일하는 세 가지 패턴',
     },
 
     { type: 'h3', text: '패턴 1. 컨텍스트 자산화 — `.md` 파일을 동료의 기억 장치로' },
