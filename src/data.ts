@@ -125,7 +125,7 @@ export const teamMembers: TeamMember[] = [
 
 export type BlogCategory = 'Frontend' | 'Design' | 'Product' | 'Culture' | 'Backend';
 
-export type BlogPackage = 'choi' | 'common' | 'min';
+export type BlogPackage = 'choi' | 'common' | 'min' | 'sk';
 
 export interface BlogBlock {
   type: 'h2' | 'h3' | 'p' | 'quote' | 'list' | 'code' | 'table' | 'hr' | 'image';
