@@ -2,11 +2,13 @@ import type { BlogPackage, BlogPost } from '../data';
 import { choiPosts } from './choi';
 import { commonPosts } from './common';
 import { minPosts } from "./min";
+import { skPosts } from './sk';
 
 export const blogPosts: BlogPost[] = [
   ...choiPosts,
   ...commonPosts,
   ...minPosts,
+  ...skPosts,
 ];
 
 export const PACKAGES: { id: BlogPackage; label: string; description: string }[] = [
@@ -24,6 +26,11 @@ export const PACKAGES: { id: BlogPackage; label: string; description: string }[]
     id: 'min',
     label: 'min',
     description: 'idea와 ideal 사이를 기록하다.',
+  },
+  {
+    id: 'sk',
+    label: 'sk',
+    description: 'AI 서비스 개발의 기록과 인사이트.',
   },
 ];
 
