@@ -54,6 +54,8 @@ const CATEGORY_TINT: Record<BlogCategory, Tint> = {
   Design: { bg: '#fff0f6', fg: '#e64980' },
   Product: { bg: '#fff4e6', fg: '#e8590c' },
   Culture: { bg: '#ebfbee', fg: '#2f9e44' },
+  Infrastructure: { bg: '#e3fafc', fg: '#0b7285' },
+  AI: { bg: '#f8f0fc', fg: '#9c36b5' },
 };
 
 export function categoryTint(c: BlogCategory): Tint {

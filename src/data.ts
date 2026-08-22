@@ -123,7 +123,14 @@ export const teamMembers: TeamMember[] = [
   },
 ];
 
-export type BlogCategory = 'Frontend' | 'Design' | 'Product' | 'Culture' | 'Backend';
+export type BlogCategory =
+  | 'Frontend'
+  | 'Design'
+  | 'Product'
+  | 'Culture'
+  | 'Backend'
+  | 'Infrastructure'
+  | 'AI';
 
 export type BlogPackage = 'choi' | 'common' | 'min' | 'sk';
 
