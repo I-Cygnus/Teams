@@ -8,3 +8,11 @@ services:
     restart: unless-stopped
     ports:
       - "${WEB_PORT:-8200}:80"
+    networks:
+      - default
+      - ipoten-net
+
+networks:
+  ipoten-net:
+    external: true
+    name: ipoten-net
