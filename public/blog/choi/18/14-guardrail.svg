@@ -1,0 +1,21 @@
+<svg width="100%" viewBox="0 0 720 256" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>주 지표만 보면 놓치는 부작용</title>
+<desc>구매율은 5퍼센트 올랐지만 환불률 8퍼센트, CS 문의 10퍼센트, 서버 비용 20퍼센트가 함께 올랐다면 B가 이겼다고 말하기 어렵다.</desc>
+<rect x="40" y="32" width="200" height="180" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="140" y="60" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0F6E56">보고 있던 지표</text>
+<text x="140" y="112" text-anchor="middle" font-size="12" fill="#52514E">구매율</text>
+<text x="140" y="146" text-anchor="middle" font-size="26" font-weight="600" fill="#0F6E56">+5%</text>
+<text x="140" y="180" text-anchor="middle" font-size="11" fill="#0F6E56">"B 승!"</text>
+<text x="272" y="122" font-size="20" fill="#898781">그런데</text>
+<rect x="380" y="32" width="300" height="180" rx="10" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<text x="530" y="60" text-anchor="middle" font-size="11.5" font-weight="600" fill="#A32D2D">같이 움직인 지표</text>
+<text x="410" y="96" font-size="12" fill="#52514E">환불률</text>
+<text x="650" y="96" text-anchor="end" font-size="14" font-weight="600" fill="#A32D2D">+8%</text>
+<line x1="410" y1="108" x2="650" y2="108" stroke="#F0D2D2" stroke-width="1"/>
+<text x="410" y="134" font-size="12" fill="#52514E">CS 문의</text>
+<text x="650" y="134" text-anchor="end" font-size="14" font-weight="600" fill="#A32D2D">+10%</text>
+<line x1="410" y1="146" x2="650" y2="146" stroke="#F0D2D2" stroke-width="1"/>
+<text x="410" y="172" font-size="12" fill="#52514E">서버 비용</text>
+<text x="650" y="172" text-anchor="end" font-size="14" font-weight="600" fill="#A32D2D">+20%</text>
+<text x="360" y="242" text-anchor="middle" font-size="12" fill="#52514E">그래서 주 지표 하나와 함께, 부작용을 감시할 가드레일 지표를 미리 정해둔다</text>
+</svg>

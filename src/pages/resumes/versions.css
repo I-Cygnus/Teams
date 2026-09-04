@@ -1,0 +1,116 @@
+/* 이력서 5종 공용 스타일 — Resume.css 위에 얹는 레이어 */
+.rv-page { padding-top: 46px; }
+.rv-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: #1f3864; display: flex; gap: 2px; padding: 8px 16px; align-items: center; overflow-x: auto; }
+.rv-tab { color: #b9c6de; font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 4px; text-decoration: none; white-space: nowrap; border: 0; background: none; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 5px; }
+.rv-tab:hover { color: #fff; background: rgba(255,255,255,.08); }
+.rv-tab.on { background: #fff; color: #1f3864; font-weight: 800; }
+.rv-print { margin-left: auto; border: 1px solid rgba(255,255,255,.3); color: #fff; }
+
+.rv-container { max-width: 980px; margin: 24px auto 60px; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+.rv-content { padding: 56px 72px 72px; }
+.rv-h2 { font-size: 1.15rem; font-weight: 800; color: #1f3864; border-bottom: 2px solid #1f3864; padding-bottom: 8px; margin: 36px 0 16px; }
+.rv-dim { color: #9aa0a8; font-weight: 400; font-size: .85em; margin-left: 8px; }
+.rv-contacts { margin-top: 14px; flex-wrap: wrap; }
+.rv-contacts .contact-item { font-size: .86rem; }
+.rv-edu-rows { display: flex; flex-direction: column; gap: 7px; font-size: .93rem; }
+
+/* 헤드라인 */
+.rv-headline { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; color: #1a1d23; line-height: 1.35; }
+.rv-headline b { color: #2664a6; }
+.rv-sub { color: #4a5160; margin-top: 10px; line-height: 1.75; font-size: .96rem; }
+.rv-name-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.rv-name { font-size: 1.25rem; font-weight: 800; }
+.rv-role-tag { color: #7e8691; font-size: .95rem; }
+
+/* V1 숫자 요약 */
+.rv-nums { display: flex; flex-direction: column; gap: 9px; margin: 20px 0 4px; }
+.rv-num-line { display: flex; gap: 12px; align-items: baseline; font-size: .98rem; line-height: 1.6; }
+.rv-num-line .n { min-width: 118px; text-align: right; font-weight: 800; font-size: 1.25rem; color: #2664a6; letter-spacing: -0.5px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.rv-ba { border-collapse: collapse; width: 100%; font-size: .87rem; margin: 12px 0 4px; }
+.rv-ba th { background: #1f3864; color: #fff; padding: 7px 12px; text-align: left; font-weight: 600; }
+.rv-ba td { border: 1px solid #d0d5db; padding: 7px 12px; }
+.rv-ba td.after { font-weight: 700; color: #1c6b3c; }
+
+/* 프로젝트 카드 (경량) */
+.rv-proj { margin-bottom: 26px; }
+.rv-proj-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.rv-proj-head h3 { font-size: 1.04rem; font-weight: 800; margin: 0; }
+.rv-proj-head .meta { color: #7e8691; font-size: .84rem; }
+.rv-proj ul { margin: 9px 0 0; padding-left: 19px; }
+.rv-proj li { margin: 4.5px 0; font-size: .93rem; line-height: 1.65; }
+.rv-proj li b { color: #1f3864; }
+
+/* V2 무기 배너 */
+.rv-weapon { background: #eef2f9; border-left: 4px solid #1f3864; padding: 16px 20px; margin: 18px 0; border-radius: 0 6px 6px 0; }
+.rv-weapon .w-title { font-weight: 800; color: #1f3864; margin-bottom: 6px; font-size: .95rem; }
+.rv-weapon p { margin: 4px 0; font-size: .92rem; line-height: 1.7; color: #3f4650; }
+.rv-principles { border-collapse: collapse; width: 100%; font-size: .86rem; }
+.rv-principles td { border: 1px solid #e1e4e8; padding: 8px 12px; }
+.rv-principles td:first-child { font-weight: 700; color: #1f3864; width: 46%; }
+
+/* V3 클래식 표 */
+.rv-c-table { border-collapse: collapse; width: 100%; font-size: .9rem; margin-bottom: 24px; }
+.rv-c-table th { background: #1f3864; color: #fff; font-weight: 600; padding: 8px 12px; border: 1px solid #16294a; text-align: left; width: 130px; }
+.rv-c-table td { border: 1px solid #c9d0dc; padding: 8px 12px; }
+.rv-c-title { text-align: center; font-size: 1.9rem; font-weight: 800; letter-spacing: 14px; color: #1f3864; margin: 6px 0 26px; padding-bottom: 16px; border-bottom: 2.5px solid #1f3864; }
+
+/* V4 스토리 */
+.rv-story { margin: 22px 0; }
+.rv-story h3 { font-size: 1.02rem; font-weight: 800; color: #1a1d23; margin: 0 0 8px; }
+.rv-story h3 .tag { display: inline-block; background: #1f3864; color: #fff; font-size: .68rem; padding: 2px 8px; border-radius: 3px; margin-right: 8px; vertical-align: 2px; letter-spacing: .5px; }
+.rv-story p { margin: 6px 0; font-size: .93rem; line-height: 1.75; color: #2a2f38; }
+.rv-3step { display: grid; grid-template-columns: 84px 1fr; gap: 6px 14px; font-size: .92rem; margin: 10px 0; }
+.rv-3step dt { font-weight: 800; color: #1f3864; }
+.rv-3step dd { margin: 0; line-height: 1.65; }
+
+/* V5 에비던스 */
+.rv-ev { display: inline-flex; align-items: center; gap: 4px; background: #f2f7fe; border: 1px solid #b3ccef; color: #14528f; font-size: .72rem; font-weight: 700; padding: 1.5px 8px; border-radius: 10px; text-decoration: none; margin-left: 7px; vertical-align: 1px; white-space: nowrap; }
+.rv-ev:hover { background: #1f3864; color: #fff; border-color: #1f3864; }
+.rv-ev-note { background: #fdf8ee; border: 1px solid #e8cf9c; color: #7a5410; padding: 12px 16px; border-radius: 6px; font-size: .88rem; margin: 16px 0; }
+
+/* 허브 */
+.rv-hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+.rv-hub-card { border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px 22px; text-decoration: none; color: inherit; display: block; transition: .15s; background: #fff; }
+.rv-hub-card:hover { border-color: #2664a6; box-shadow: 0 6px 18px rgba(31,56,100,.12); transform: translateY(-2px); }
+.rv-hub-card h3 { margin: 0 0 6px; color: #1f3864; font-size: 1.05rem; }
+.rv-hub-card p { margin: 0; color: #6b7280; font-size: .87rem; line-height: 1.6; }
+.rv-hub-card .basis { margin-top: 10px; font-size: .78rem; color: #9aa0a8; }
+
+@media print {
+  .no-print { display: none !important; }
+  .rv-page { padding-top: 0; }
+  .rv-container { box-shadow: none; margin: 0; max-width: 100%; }
+  .rv-content { padding: 24px 28px; }
+}
+@media (max-width: 760px) {
+  .rv-content { padding: 32px 22px 48px; }
+  .rv-hub-grid { grid-template-columns: 1fr; }
+  .rv-num-line .n { min-width: 86px; font-size: 1.05rem; }
+}
+
+/* 프로필 2단 (원본 레이아웃 유지) */
+.rv-profile { display: flex; gap: 36px; align-items: flex-start; }
+.rv-profile .profile-info { flex: 1; min-width: 0; }
+.rv-profile .profile-image-container { width: 150px; flex-shrink: 0; }
+.rv-profile .profile-image { width: 100%; border-radius: 6px; display: block; }
+.rv-profile .profile-motto { font-size: 1.45rem; font-weight: 800; color: #1a1d23; letter-spacing: -0.5px; margin: 14px 0 4px; }
+
+/* 프로젝트 링크 줄 */
+.rv-links { display: flex; flex-wrap: wrap; gap: 6px; margin: 7px 0 2px; }
+.rv-links a { font-size: .78rem; color: #14528f; background: #f2f7fe; border: 1px solid #b3ccef; border-radius: 3px; padding: 2px 8px; text-decoration: none; }
+.rv-links a:hover { background: #1f3864; color: #fff; border-color: #1f3864; }
+
+@media (max-width: 700px) {
+  .rv-profile { flex-direction: column-reverse; gap: 18px; }
+  .rv-profile .profile-image-container { width: 120px; }
+}
+
+/* V3 상단 사진 + 표 */
+.rv-c-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px; }
+.rv-c-head .rv-c-table { flex: 1; }
+.rv-c-photo { width: 108px; flex-shrink: 0; border: 1px solid #c9d0dc; }
+.rv-c-photo img { width: 100%; display: block; }
+.rv-c-sign { text-align: right; margin-top: 34px; font-size: .9rem; color: #4a5160; }
+.rv-c-table thead th { text-align: left; }
+
+.rv-story-meta { font-size: .82rem; color: #7e8691; margin: -2px 0 8px; }

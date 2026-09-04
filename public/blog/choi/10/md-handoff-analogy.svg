@@ -1,0 +1,33 @@
+<svg width="100%" viewBox="0 0 720 268" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>AI 세션 인수인계 비유 — 맥락은 세션이 아니라 파일에 있다</title>
+<desc>세션 A에서 작업하다 진행 상황을 md 파일로 정리하면, 다른 세션 B가 그 파일을 읽고 이어서 작업할 수 있다. 가상 스레드가 그 md 파일 역할이고, 캐리어 스레드가 세션 역할이다.</desc>
+
+<rect x="48" y="56" width="168" height="88" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="132" y="88" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0F6E56">AI 세션 A</text>
+<text x="132" y="110" text-anchor="middle" font-size="10.5" fill="#52514E">여기까지 작업하다가</text>
+<text x="132" y="126" text-anchor="middle" font-size="10.5" fill="#52514E">세션 종료</text>
+
+<path d="M216 100 L266 100" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M266 100 l-7 -4 l0 8 z" fill="#898781"/>
+<text x="241" y="86" text-anchor="middle" font-size="10" fill="#52514E">진행 상황 정리</text>
+
+<rect x="276" y="40" width="168" height="120" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="1"/>
+<path d="M348 60 h18 l6 6 v14 h-24 z" fill="none" stroke="#5B3FB5" stroke-width="1"/>
+<text x="360" y="102" text-anchor="middle" font-size="12.5" font-weight="600" fill="#5B3FB5">진행상황.md</text>
+<text x="360" y="124" text-anchor="middle" font-size="10.5" fill="#52514E">어디까지 했는지, 결정한 것,</text>
+<text x="360" y="140" text-anchor="middle" font-size="10.5" fill="#52514E">다음 할 일 — 맥락 전부 저장</text>
+
+<path d="M444 100 L494 100" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M494 100 l-7 -4 l0 8 z" fill="#898781"/>
+<text x="469" y="86" text-anchor="middle" font-size="10" fill="#52514E">읽고 이어서</text>
+
+<rect x="504" y="56" width="168" height="88" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="588" y="88" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0F6E56">AI 세션 B</text>
+<text x="588" y="110" text-anchor="middle" font-size="10.5" fill="#52514E">완전히 다른 세션이</text>
+<text x="588" y="126" text-anchor="middle" font-size="10.5" fill="#52514E">그대로 이어서 작업</text>
+
+<text x="360" y="196" text-anchor="middle" font-size="12" fill="#52514E">맥락이 세션이 아니라 파일에 있으니, 이어받는 세션은 누구여도 된다</text>
+
+<rect x="120" y="216" width="480" height="30" rx="6" fill="#F4F3F0" stroke="#D9D7D2" stroke-width="0.5"/>
+<text x="360" y="235" text-anchor="middle" font-size="11" fill="#52514E">.md 파일 = 가상 스레드 &#160;&#183;&#160; AI 세션 = 캐리어 스레드</text>
+</svg>

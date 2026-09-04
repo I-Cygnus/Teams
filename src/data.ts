@@ -134,6 +134,9 @@ export type BlogCategory =
 
 export type BlogPackage = 'choi' | 'common' | 'min' | 'sk';
 
+/** 어느 제품을 만들며 나온 기록인지. 제품과 무관한 글은 비워 둔다. */
+export type BlogProject = 'i-poten' | 'i-fence' | 'joyword';
+
 export interface BlogBlock {
   type: 'h2' | 'h3' | 'p' | 'quote' | 'list' | 'code' | 'table' | 'hr' | 'image';
   text?: string;
@@ -155,6 +158,8 @@ export interface BlogAuthorOverride {
 export interface BlogPost {
   id: string;
   package: BlogPackage;
+  /** 관련 제품. 없으면 제품 무관한 일반 글. */
+  project?: BlogProject;
   title: string;
   excerpt: string;
   category: BlogCategory;

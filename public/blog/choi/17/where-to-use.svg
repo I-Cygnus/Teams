@@ -1,0 +1,34 @@
+<svg width="100%" viewBox="0 0 720 300" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>바깥은 REST, 안쪽은 gRPC</title>
+<desc>브라우저와 앱 등 외부에서 서버로 들어오는 구간은 REST를 쓰고, 서버 내부 서비스끼리 통신하는 구간은 gRPC를 쓰는 것이 흔한 조합이다.</desc>
+
+<rect x="40" y="60" width="150" height="90" rx="8" fill="#FFFFFF" stroke="#D9D7D2" stroke-width="1"/>
+<text x="115" y="98" text-anchor="middle" font-size="12" font-weight="600" fill="#52514E">브라우저 · 앱</text>
+<text x="115" y="120" text-anchor="middle" font-size="11" fill="#898781">누가 부를지 모른다</text>
+
+<path d="M190 105 L266 105" fill="none" stroke="#0F6E56" stroke-width="1.4"/>
+<path d="M266 105 l-8 -4.5 l0 9 z" fill="#0F6E56"/>
+<rect x="196" y="70" width="64" height="24" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="228" y="86" text-anchor="middle" font-size="11" font-weight="600" fill="#0F6E56">REST</text>
+
+<rect x="274" y="36" width="406" height="200" rx="10" fill="#FAFAF8" stroke="#D9D7D2" stroke-dasharray="4 3"/>
+<text x="298" y="62" font-size="11" fill="#898781">우리 서버 안쪽</text>
+
+<rect x="298" y="76" width="132" height="64" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="364" y="106" text-anchor="middle" font-size="12" font-weight="600" fill="#52514E">API 서버</text>
+<text x="364" y="126" text-anchor="middle" font-size="10.5" fill="#898781">외부 창구</text>
+
+<path d="M430 108 L494 108" fill="none" stroke="#6C4EC9" stroke-width="1.4"/>
+<path d="M494 108 l-8 -4.5 l0 9 z" fill="#6C4EC9"/>
+<rect x="432" y="140" width="60" height="24" rx="12" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="462" y="156" text-anchor="middle" font-size="11" font-weight="600" fill="#5B3FB5">gRPC</text>
+
+<rect x="502" y="76" width="150" height="64" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="577" y="106" text-anchor="middle" font-size="12" font-weight="600" fill="#52514E">주문 · 결제 서비스</text>
+<text x="577" y="126" text-anchor="middle" font-size="10.5" fill="#898781">우리끼리만 부른다</text>
+
+<text x="298" y="186" font-size="11" fill="#52514E">누구나 읽을 수 있어야 하니 <tspan font-weight="600">REST</tspan></text>
+<text x="298" y="206" font-size="11" fill="#52514E">서로 아는 사이라 규칙보다 <tspan font-weight="600">속도와 타입 안전</tspan>이 중요하니 gRPC</text>
+
+<text x="360" y="278" text-anchor="middle" font-size="12" fill="#52514E">둘 중 하나를 고르는 문제가 아니라, 구간마다 다른 걸 쓰는 문제입니다</text>
+</svg>

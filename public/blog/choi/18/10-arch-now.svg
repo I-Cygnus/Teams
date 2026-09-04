@@ -1,0 +1,44 @@
+<svg width="100%" viewBox="0 0 720 400" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>지금 당장 만들 A/B 테스트 구조</title>
+<desc>서비스에서 SDK를 거쳐 API로 이벤트를 보내고, 실험 설정과 배정은 PostgreSQL에, 이벤트와 집계는 ClickHouse에 저장한 뒤 분석 API를 거쳐 대시보드에서 결과를 본다. 메시지 큐는 아직 넣지 않는다.</desc>
+<rect x="24" y="16" width="120" height="26" rx="13" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="84" y="34" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0F6E56">지금 당장</text>
+
+<rect x="266" y="56" width="188" height="40" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="360" y="81" text-anchor="middle" font-size="12" fill="#52514E">서비스</text>
+<path d="M360 96 L360 116" stroke="#898781" stroke-width="1"/>
+<path d="M360 116 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="266" y="120" width="188" height="44" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="360" y="142" text-anchor="middle" font-size="12" font-weight="600" fill="#5B3FB5">A/B SDK</text>
+<text x="360" y="158" text-anchor="middle" font-size="10" fill="#52514E">그룹 배정 · 이벤트 전송</text>
+<path d="M360 164 L360 184" stroke="#898781" stroke-width="1"/>
+<path d="M360 184 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="266" y="188" width="188" height="40" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="360" y="213" text-anchor="middle" font-size="12" font-weight="600" fill="#12161F">A/B API</text>
+
+<path d="M300 228 L170 228 L170 252" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M170 252 l-4.5 -8 l9 0 z" fill="#898781"/>
+<path d="M420 228 L550 228 L550 252" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M550 252 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="70" y="256" width="200" height="56" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="170" y="280" text-anchor="middle" font-size="12" font-weight="600" fill="#52514E">PostgreSQL</text>
+<text x="170" y="298" text-anchor="middle" font-size="10.5" fill="#898781">실험 설정 · 사용자 배정</text>
+
+<rect x="450" y="256" width="200" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="550" y="280" text-anchor="middle" font-size="12" font-weight="600" fill="#0F6E56">ClickHouse</text>
+<text x="550" y="298" text-anchor="middle" font-size="10.5" fill="#52514E">이벤트 원본 · 대량 집계</text>
+
+<path d="M550 312 L550 332 L360 332 L360 348" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M170 312 L170 332 L360 332" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M360 348 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="266" y="352" width="188" height="36" rx="8" fill="#12161F"/>
+<text x="360" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">분석 → Dashboard</text>
+
+<rect x="486" y="120" width="200" height="44" rx="8" fill="#FFFFFF" stroke="#A32D2D" stroke-dasharray="4 3"/>
+<text x="586" y="141" text-anchor="middle" font-size="11" fill="#A32D2D">메시지 큐</text>
+<text x="586" y="157" text-anchor="middle" font-size="10.5" fill="#A32D2D">아직 넣지 않는다</text>
+</svg>

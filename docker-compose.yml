@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: country-mouse-seoul-mouse-web:latest
+    container_name: country-mouse-seoul-mouse-web
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-8200}:80"

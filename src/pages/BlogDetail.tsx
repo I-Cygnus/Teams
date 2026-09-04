@@ -367,7 +367,7 @@ export default function BlogDetail() {
 
         {/* Sticky TOC — floats in the right gutter on wide screens */}
         {headings.length > 1 && (
-          <aside className="pointer-events-none absolute left-full top-0 ml-10 hidden h-full w-56 xl:block">
+          <aside className="pointer-events-none absolute left-full top-0 ml-32 hidden h-full w-56 xl:block">
             <nav className="pointer-events-auto sticky top-28">
               <p className="mb-3 text-[11.5px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-faint)]">
                 목차

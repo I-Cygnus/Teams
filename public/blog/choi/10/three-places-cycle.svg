@@ -1,0 +1,36 @@
+<svg width="100%" viewBox="0 0 720 300" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>가상 스레드가 돌아다니는 세 장소</title>
+<desc>가상 스레드는 스케줄러 큐에서 대기하다가 캐리어 스레드에 마운트되어 실행되고, 대기가 발생하면 언마운트되어 힙에 저장되며, 응답이 도착하면 언파크로 다시 큐에 등록된다.</desc>
+
+<rect x="48" y="72" width="180" height="112" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="138" y="102" text-anchor="middle" font-size="12.5" font-weight="600" fill="#52514E">① 스케줄러 큐</text>
+<text x="138" y="126" text-anchor="middle" font-size="10.5" fill="#52514E">실행 순서 대기</text>
+<text x="138" y="142" text-anchor="middle" font-size="10.5" fill="#52514E">아직 실행 전</text>
+<text x="138" y="164" text-anchor="middle" font-size="10.5" fill="#898781">OS 스레드 안 씀</text>
+
+<path d="M228 128 L262 128" fill="none" stroke="#0F6E56" stroke-width="1.2"/>
+<path d="M262 128 l-8 -4.5 l0 9 z" fill="#0F6E56"/>
+<text x="245" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0F6E56">마운트</text>
+
+<rect x="270" y="72" width="180" height="112" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="360" y="102" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0F6E56">② 캐리어 스레드</text>
+<text x="360" y="126" text-anchor="middle" font-size="10.5" fill="#52514E">실제로 실행 중</text>
+<text x="360" y="142" text-anchor="middle" font-size="10.5" fill="#52514E">코드가 진짜 도는 곳</text>
+<text x="360" y="164" text-anchor="middle" font-size="10.5" fill="#0F6E56">OS 스레드 점유</text>
+
+<path d="M450 128 L484 128" fill="none" stroke="#6C4EC9" stroke-width="1.2"/>
+<path d="M484 128 l-8 -4.5 l0 9 z" fill="#6C4EC9"/>
+<text x="467" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5B3FB5">언마운트</text>
+
+<rect x="492" y="72" width="180" height="112" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="582" y="102" text-anchor="middle" font-size="12.5" font-weight="600" fill="#5B3FB5">③ 힙</text>
+<text x="582" y="126" text-anchor="middle" font-size="10.5" fill="#52514E">진행 상황(스택) 저장</text>
+<text x="582" y="142" text-anchor="middle" font-size="10.5" fill="#52514E">응답 올 때까지 잠듦</text>
+<text x="582" y="164" text-anchor="middle" font-size="10.5" fill="#898781">OS 스레드 안 씀</text>
+
+<path d="M582 184 L582 226 L138 226 L138 184" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M138 184 l-4.5 8 l9 0 z" fill="#898781"/>
+<text x="360" y="248" text-anchor="middle" font-size="11" fill="#52514E">응답 도착 → 언파크(unpark) → 큐에 다시 등록 → 다음 캐리어가 이어서 실행</text>
+
+<text x="360" y="282" text-anchor="middle" font-size="11" fill="#898781">대기 중인 가상 스레드는 큐에 없다 — 응답이 와야 비로소 큐로 돌아온다</text>
+</svg>

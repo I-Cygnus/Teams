@@ -3,6 +3,7 @@ import type { BlogPost } from '../../data';
 export const post02: BlogPost = {
     id: '2',
     package: 'min',
+    project: 'i-poten',
     title: 'TSV 데이터 적재, 단순 Import에서 Batch 파이프라인으로 바라보기',
     excerpt:
         'I-Poten의 포텐워드와 포텐퀴즈 데이터를 TSV로 적재했던 방식과 Runner 기반 구조의 한계, 그리고 Spring Batch로 확장할 수 있는 개선 방향을 정리합니다.',

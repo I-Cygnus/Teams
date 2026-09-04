@@ -1,0 +1,45 @@
+<svg width="100%" viewBox="0 0 720 396" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>gRPC의 네 가지 통신 방식</title>
+<desc>단일 방식은 요청 하나에 응답 하나, 서버 스트리밍은 요청 하나에 응답 여러 개, 클라이언트 스트리밍은 요청 여러 개에 응답 하나, 양방향은 양쪽이 계속 주고받는다.</desc>
+
+<rect x="40" y="40" width="640" height="72" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="64" y="68" font-size="12.5" font-weight="600" fill="#52514E">① 단일 — 평범한 요청·응답</text>
+<text x="64" y="94" font-size="11" fill="#898781">주문 조회처럼 한 번 묻고 한 번 받는 것</text>
+<path d="M420 66 L560 66" stroke="#898781" stroke-width="1.2"/>
+<path d="M560 66 l-8 -4.5 l0 9 z" fill="#898781"/>
+<path d="M560 92 L420 92" stroke="#898781" stroke-width="1.2"/>
+<path d="M420 92 l8 -4.5 l0 9 z" fill="#898781"/>
+<text x="404" y="70" text-anchor="end" font-size="10.5" fill="#52514E">클라</text>
+<text x="576" y="70" font-size="10.5" fill="#52514E">서버</text>
+
+<rect x="40" y="126" width="640" height="72" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="64" y="154" font-size="12.5" font-weight="600" fill="#0F6E56">② 서버 스트리밍 — 한 번 묻고, 계속 받는다</text>
+<text x="64" y="180" font-size="11" fill="#52514E">실시간 알림 · 시세 · AI 답변이 한 글자씩 나오는 것</text>
+<path d="M420 152 L560 152" stroke="#898781" stroke-width="1.2"/>
+<path d="M560 152 l-8 -4.5 l0 9 z" fill="#898781"/>
+<path d="M560 172 L420 172" stroke="#0F6E56" stroke-width="1.2"/>
+<path d="M420 172 l8 -4.5 l0 9 z" fill="#0F6E56"/>
+<path d="M560 184 L420 184" stroke="#0F6E56" stroke-width="1.2"/>
+<path d="M420 184 l8 -4.5 l0 9 z" fill="#0F6E56"/>
+<text x="576" y="184" font-size="10.5" fill="#0F6E56">…</text>
+
+<rect x="40" y="212" width="640" height="72" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="64" y="240" font-size="12.5" font-weight="600" fill="#5B3FB5">③ 클라이언트 스트리밍 — 계속 보내고, 한 번 받는다</text>
+<text x="64" y="266" font-size="11" fill="#52514E">큰 파일 업로드 · 센서 기록 모아 보내기</text>
+<path d="M420 238 L560 238" stroke="#6C4EC9" stroke-width="1.2"/>
+<path d="M560 238 l-8 -4.5 l0 9 z" fill="#6C4EC9"/>
+<path d="M420 250 L560 250" stroke="#6C4EC9" stroke-width="1.2"/>
+<path d="M560 250 l-8 -4.5 l0 9 z" fill="#6C4EC9"/>
+<path d="M560 270 L420 270" stroke="#898781" stroke-width="1.2"/>
+<path d="M420 270 l8 -4.5 l0 9 z" fill="#898781"/>
+
+<rect x="40" y="298" width="640" height="72" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="64" y="326" font-size="12.5" font-weight="600" fill="#A32D2D">④ 양방향 — 둘 다 계속 주고받는다</text>
+<text x="64" y="352" font-size="11" fill="#52514E">채팅 · 실시간 상담 · 게임 · 위치 공유</text>
+<path d="M420 324 L560 324" stroke="#A32D2D" stroke-width="1.2"/>
+<path d="M560 324 l-8 -4.5 l0 9 z" fill="#A32D2D"/>
+<path d="M560 340 L420 340" stroke="#A32D2D" stroke-width="1.2"/>
+<path d="M420 340 l8 -4.5 l0 9 z" fill="#A32D2D"/>
+<path d="M420 356 L560 356" stroke="#A32D2D" stroke-width="1.2"/>
+<path d="M560 356 l-8 -4.5 l0 9 z" fill="#A32D2D"/>
+</svg>

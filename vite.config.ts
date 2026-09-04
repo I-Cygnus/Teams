@@ -31,6 +31,6 @@ export default defineConfig({
     choiSpa(),
   ],
   server: {
-    port: 5555
+    port: 5555,
   }
 })

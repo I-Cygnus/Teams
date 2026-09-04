@@ -1,0 +1,47 @@
+<svg width="100%" viewBox="0 0 720 336" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>FastAPI 이벤트 루프와 자바 가상 스레드의 구조 비교</title>
+<desc>FastAPI는 코루틴 여러 개가 이벤트 루프 하나에서 실행되어 코어를 쓰려면 프로세스를 복제해야 하고, 자바 가상 스레드는 캐리어 스레드가 코어 수만큼 있어 한 프로세스 안에서 병렬 실행된다.</desc>
+
+<text x="184" y="40" text-anchor="middle" font-size="12.5" font-weight="600" fill="#52514E">FastAPI — asyncio</text>
+<text x="536" y="40" text-anchor="middle" font-size="12.5" font-weight="600" fill="#52514E">자바 — 가상 스레드</text>
+
+<line x1="360" y1="24" x2="360" y2="270" stroke="#D9D7D2" stroke-width="1"/>
+
+<g fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5">
+<circle cx="112" cy="72" r="9"/><circle cx="140" cy="72" r="9"/><circle cx="168" cy="72" r="9"/><circle cx="196" cy="72" r="9"/><circle cx="224" cy="72" r="9"/><circle cx="252" cy="72" r="9"/>
+<circle cx="112" cy="98" r="9"/><circle cx="140" cy="98" r="9"/><circle cx="168" cy="98" r="9"/><circle cx="196" cy="98" r="9"/><circle cx="224" cy="98" r="9"/><circle cx="252" cy="98" r="9"/>
+</g>
+<text x="184" y="130" text-anchor="middle" font-size="10.5" fill="#5B3FB5">코루틴들</text>
+
+<path d="M184 140 L184 160" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M184 160 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="94" y="168" width="180" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="184" y="194" text-anchor="middle" font-size="12" font-weight="600" fill="#0F6E56">이벤트 루프 1개</text>
+
+<text x="184" y="240" text-anchor="middle" font-size="10.5" fill="#52514E">한 번에 하나씩만 실행</text>
+<text x="184" y="258" text-anchor="middle" font-size="10.5" fill="#52514E">코어를 쓰려면 프로세스 복제 (--workers 8)</text>
+
+<g fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5">
+<circle cx="464" cy="72" r="9"/><circle cx="492" cy="72" r="9"/><circle cx="520" cy="72" r="9"/><circle cx="548" cy="72" r="9"/><circle cx="576" cy="72" r="9"/><circle cx="604" cy="72" r="9"/>
+<circle cx="464" cy="98" r="9"/><circle cx="492" cy="98" r="9"/><circle cx="520" cy="98" r="9"/><circle cx="548" cy="98" r="9"/><circle cx="576" cy="98" r="9"/><circle cx="604" cy="98" r="9"/>
+</g>
+<text x="536" y="130" text-anchor="middle" font-size="10.5" fill="#5B3FB5">가상 스레드들 (수십만 개 가능)</text>
+
+<path d="M478 140 L478 160" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M478 160 l-4.5 -8 l9 0 z" fill="#898781"/>
+<path d="M594 140 L594 160" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M594 160 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="418" y="168" width="110" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="473" y="194" text-anchor="middle" font-size="12" font-weight="600" fill="#0F6E56">캐리어 1</text>
+<rect x="544" y="168" width="110" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="599" y="194" text-anchor="middle" font-size="12" font-weight="600" fill="#0F6E56">캐리어 2 …</text>
+
+<text x="536" y="240" text-anchor="middle" font-size="10.5" fill="#52514E">코어 수만큼 진짜 병렬 실행</text>
+<text x="536" y="258" text-anchor="middle" font-size="10.5" fill="#52514E">한 프로세스, 힙 하나 공유</text>
+
+<line x1="48" y1="284" x2="672" y2="284" stroke="#D9D7D2" stroke-width="0.5"/>
+<text x="184" y="312" text-anchor="middle" font-size="11" fill="#A32D2D">await로 양보 지점을 직접 명시</text>
+<text x="536" y="312" text-anchor="middle" font-size="11" fill="#0F6E56">표시 없이 동기 코드 그대로 — JDK가 자동 처리</text>
+</svg>

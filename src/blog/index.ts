@@ -1,4 +1,4 @@
-import type { BlogPackage, BlogPost } from '../data';
+import type { BlogPackage, BlogPost, BlogProject } from '../data';
 import { choiPosts } from './choi';
 import { commonPosts } from './common';
 import { minPosts } from "./min";
@@ -33,6 +33,30 @@ export const PACKAGES: { id: BlogPackage; label: string; description: string }[]
     description: 'AI 서비스 개발의 기록과 인사이트.',
   },
 ];
+
+export const PROJECTS: { id: BlogProject; label: string; description: string }[] = [
+  {
+    id: 'i-poten',
+    label: 'I-Poten',
+    description: 'AI 모의면접 서비스를 만들며 남긴 기록.',
+  },
+  {
+    id: 'i-fence',
+    label: 'I-Fence',
+    description: 'I-Fence를 만들며 남긴 기록.',
+  },
+  {
+    id: 'joyword',
+    label: 'Joyword',
+    description: 'Joyword를 만들며 남긴 기록.',
+  },
+];
+
+export function postsByProject(project: BlogProject): BlogPost[] {
+  return blogPosts
+    .filter((p) => p.project === project)
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+}
 
 export function postsByPackage(pkg: BlogPackage): BlogPost[] {
   return blogPosts

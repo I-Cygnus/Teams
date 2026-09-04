@@ -1,0 +1,31 @@
+<svg width="100%" viewBox="0 0 720 328" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>나쁜 실험 설계와 좋은 실험 설계</title>
+<desc>월요일에 A, 화요일에 B를 돌리면 요일 차이와 UI 차이가 섞이지만, 같은 기간에 랜덤으로 나누면 외부 조건을 공유한다.</desc>
+<rect x="40" y="32" width="300" height="216" rx="10" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="64" y="60" font-size="12.5" font-weight="600" fill="#A32D2D">나쁜 설계 — 시간을 나눈다</text>
+<rect x="64" y="80" width="120" height="52" rx="6" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="124" y="102" text-anchor="middle" font-size="11" fill="#52514E">월요일</text>
+<text x="124" y="120" text-anchor="middle" font-size="12" font-weight="600" fill="#12161F">A · 기존 UI</text>
+<rect x="196" y="80" width="120" height="52" rx="6" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="256" y="102" text-anchor="middle" font-size="11" fill="#52514E">화요일</text>
+<text x="256" y="120" text-anchor="middle" font-size="12" font-weight="600" fill="#12161F">B · 새 UI</text>
+<text x="64" y="164" font-size="11" fill="#52514E">월요일 = 평소 사용자</text>
+<text x="64" y="184" font-size="11" fill="#52514E">화요일 = 광고 보고 들어온 사용자</text>
+<text x="64" y="216" font-size="11.5" font-weight="600" fill="#A32D2D">차이가 UI 때문인지</text>
+<text x="64" y="234" font-size="11.5" font-weight="600" fill="#A32D2D">사용자 때문인지 알 수 없다</text>
+<rect x="380" y="32" width="300" height="216" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="404" y="60" font-size="12.5" font-weight="600" fill="#0F6E56">좋은 설계 — 같은 기간, 랜덤</text>
+<rect x="470" y="76" width="120" height="34" rx="6" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="530" y="98" text-anchor="middle" font-size="11.5" fill="#0F6E56">같은 기간 사용자</text>
+<path d="M530 110 L440 110 L440 132" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M440 132 l-4.5 -8 l9 0 z" fill="#898781"/>
+<path d="M530 110 L620 110 L620 132" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M620 132 l-4.5 -8 l9 0 z" fill="#898781"/>
+<rect x="396" y="136" width="88" height="46" rx="6" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="440" y="164" text-anchor="middle" font-size="12" font-weight="600" fill="#12161F">A 50%</text>
+<rect x="576" y="136" width="88" height="46" rx="6" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="620" y="164" text-anchor="middle" font-size="12" font-weight="600" fill="#12161F">B 50%</text>
+<text x="404" y="216" font-size="11.5" font-weight="600" fill="#0F6E56">요일 · 날씨 · 광고 · 시즌을</text>
+<text x="404" y="234" font-size="11.5" font-weight="600" fill="#0F6E56">두 그룹이 똑같이 겪는다</text>
+<text x="360" y="300" text-anchor="middle" font-size="11.5" fill="#52514E">통계 공식보다 실험 설계가 먼저다 — 설계가 틀리면 어떤 계산도 구제하지 못한다</text>
+</svg>

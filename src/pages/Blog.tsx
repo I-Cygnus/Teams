@@ -1,41 +1,72 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import type { BlogPackage } from '../data';
-import { blogPosts, PACKAGES, postsByPackage } from '../blog';
+import type { BlogPackage, BlogProject } from '../data';
+import { blogPosts, PACKAGES, PROJECTS } from '../blog';
 import { Byline, Cover, fade } from '../blog/ui';
-
-type Tab = 'all' | BlogPackage;
 
 const isPackage = (v: string | undefined): v is BlogPackage =>
   PACKAGES.some((p) => p.id === v);
 
+/** 상위 축 — 'tech'는 특정 제품에 매이지 않은 일반 기술 글. */
+type Scope = 'all' | 'tech' | BlogProject;
+
+const inScope = (p: (typeof blogPosts)[number], scope: Scope) =>
+  scope === 'all' ? true : scope === 'tech' ? !p.project : p.project === scope;
+
 export default function Blog() {
-  // Deep links like /blog/choi open with that package pre-selected; in-page
-  // tab clicks just filter locally so switching feels instant, not like a
-  // full page transition.
   const { pkg } = useParams<{ pkg: string }>();
-  const [tab, setTab] = useState<Tab>(() => (isPackage(pkg) ? pkg : 'all'));
+  const [scope, setScope] = useState<Scope>('all');
+  const [author, setAuthor] = useState<BlogPackage | null>(() =>
+    isPackage(pkg) ? pkg : null,
+  );
 
-  const posts = useMemo(() => {
-    const base = tab === 'all' ? [...blogPosts] : postsByPackage(tab);
-    return base.sort(
-      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-    );
-  }, [tab]);
+  // 상위(스코프)로 먼저 좁히고, 그 안에서 작성자로 한 번 더.
+  const scoped = useMemo(() => blogPosts.filter((p) => inScope(p, scope)), [scope]);
 
-  const activePkg = tab === 'all' ? null : PACKAGES.find((p) => p.id === tab) ?? null;
+  const posts = useMemo(
+    () =>
+      scoped
+        .filter((p) => (author ? p.package === author : true))
+        .sort(
+          (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+        ),
+    [scoped, author],
+  );
+
+  const activePkg = author ? PACKAGES.find((p) => p.id === author) ?? null : null;
+  const activeProj =
+    scope === 'all' || scope === 'tech'
+      ? null
+      : PROJECTS.find((p) => p.id === scope) ?? null;
   const featured = posts[0];
   const rest = posts.slice(1);
 
-  const tabs: { id: Tab; label: string; count: number }[] = [
+  const scopeTabs: { id: Scope; label: string; count: number }[] = [
     { id: 'all', label: '전체', count: blogPosts.length },
-    ...PACKAGES.map((p) => ({
-      id: p.id,
-      label: p.label,
-      count: postsByPackage(p.id).length,
+    { id: 'tech', label: 'Tech', count: blogPosts.filter((p) => !p.project).length },
+    ...PROJECTS.map((pr) => ({
+      id: pr.id as Scope,
+      label: pr.label,
+      count: blogPosts.filter((p) => p.project === pr.id).length,
     })),
   ];
+
+  // 작성자 숫자는 지금 스코프 안에서 센다.
+  const authorChips = PACKAGES.map((p) => ({
+    id: p.id,
+    label: p.label,
+    count: scoped.filter((x) => x.package === p.id).length,
+  }));
+
+  // 스코프를 옮겼을 때 해당 작성자의 글이 없으면 작성자 선택을 풀어준다.
+  const pickScope = (next: Scope) => {
+    const target = next === scope ? 'all' : next;
+    setScope(target);
+    if (author && !blogPosts.some((p) => inScope(p, target) && p.package === author)) {
+      setAuthor(null);
+    }
+  };
 
   return (
     <motion.div
@@ -63,29 +94,33 @@ export default function Blog() {
           </p>
         </header>
 
-        {/* ── Package tabs — selectable, low profile ───────────── */}
+        {/* ── 상위 — Tech · 프로젝트 ─────────────────────────── */}
         <nav className="mt-8 border-b border-[var(--line)]">
           <div className="flex flex-wrap items-center gap-x-7">
-            {tabs.map((t) => {
-              const on = tab === t.id;
+            {scopeTabs.map((t) => {
+              const on = scope === t.id;
+              const empty = t.count === 0 && !on;
               return (
                 <button
                   key={t.id}
                   type="button"
-                  onClick={() => setTab(t.id)}
-                  className={`group relative pb-3 pt-1 text-[14.5px] font-medium transition-colors ${
+                  disabled={empty}
+                  onClick={() => pickScope(t.id)}
+                  className={`relative pb-3 pt-1 text-[15px] font-semibold tracking-tight transition-colors ${
                     on
                       ? 'text-[var(--ink)]'
-                      : 'text-[var(--ink-faint)] hover:text-[var(--ink-soft)]'
+                      : empty
+                        ? 'text-[var(--ink-faint)] opacity-40'
+                        : 'text-[var(--ink-faint)] hover:text-[var(--ink-soft)]'
                   }`}
                 >
                   {t.label}
-                  <span className="ml-1.5 align-top text-[11px] tabular-nums text-[var(--ink-faint)]">
+                  <span className="ml-1.5 align-top text-[11px] font-medium tabular-nums text-[var(--ink-faint)]">
                     {t.count}
                   </span>
                   {on && (
                     <motion.span
-                      layoutId="blog-tab-underline"
+                      layoutId="blog-scope-underline"
                       className="absolute inset-x-0 -bottom-px h-[2px] rounded-full bg-[var(--ink)]"
                       transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                     />
@@ -96,15 +131,50 @@ export default function Blog() {
           </div>
         </nav>
 
-        {/* One-line package note — never a big landing block */}
-        {activePkg && (
+        {/* ── 하위 — 작성자 ──────────────────────────────────── */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2">
+          <span className="mr-1 text-[11.5px] font-medium tracking-tight text-[var(--ink-faint)]">
+            작성자
+          </span>
+          {authorChips.map((t) => {
+            const on = author === t.id;
+            const empty = t.count === 0 && !on;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                disabled={empty}
+                onClick={() => setAuthor(on ? null : t.id)}
+                className={`inline-flex items-center rounded-full border px-3 py-[5px] text-[13px] font-medium transition-colors ${
+                  on
+                    ? 'border-[var(--ink)] bg-[var(--ink)] text-white'
+                    : empty
+                      ? 'border-[var(--line)] text-[var(--ink-faint)] opacity-40'
+                      : 'border-[var(--line)] text-[var(--ink-soft)] hover:border-[var(--ink-faint)] hover:text-[var(--ink)]'
+                }`}
+              >
+                {t.label}
+                <span
+                  className={`ml-1.5 text-[11px] tabular-nums ${
+                    on ? 'text-white/70' : 'text-[var(--ink-faint)]'
+                  }`}
+                >
+                  {t.count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* One-line note — never a big landing block */}
+        {(activePkg || activeProj) && (
           <p className="mt-5 text-[13.5px] leading-[1.6] text-[var(--ink-faint)]">
-            {activePkg.description}
+            {[activeProj?.description, activePkg?.description].filter(Boolean).join(' · ')}
           </p>
         )}
 
         {/* ── Posts ─────────────────────────────────────────────── */}
-        <div key={tab}>
+        <div key={`${scope}-${author ?? 'a'}`}>
           {featured && (
             <motion.div
               initial="hidden"
@@ -162,7 +232,7 @@ export default function Blog() {
 
           {posts.length === 0 && (
             <p className="py-24 text-center text-[14.5px] text-[var(--ink-faint)]">
-              아직 이 패키지에 글이 없습니다.
+              아직 여기에 해당하는 글이 없습니다.
             </p>
           )}
         </div>

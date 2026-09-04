@@ -1,0 +1,27 @@
+<svg width="100%" viewBox="0 0 720 344" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>A/B 결과에 다른 데이터를 더해 효과를 다시 추정한다</title>
+<desc>기존 A/B는 두 그룹의 평균만 비교하지만, 여기에 시간 변화와 사용자 특성, 실험 전 행동 데이터를 더해 보완 분석 모델로 더 정확한 효과를 추정한다.</desc>
+<rect x="250" y="24" width="220" height="56" rx="10" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="360" y="48" text-anchor="middle" font-size="12" font-weight="600" fill="#52514E">기존 A/B 결과</text>
+<text x="360" y="68" text-anchor="middle" font-size="10.5" fill="#898781">A 평균 vs B 평균</text>
+<path d="M360 80 L360 100" stroke="#898781" stroke-width="1"/>
+<path d="M360 100 l-4.5 -8 l9 0 z" fill="#898781"/>
+<text x="360" y="126" text-anchor="middle" font-size="11" fill="#52514E">여기에 원래 가지고 있던 데이터를 더한다</text>
+<rect x="40" y="140" width="196" height="70" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="138" y="166" text-anchor="middle" font-size="12" font-weight="600" fill="#5B3FB5">시간 변화</text>
+<text x="138" y="188" text-anchor="middle" font-size="10.5" fill="#52514E">추세 · 계절성 · 요일</text>
+<rect x="262" y="140" width="196" height="70" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="360" y="166" text-anchor="middle" font-size="12" font-weight="600" fill="#5B3FB5">사용자 특성</text>
+<text x="360" y="188" text-anchor="middle" font-size="10.5" fill="#52514E">신규 · 기존 · 기기 · 지역</text>
+<rect x="484" y="140" width="196" height="70" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="582" y="166" text-anchor="middle" font-size="12" font-weight="600" fill="#5B3FB5">실험 전 행동</text>
+<text x="582" y="188" text-anchor="middle" font-size="10.5" fill="#52514E">과거 구매 · 방문 이력</text>
+<path d="M138 210 L138 230 L360 230 L360 250" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M360 210 L360 230" stroke="#898781" stroke-width="1"/>
+<path d="M582 210 L582 230 L360 230" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M360 250 l-4.5 -8 l9 0 z" fill="#898781"/>
+<rect x="230" y="254" width="260" height="48" rx="10" fill="#12161F"/>
+<text x="360" y="274" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">보완 분석</text>
+<text x="360" y="292" text-anchor="middle" font-size="10" fill="#ABB0B8">DID · 패널 · 시계열 · CUPED</text>
+<text x="510" y="284" font-size="11" fill="#898781">→ 더 정확한 효과 추정</text>
+</svg>

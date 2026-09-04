@@ -1,0 +1,21 @@
+<svg width="100%" viewBox="0 0 720 236" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>퍼센트포인트와 상대 증가율의 차이</title>
+<desc>20퍼센트에서 22퍼센트로 오른 것은 2퍼센트포인트 상승이자 상대적으로 10퍼센트 증가다.</desc>
+<rect x="60" y="40" width="120" height="60" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="120" y="64" text-anchor="middle" font-size="11" fill="#52514E">A</text>
+<text x="120" y="88" text-anchor="middle" font-size="20" font-weight="600" fill="#52514E">20%</text>
+<path d="M188 70 L232 70" stroke="#898781" stroke-width="1.2"/>
+<path d="M232 70 l-8 -4.5 l0 9 z" fill="#898781"/>
+<rect x="240" y="40" width="120" height="60" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="300" y="64" text-anchor="middle" font-size="11" fill="#0F6E56">B</text>
+<text x="300" y="88" text-anchor="middle" font-size="20" font-weight="600" fill="#0F6E56">22%</text>
+<rect x="60" y="128" width="300" height="64" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="80" y="152" font-size="11.5" font-weight="600" fill="#12161F">퍼센트포인트(%p)</text>
+<text x="80" y="176" font-size="11.5" fill="#52514E">22 − 20 = <tspan font-weight="600" fill="#12161F">+2%p</tspan></text>
+<rect x="392" y="128" width="268" height="64" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="412" y="152" font-size="11.5" font-weight="600" fill="#12161F">상대 증가율(%)</text>
+<text x="412" y="176" font-size="11.5" fill="#52514E">(22 − 20) ÷ 20 = <tspan font-weight="600" fill="#12161F">+10%</tspan></text>
+<text x="392" y="70" font-size="11.5" fill="#52514E">같은 결과를 두 가지로 말할 수 있다.</text>
+<text x="392" y="92" font-size="11.5" fill="#A32D2D">섞어 쓰면 10%p 오른 것처럼 들린다.</text>
+<text x="360" y="222" text-anchor="middle" font-size="11.5" fill="#52514E">"전환율이 2%p 올랐고, 상대적으로는 10% 증가했다" — 이렇게 말해야 정확하다</text>
+</svg>

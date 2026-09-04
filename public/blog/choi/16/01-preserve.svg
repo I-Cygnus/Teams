@@ -1,0 +1,24 @@
+<svg width="100%" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,system-ui,'Apple SD Gothic Neo',sans-serif">
+  <rect width="680" height="220" fill="#F6FBFC"/>
+  <text x="24" y="32" font-size="15" font-weight="700" fill="#164E63">폐기가 아니라 보류 — 복원 가능한 보존</text>
+  <rect x="24" y="54" width="180" height="110" rx="8" fill="#fff" stroke="#A5D8E2"/>
+  <text x="40" y="80" font-size="13" font-weight="700" fill="#0E7490">철회한 설계</text>
+  <text x="40" y="102" font-size="11.5" fill="#155E75">판정 코드 11종</text>
+  <text x="40" y="120" font-size="11.5" fill="#155E75">설계 판단 7가지</text>
+  <text x="40" y="138" font-size="11.5" fill="#155E75">구현 + 테스트</text>
+  <text x="216" y="112" font-size="15" fill="#67C3D4">→</text>
+  <rect x="238" y="54" width="200" height="110" rx="8" fill="#ECFEFF" stroke="#0E7490" stroke-width="1.5"/>
+  <text x="254" y="80" font-size="13" font-weight="700" fill="#155E75">보존 형식</text>
+  <text x="254" y="102" font-size="11.5" fill="#155E75">코드 전체 백업</text>
+  <text x="254" y="120" font-size="11.5" fill="#155E75">복원 README (배경·근거·</text>
+  <text x="254" y="136" font-size="11.5" fill="#155E75">절차·검증 케이스)</text>
+  <text x="254" y="154" font-size="11.5" fill="#155E75">판단 기록 + 날짜</text>
+  <text x="450" y="112" font-size="15" fill="#67C3D4">→</text>
+  <rect x="472" y="54" width="184" height="110" rx="8" fill="#fff" stroke="#A5D8E2"/>
+  <text x="488" y="80" font-size="13" font-weight="700" fill="#0E7490">미래의 조건 변화</text>
+  <text x="488" y="102" font-size="11.5" fill="#155E75">표기 정책이 바뀌는 날</text>
+  <text x="488" y="120" font-size="11.5" fill="#155E75">문서만 보고</text>
+  <text x="488" y="138" font-size="11.5" fill="#155E75">완전 복원 가능</text>
+  <rect x="24" y="182" width="632" height="26" rx="5" fill="#CFFAFE"/>
+  <text x="38" y="200" font-size="12.5" fill="#155E75">기준: 이 문서만 읽고, 나 없이도, 완전 복원이 가능한가</text>
+</svg>

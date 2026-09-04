@@ -1,0 +1,18 @@
+<svg width="100%" viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,system-ui,'Apple SD Gothic Neo',sans-serif">
+  <rect width="680" height="230" fill="#F7FBF8"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#14532D">bloat 측정 — 정확 함수 vs 근사 함수</text>
+  <g font-size="12.5">
+    <rect x="24" y="56" width="304" height="120" rx="8" fill="#fff" stroke="#D1D5DB"/>
+    <text x="42" y="82" font-weight="700" fill="#374151">pgstattuple (정확)</text>
+    <text x="42" y="106" fill="#6B7280">테이블 전체를 읽음</text>
+    <text x="42" y="126" fill="#B91C1C">300GB 감시에 300GB 스캔 — 모순</text>
+    <text x="42" y="146" fill="#6B7280">정확도: 100%</text>
+    <rect x="352" y="56" width="304" height="120" rx="8" fill="#ECFDF3" stroke="#1C7C46" stroke-width="1.5"/>
+    <text x="370" y="82" font-weight="700" fill="#14532D">pgstattuple_approx (근사) ← 채택</text>
+    <text x="370" y="106" fill="#166534">visibility map 활용, 일부만 읽음</text>
+    <text x="370" y="126" fill="#166534">부하 낮음 → 상시 조회 가능</text>
+    <text x="370" y="146" fill="#166534">오차 수 % — "청소 필요?" 판단엔 충분</text>
+  </g>
+  <rect x="24" y="192" width="632" height="26" rx="5" fill="#DCFCE7"/>
+  <text x="38" y="210" font-size="12.5" fill="#14532D">모니터링의 가치 = 정밀도가 아니라 <tspan font-weight="700">부하 없이 자주 볼 수 있는 것</tspan>. 채택 근거는 문서로.</text>
+</svg>

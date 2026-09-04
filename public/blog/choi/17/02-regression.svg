@@ -1,0 +1,20 @@
+<svg width="100%" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,system-ui,'Apple SD Gothic Neo',sans-serif">
+  <rect width="680" height="220" fill="#FDFAF7"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#1C1917">회귀의 타임라인 — 선의의 수정이 폭탄이 되기까지</text>
+  <line x1="50" y1="120" x2="640" y2="120" stroke="#D6D3D1" stroke-width="2"/>
+  <g text-anchor="middle">
+    <circle cx="120" cy="120" r="7" fill="#78716C"/>
+    <text x="120" y="90" font-size="12.5" font-weight="700" fill="#44403C">과거</text>
+    <text x="120" y="150" font-size="12" fill="#57534E">"결과 미저장 버그"</text>
+    <text x="120" y="166" font-size="12" fill="#57534E">수정 커밋</text>
+    <circle cx="330" cy="120" r="7" fill="#EA580C"/>
+    <text x="330" y="90" font-size="12.5" font-weight="700" fill="#9A3412">부작용</text>
+    <text x="330" y="150" font-size="12" fill="#57534E">한도 조건이 풀려</text>
+    <text x="330" y="166" font-size="12" fill="#B91C1C">0 = 무제한 탄생</text>
+    <circle cx="540" cy="120" r="9" fill="#B91C1C"/>
+    <text x="540" y="90" font-size="12.5" font-weight="700" fill="#B91C1C">몇 달 뒤</text>
+    <text x="540" y="150" font-size="12" fill="#57534E">설정 누락(0) × 920만 행</text>
+    <text x="540" y="166" font-size="12" font-weight="700" fill="#B91C1C">= OOM</text>
+  </g>
+  <text x="24" y="202" font-size="12" fill="#78716C">git log -p 로 조건문의 역사를 추적 → 한도를 풀어버린 커밋 특정</text>
+</svg>

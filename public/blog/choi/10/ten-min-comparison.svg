@@ -1,0 +1,51 @@
+<svg width="100%" viewBox="0 0 720 372" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>10분 대기 상황에서 기존 방식과 버추얼 스레드 비교</title>
+<desc>기존 방식은 스레드들이 10분 대기 동안 점유되어 새 요청을 거절하지만, 버추얼 스레드는 대기 정보를 힙에 저장하고 캐리어 스레드가 같은 10분 동안 다른 요청들을 처리한다.</desc>
+
+<text x="40" y="34" font-size="12" font-weight="600" fill="#52514E">기존 방식</text>
+
+<text x="40" y="66" font-size="11" fill="#52514E">스레드 q1</text>
+<rect x="118" y="50" width="44" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<rect x="162" y="50" width="428" height="24" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="376" y="66" text-anchor="middle" font-size="10.5" fill="#A32D2D">과정2 — 10분 대기, 점유 중</text>
+<rect x="590" y="50" width="44" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+
+<text x="40" y="102" font-size="11" fill="#52514E">스레드 q2</text>
+<rect x="118" y="86" width="44" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<rect x="162" y="86" width="428" height="24" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="376" y="102" text-anchor="middle" font-size="10.5" fill="#A32D2D">과정2 — 10분 대기, 점유 중</text>
+<rect x="590" y="86" width="44" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+
+<text x="40" y="140" font-size="11" fill="#52514E">새 요청</text>
+<rect x="118" y="124" width="516" height="26" rx="3" fill="none" stroke="#A32D2D" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="376" y="141" text-anchor="middle" font-size="11" font-weight="600" fill="#A32D2D">남은 스레드 없음 — 요청 거절</text>
+
+<line x1="40" y1="180" x2="680" y2="180" stroke="#D9D7D2" stroke-width="1"/>
+
+<text x="40" y="212" font-size="12" font-weight="600" fill="#52514E">버추얼 스레드</text>
+
+<text x="40" y="246" font-size="11" fill="#52514E">가상 스레드 Q</text>
+<rect x="138" y="230" width="44" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<rect x="182" y="230" width="408" height="24" rx="3" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="386" y="246" text-anchor="middle" font-size="10.5" fill="#5B3FB5">과정2 — 10분 대기, 힙에 저장 (스레드 점유 없음)</text>
+<rect x="590" y="230" width="44" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+
+<text x="40" y="288" font-size="11" fill="#52514E">캐리어 q</text>
+<rect x="138" y="272" width="44" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<g fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5">
+<rect x="190" y="272" width="46" height="24" rx="3"/>
+<rect x="242" y="272" width="46" height="24" rx="3"/>
+<rect x="294" y="272" width="46" height="24" rx="3"/>
+<rect x="346" y="272" width="46" height="24" rx="3"/>
+<rect x="398" y="272" width="46" height="24" rx="3"/>
+<rect x="450" y="272" width="46" height="24" rx="3"/>
+<rect x="502" y="272" width="46" height="24" rx="3"/>
+<rect x="554" y="272" width="30" height="24" rx="3"/>
+</g>
+<rect x="590" y="272" width="44" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+
+<path d="M236 306 L236 314 L548 314 L548 306" fill="none" stroke="#898781" stroke-width="0.5"/>
+<text x="392" y="334" text-anchor="middle" font-size="11" fill="#52514E">같은 10분 동안 캐리어 q가 처리한 다른 요청들</text>
+
+<text x="360" y="362" text-anchor="middle" font-size="11.5" fill="#52514E">요청 하나는 여전히 10분 — 달라진 건 그동안 서버가 다른 요청을 받을 수 있다는 것</text>
+</svg>

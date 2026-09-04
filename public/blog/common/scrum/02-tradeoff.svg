@@ -1,0 +1,19 @@
+<svg width="100%" viewBox="0 0 720 296" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:'Wanted Sans',-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>매일 스크럼이 주는 것과 지금 치르는 비용</title>
+<desc>매일 스크럼은 밀도 높은 소통과 즉시 이슈 해소, 매일의 리듬을 주지만, 전원이 같은 시간을 비워야 하고 준비 로스가 크며 각자의 본업과 작업량 편차라는 비용이 생겼다.</desc>
+<rect x="0.5" y="0.5" width="719" height="295" rx="16" fill="#FAFBFC" stroke="#E8EAED"/>
+
+<rect x="48" y="48" width="292" height="168" rx="12" fill="#F0F5FF" stroke="#DCE7FF"/>
+<text x="72" y="84" font-size="13" font-weight="700" fill="#1F47B8">매일 스크럼이 주는 것</text>
+<text x="72" y="118" font-size="11.5" fill="#3C4453">· 밀도 높은 소통과 방향 정렬</text>
+<text x="72" y="144" font-size="11.5" fill="#3C4453">· 이슈가 커지기 전의 즉시 해소</text>
+<text x="72" y="170" font-size="11.5" fill="#3C4453">· 매일의 리듬 · 각성 · 컨텍스트 유지</text>
+
+<rect x="380" y="48" width="292" height="168" rx="12" fill="#FDF3E2" stroke="#F3E2C0"/>
+<text x="404" y="84" font-size="13" font-weight="700" fill="#B8730B">지금 치르는 비용</text>
+<text x="404" y="118" font-size="11.5" fill="#3C4453">· 전원이 매일 같은 시간을 비워야 함</text>
+<text x="404" y="144" font-size="11.5" fill="#3C4453">· 하루 안에 준비하는 로스가 커짐</text>
+<text x="404" y="170" font-size="11.5" fill="#3C4453">· 각자의 일 · 하루 작업량의 편차</text>
+
+<text x="360" y="252" text-anchor="middle" font-size="12" fill="#5B6474">스크럼이 나빠진 게 아니라 우리의 상황이 바뀌었다 — 그래서 트레이드오프를 선택한다</text>
+</svg>

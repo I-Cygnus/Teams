@@ -1,0 +1,45 @@
+<svg width="100%" viewBox="0 0 720 340" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>이벤트 루프는 어디에 있나</title>
+<desc>WebFlux는 이벤트 루프와 리액티브 규약이 개발자 코드까지 올라오고, FastAPI는 await 표시만 남으며, 가상 스레드는 루프가 JVM 안에 완전히 숨는다. 셋 다 밑바닥은 같은 OS 이벤트 기능 위에서 돈다.</desc>
+
+<text x="40" y="32" font-size="12" font-weight="600" fill="#52514E">개발자가 쓰는 코드</text>
+
+<rect x="40" y="46" width="200" height="86" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="140" y="72" text-anchor="middle" font-size="12.5" font-weight="600" fill="#A32D2D">WebFlux</text>
+<text x="140" y="96" text-anchor="middle" font-size="10.5" fill="#52514E">Flux · 연산자 체인</text>
+<text x="140" y="114" text-anchor="middle" font-size="10.5" fill="#A32D2D">루프와 규약이 코드까지</text>
+
+<rect x="260" y="46" width="200" height="86" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="360" y="72" text-anchor="middle" font-size="12.5" font-weight="600" fill="#5B3FB5">FastAPI</text>
+<text x="360" y="96" text-anchor="middle" font-size="10.5" fill="#52514E">순차 코드 + await</text>
+<text x="360" y="114" text-anchor="middle" font-size="10.5" fill="#5B3FB5">루프는 숨고, 표시만 남음</text>
+
+<rect x="480" y="46" width="200" height="86" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="580" y="72" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0F6E56">가상 스레드</text>
+<text x="580" y="96" text-anchor="middle" font-size="10.5" fill="#52514E">그냥 순차 코드</text>
+<text x="580" y="114" text-anchor="middle" font-size="10.5" fill="#0F6E56">루프가 완전히 숨음</text>
+
+<path d="M140 132 L140 168" stroke="#898781" stroke-width="1"/>
+<path d="M140 168 l-4.5 -8 l9 0 z" fill="#898781"/>
+<path d="M360 132 L360 168" stroke="#898781" stroke-width="1"/>
+<path d="M360 168 l-4.5 -8 l9 0 z" fill="#898781"/>
+<path d="M580 132 L580 168" stroke="#898781" stroke-width="1"/>
+<path d="M580 168 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<text x="40" y="196" font-size="12" font-weight="600" fill="#52514E">런타임이 하는 일</text>
+
+<rect x="40" y="210" width="200" height="52" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="140" y="234" text-anchor="middle" font-size="11" fill="#52514E">Netty 이벤트 루프</text>
+<text x="140" y="252" text-anchor="middle" font-size="10.5" fill="#898781">스레드 여러 개</text>
+
+<rect x="260" y="210" width="200" height="52" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="360" y="234" text-anchor="middle" font-size="11" fill="#52514E">asyncio 이벤트 루프</text>
+<text x="360" y="252" text-anchor="middle" font-size="10.5" fill="#898781">프로세스당 하나</text>
+
+<rect x="480" y="210" width="200" height="52" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="580" y="234" text-anchor="middle" font-size="11" fill="#52514E">JVM 내부 Poller</text>
+<text x="580" y="252" text-anchor="middle" font-size="10.5" fill="#898781">깨워서 캐리어에 올림</text>
+
+<rect x="40" y="278" width="640" height="42" rx="8" fill="#12161F"/>
+<text x="360" y="304" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">OS의 이벤트 알림(epoll · kqueue) — 셋 다 결국 같은 바닥 위에서 돈다</text>
+</svg>

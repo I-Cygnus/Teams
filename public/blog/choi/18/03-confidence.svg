@@ -1,0 +1,23 @@
+<svg width="100%" viewBox="0 0 720 300" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>신뢰구간이 0을 포함하는지 여부</title>
+<desc>신뢰구간이 0을 넘지 않으면 개선했다고 말할 수 있고, 0을 포함하면 효과가 없을 가능성도 남아 있다.</desc>
+<line x1="300" y1="40" x2="300" y2="248" stroke="#A32D2D" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="300" y="34" text-anchor="middle" font-size="11" fill="#A32D2D">0 (차이 없음)</text>
+<text x="60" y="86" font-size="11.5" font-weight="600" fill="#0F6E56">확실한 경우</text>
+<text x="60" y="106" font-size="10.5" fill="#52514E">+0.5%p ~ +3.5%p</text>
+<line x1="330" y1="96" x2="510" y2="96" stroke="#0F6E56" stroke-width="3"/>
+<line x1="330" y1="86" x2="330" y2="106" stroke="#0F6E56" stroke-width="2"/>
+<line x1="510" y1="86" x2="510" y2="106" stroke="#0F6E56" stroke-width="2"/>
+<circle cx="420" cy="96" r="5" fill="#0F6E56"/>
+<text x="420" y="76" text-anchor="middle" font-size="11" font-weight="600" fill="#0F6E56">+2%p</text>
+<text x="530" y="100" font-size="11" fill="#0F6E56">구간 전체가 0보다 크다 → 개선했다고 말할 수 있다</text>
+<text x="60" y="196" font-size="11.5" font-weight="600" fill="#A32D2D">애매한 경우</text>
+<text x="60" y="216" font-size="10.5" fill="#52514E">−1%p ~ +5%p</text>
+<line x1="240" y1="206" x2="560" y2="206" stroke="#A32D2D" stroke-width="3"/>
+<line x1="240" y1="196" x2="240" y2="216" stroke="#A32D2D" stroke-width="2"/>
+<line x1="560" y1="196" x2="560" y2="216" stroke="#A32D2D" stroke-width="2"/>
+<circle cx="420" cy="206" r="5" fill="#A32D2D"/>
+<text x="420" y="186" text-anchor="middle" font-size="11" font-weight="600" fill="#A32D2D">+2%p</text>
+<text x="580" y="210" font-size="11" fill="#A32D2D">0을 품고 있다 → 효과가 없을 수도</text>
+<text x="360" y="278" text-anchor="middle" font-size="11.5" fill="#52514E">추정값이 같아도, 구간이 0을 넘느냐에 따라 결론이 갈린다</text>
+</svg>

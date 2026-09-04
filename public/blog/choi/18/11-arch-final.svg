@@ -1,0 +1,42 @@
+<svg width="100%" viewBox="0 0 720 420" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>규모가 커졌을 때의 최종 구조</title>
+<desc>SDK와 이벤트 API 뒤에 Kafka를 두어 대량 이벤트를 비동기로 받고, ClickHouse는 분석용으로 Elasticsearch는 원천 로그 검색용으로 나눈 뒤 통계 엔진을 거쳐 대시보드로 간다.</desc>
+<rect x="24" y="16" width="140" height="26" rx="13" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="94" y="34" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5B3FB5">규모가 커지면</text>
+
+<rect x="266" y="56" width="188" height="36" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="360" y="79" text-anchor="middle" font-size="12" fill="#52514E">서비스 · SDK</text>
+<path d="M360 92 L360 110" stroke="#898781" stroke-width="1"/>
+<path d="M360 110 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="266" y="114" width="188" height="36" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="360" y="137" text-anchor="middle" font-size="12" font-weight="600" fill="#12161F">Event API</text>
+<path d="M360 150 L360 168" stroke="#898781" stroke-width="1"/>
+<path d="M360 168 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="266" y="172" width="188" height="48" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="1"/>
+<text x="360" y="194" text-anchor="middle" font-size="12" font-weight="600" fill="#5B3FB5">Kafka</text>
+<text x="360" y="211" text-anchor="middle" font-size="10" fill="#52514E">버퍼링 · 비동기 · 재처리</text>
+<text x="474" y="200" font-size="10.5" fill="#5B3FB5">← 여기가 새로 붙는 층</text>
+
+<path d="M310 220 L200 220 L200 248" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M200 248 l-4.5 -8 l9 0 z" fill="#898781"/>
+<path d="M410 220 L520 220 L520 248" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M520 248 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="100" y="252" width="200" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="200" y="276" text-anchor="middle" font-size="12" font-weight="600" fill="#0F6E56">ClickHouse</text>
+<text x="200" y="294" text-anchor="middle" font-size="10.5" fill="#52514E">지표 집계 · 분석</text>
+
+<rect x="420" y="252" width="200" height="56" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="520" y="276" text-anchor="middle" font-size="12" font-weight="600" fill="#52514E">Elasticsearch</text>
+<text x="520" y="294" text-anchor="middle" font-size="10.5" fill="#898781">원천 로그 검색 · 탐색</text>
+
+<path d="M200 308 L200 332 L360 332 L360 348" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M360 348 l-4.5 -8 l9 0 z" fill="#898781"/>
+
+<rect x="266" y="352" width="188" height="40" rx="8" fill="#12161F"/>
+<text x="360" y="370" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">통계 분석 엔진</text>
+<text x="360" y="385" text-anchor="middle" font-size="10" fill="#ABB0B8">+ DID · 패널 · 시계열</text>
+<text x="474" y="376" font-size="10.5" fill="#898781">→ Dashboard</text>
+</svg>

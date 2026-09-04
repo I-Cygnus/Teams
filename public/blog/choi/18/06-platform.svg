@@ -1,0 +1,34 @@
+<svg width="100%" viewBox="0 0 720 372" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>A/B 테스트 플랫폼의 구조</title>
+<desc>실험 정의 저장소와 배정 엔진, 노출과 이벤트 수집, 데이터 웨어하우스, 통계 분석, 결과판으로 이어지는 시스템 구조.</desc>
+<rect x="266" y="24" width="188" height="44" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="360" y="52" text-anchor="middle" font-size="12" font-weight="600" fill="#52514E">실험 정의 저장소</text>
+<path d="M360 68 L360 92" stroke="#898781" stroke-width="1"/>
+<path d="M360 92 l-4.5 -8 l9 0 z" fill="#898781"/>
+<rect x="40" y="96" width="120" height="44" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="100" y="124" text-anchor="middle" font-size="12" fill="#52514E">사용자</text>
+<path d="M160 118 L258 118" stroke="#898781" stroke-width="1"/>
+<path d="M258 118 l-8 -4.5 l0 9 z" fill="#898781"/>
+<rect x="266" y="96" width="188" height="44" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="360" y="118" text-anchor="middle" font-size="12" font-weight="600" fill="#5B3FB5">배정 엔진</text>
+<text x="360" y="134" text-anchor="middle" font-size="10" fill="#52514E">같은 사용자는 늘 같은 그룹으로</text>
+<path d="M330 140 L262 140 L262 168" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M262 168 l-4.5 -8 l9 0 z" fill="#898781"/>
+<path d="M390 140 L458 140 L458 168" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M458 168 l-4.5 -8 l9 0 z" fill="#898781"/>
+<rect x="206" y="172" width="112" height="40" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="262" y="197" text-anchor="middle" font-size="12" font-weight="600" fill="#12161F">A 노출</text>
+<rect x="402" y="172" width="112" height="40" rx="8" fill="#FFFFFF" stroke="#D9D7D2"/>
+<text x="458" y="197" text-anchor="middle" font-size="12" font-weight="600" fill="#12161F">B 노출</text>
+<path d="M262 212 L262 232 L360 232 L360 252" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M458 212 L458 232 L360 232" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M360 252 l-4.5 -8 l9 0 z" fill="#898781"/>
+<rect x="266" y="256" width="188" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="360" y="281" text-anchor="middle" font-size="12" font-weight="600" fill="#0F6E56">이벤트 수집 · 저장</text>
+<path d="M360 296 L360 316" stroke="#898781" stroke-width="1"/>
+<path d="M360 316 l-4.5 -8 l9 0 z" fill="#898781"/>
+<rect x="266" y="320" width="188" height="40" rx="8" fill="#12161F"/>
+<text x="360" y="345" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">지표 계산 · 통계 분석</text>
+<text x="480" y="284" font-size="10.5" fill="#898781">노출 · 클릭 · 구매</text>
+<text x="480" y="345" font-size="10.5" fill="#898781">효과 · 신뢰구간 · p값</text>
+</svg>

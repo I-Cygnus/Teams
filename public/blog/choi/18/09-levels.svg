@@ -1,0 +1,20 @@
+<svg width="100%" viewBox="0 0 720 308" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>A/B 테스트 이해의 네 단계</title>
+<desc>초급은 두 안을 비교하는 것, 중급은 통계적 유의성 검증, 고급은 인과 효과 추정, 그 위는 편향과 분산을 통제하는 설계다.</desc>
+<rect x="40" y="32" width="640" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="64" y="56" font-size="12.5" font-weight="600" fill="#0F6E56">초급</text>
+<text x="140" y="56" font-size="12" fill="#12161F">A와 B를 나눠 보여주고 뭐가 더 좋은지 비교한다</text>
+<text x="140" y="76" font-size="10.5" fill="#898781">필요한 것: 두 개의 안, 그리고 결과를 세는 방법</text>
+<rect x="40" y="98" width="640" height="56" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="64" y="122" font-size="12.5" font-weight="600" fill="#5B3FB5">중급</text>
+<text x="140" y="122" font-size="12" fill="#12161F">랜덤하게 나누고, 차이가 통계적으로 유의한지 검증한다</text>
+<text x="140" y="142" font-size="10.5" fill="#898781">필요한 것: 랜덤 배정 · 지표 정의 · 표본 크기 · p값 · 신뢰구간</text>
+<rect x="40" y="164" width="640" height="56" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="64" y="188" font-size="12.5" font-weight="600" fill="#A32D2D">고급</text>
+<text x="140" y="188" font-size="12" fill="#12161F">변경이 결과에 미친 인과적 효과를 추정한다</text>
+<text x="140" y="208" font-size="10.5" fill="#898781">필요한 것: 실험 설계 · 검정력 · MDE · 가드레일 지표</text>
+<rect x="40" y="230" width="640" height="56" rx="8" fill="#12161F"/>
+<text x="64" y="254" font-size="12.5" font-weight="600" fill="#FFFFFF">그 너머</text>
+<text x="140" y="254" font-size="12" fill="#FFFFFF">편향과 분산을 통제하며 실험 시스템을 설계한다</text>
+<text x="140" y="274" font-size="10.5" fill="#ABB0B8">다중검정 보정 · 이질적 처리효과 · CUPED · SRM 감시</text>
+</svg>

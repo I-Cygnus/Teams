@@ -1,0 +1,36 @@
+<svg width="100%" viewBox="0 0 720 312" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>실행하는 쪽 셋과 정보를 담는 쪽 하나</title>
+<desc>커널 스레드, 플랫폼 스레드, 캐리어 스레드는 사실상 같은 실체이고, 가상 스레드만 정보를 담는 자바 객체로 성격이 다르다.</desc>
+
+<rect x="36" y="36" width="396" height="212" rx="8" fill="none" stroke="#0F6E56" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="56" y="62" font-size="12" font-weight="600" fill="#0F6E56">실제 실행하는 쪽 — 셋은 같은 실체</text>
+
+<rect x="56" y="76" width="356" height="46" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="70" y="95" font-size="12" font-weight="600" fill="#0F6E56">커널 스레드</text>
+<text x="70" y="112" font-size="10.5" fill="#52514E">OS가 관리하는 진짜 실행 자원</text>
+
+<rect x="56" y="130" width="356" height="46" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="70" y="149" font-size="12" font-weight="600" fill="#0F6E56">플랫폼 스레드</text>
+<text x="70" y="166" font-size="10.5" fill="#52514E">커널 스레드의 자바 표현 — 1:1 대응</text>
+
+<rect x="56" y="184" width="356" height="46" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="70" y="203" font-size="12" font-weight="600" fill="#0F6E56">캐리어 스레드</text>
+<text x="70" y="220" font-size="10.5" fill="#52514E">가상 스레드를 태우고 있는 상태 — 종류가 아니라 역할 이름</text>
+
+<rect x="464" y="36" width="220" height="212" rx="8" fill="none" stroke="#6C4EC9" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="484" y="62" font-size="12" font-weight="600" fill="#5B3FB5">정보를 담는 쪽</text>
+
+<rect x="484" y="76" width="180" height="70" rx="4" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="498" y="98" font-size="12" font-weight="600" fill="#5B3FB5">가상 스레드</text>
+<text x="498" y="116" font-size="10.5" fill="#52514E">실행할 작업과 진행 상태를</text>
+<text x="498" y="131" font-size="10.5" fill="#52514E">담은 힙 위의 자바 객체</text>
+
+<text x="484" y="176" font-size="10.5" fill="#52514E">· OS는 존재를 모른다</text>
+<text x="484" y="196" font-size="10.5" fill="#52514E">· 혼자서는 실행하지 못한다</text>
+<text x="484" y="216" font-size="10.5" fill="#52514E">· 캐리어에 올라타야 동작한다</text>
+
+<path d="M464 142 L438 142" fill="none" stroke="#898781" stroke-width="1"/>
+<path d="M438 142 l7 -4 l0 8 z" fill="#898781"/>
+
+<text x="360" y="286" text-anchor="middle" font-size="12" fill="#52514E">가상 스레드는 캐리어 스레드에 올라타야만 실행된다</text>
+</svg>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>평가 리포트 — 이력서 · 포트폴리오</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1d23; --sub:#5b6270; --dim:#98a0ac; --line:#e4e7ec; --bg:#f5f6f8;
+  --navy:#1f3864; --blue:#2664a6; --blue-l:#eef4fb;
+  --red:#c0392b; --red-l:#fdf1ef; --red-line:#f0c8c2;
+  --green:#1c7c46; --green-l:#eefaf2; --green-line:#bfe5cd;
+  --amber:#9a6700; --amber-l:#fdf6e5; --amber-line:#ecd9a8;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+
+/* 상단 바 */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(31,56,100,.97);backdrop-filter:blur(6px);color:#fff;display:flex;align-items:center;gap:4px;padding:10px 18px;overflow-x:auto}
+.topbar .t{font-weight:800;font-size:14px;margin-right:14px;white-space:nowrap}
+.topbar a{color:#b9c6de;font-size:12.5px;font-weight:600;text-decoration:none;padding:5px 10px;border-radius:4px;white-space:nowrap}
+.topbar a:hover{color:#fff;background:rgba(255,255,255,.1)}
+
+.wrap{max-width:920px;margin:0 auto;padding:92px 24px 90px}
+
+/* 히어로 */
+.hero{background:#fff;border:1px solid var(--line);border-top:4px solid var(--navy);padding:40px 44px;margin-bottom:26px}
+.kicker{font-size:12px;font-weight:800;letter-spacing:2.5px;color:var(--blue);text-transform:uppercase}
+h1{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1.3;margin:8px 0 14px}
+.hero .lead{color:var(--sub);font-size:15px;max-width:640px}
+.meta-line{color:var(--dim);font-size:12.5px;margin-top:18px}
+
+/* 등급 카드 */
+.grades{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 0}
+.grade{border:1px solid var(--line);padding:22px 24px;position:relative;background:#fafbfc}
+.grade .what{font-size:13px;font-weight:700;color:var(--sub)}
+.grade .what a{color:var(--sub)}
+.grade .g{font-size:44px;font-weight:900;letter-spacing:-2px;line-height:1.1;margin:6px 0 2px}
+.grade.resume .g{color:var(--amber)}
+.grade.portfolio .g{color:var(--green)}
+.grade .one{font-size:13px;color:var(--sub);line-height:1.6}
+.grade .arrow{position:absolute;top:22px;right:24px;font-size:12px;font-weight:800;padding:4px 10px;border-radius:99px}
+.grade.resume .arrow{background:var(--amber-l);color:var(--amber);border:1px solid var(--amber-line)}
+.grade.portfolio .arrow{background:var(--green-l);color:var(--green);border:1px solid var(--green-line)}
+
+/* 섹션 */
+section{background:#fff;border:1px solid var(--line);padding:38px 44px;margin-bottom:26px}
+.sec-no{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--blue)}
+h2{font-size:22px;font-weight:800;letter-spacing:-0.6px;margin:6px 0 6px;line-height:1.4}
+.sec-lead{color:var(--sub);font-size:14px;margin-bottom:22px;max-width:660px}
+h3{font-size:16.5px;font-weight:800;margin:32px 0 10px;letter-spacing:-0.3px}
+h3 .chip{font-size:11px;font-weight:800;padding:2.5px 9px;border-radius:99px;vertical-align:3px;margin-left:8px;letter-spacing:.3px}
+.chip.bad{background:var(--red-l);color:var(--red);border:1px solid var(--red-line)}
+.chip.good{background:var(--green-l);color:var(--green);border:1px solid var(--green-line)}
+.chip.warn{background:var(--amber-l);color:var(--amber);border:1px solid var(--amber-line)}
+p{margin:10px 0}
+p b, li b{color:var(--navy)}
+.note{background:var(--blue-l);border-left:3px solid var(--blue);padding:14px 18px;font-size:13.5px;margin:16px 0;color:#2c4a6e}
+.note b{color:var(--navy)}
+
+/* 불일치 카드 */
+.clash{border:1px solid var(--red-line);background:var(--red-l);padding:18px 22px;margin:14px 0;display:grid;grid-template-columns:1fr auto 1fr;gap:6px 18px;align-items:center}
+.clash .side{font-size:14px}
+.clash .side .src{display:block;font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.5px;text-transform:uppercase}
+.clash .side b{font-size:17px;color:var(--red)}
+.clash .vs{font-size:12px;font-weight:900;color:var(--red);background:#fff;border:1px solid var(--red-line);border-radius:99px;padding:4px 10px}
+.clash .why{grid-column:1/-1;font-size:12.5px;color:#8c4238;border-top:1px dashed var(--red-line);padding-top:10px;margin-top:4px}
+
+/* Before/After 첨삭 카드 */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);margin:14px 0}
+.ba>div{padding:16px 20px;font-size:13.5px;line-height:1.7}
+.ba .b{background:var(--red-l);border-right:1px solid var(--line)}
+.ba .a{background:var(--green-l)}
+.ba .lab{display:block;font-size:10.5px;font-weight:900;letter-spacing:1.5px;margin-bottom:6px}
+.ba .b .lab{color:var(--red)} .ba .a .lab{color:var(--green)}
+.ba .diag{grid-column:1/-1;background:#fff;border-top:1px solid var(--line);padding:10px 20px;font-size:12.5px;color:var(--sub)}
+.ba .diag b{color:var(--red)}
+code{background:#f0f2f5;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12.5px;font-family:ui-monospace,'SF Mono',Menlo,monospace;color:#8a2f57}
+
+/* 순서 시각화 */
+.order{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.order .row{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.order .lab{font-size:11.5px;font-weight:800;color:var(--dim);text-align:right;letter-spacing:.5px}
+.order .seq{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:12px;font-weight:700;padding:5px 12px;border-radius:6px;border:1px solid var(--line);background:#fafbfc;color:var(--sub)}
+.pill.hot{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pill.weak{background:var(--red-l);color:var(--red);border-color:var(--red-line);text-decoration:line-through;text-decoration-thickness:1px}
+
+/* 점수 바 */
+.scores{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.score{display:grid;grid-template-columns:190px 1fr 52px;gap:14px;align-items:center}
+.score .k{font-size:13px;font-weight:700;text-align:right;color:var(--sub)}
+.score .bar{height:10px;background:#edf0f3;border-radius:99px;overflow:hidden}
+.score .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--navy))}
+.score .bar i.low{background:linear-gradient(90deg,#e2a03f,var(--red))}
+.score .v{font-size:13px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
+
+/* 케이스 문법 다이어그램 */
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0;padding:18px 20px;background:#fafbfc;border:1px solid var(--line)}
+.flow .st{background:#fff;border:1.5px solid var(--navy);color:var(--navy);font-size:12.5px;font-weight:800;padding:7px 13px;border-radius:6px}
+.flow .ar{color:var(--dim);font-weight:900}
+
+/* 인용 */
+.quote{border-left:3px solid var(--navy);background:#fafbfc;padding:14px 20px;margin:14px 0;font-size:13.5px;color:#3a4150}
+.quote .who{display:block;margin-top:8px;font-size:11.5px;color:var(--dim);font-weight:700}
+
+/* 대조표 */
+table{width:100%;border-collapse:collapse;font-size:13px;margin:14px 0}
+thead th{background:var(--navy);color:#fff;font-weight:700;text-align:left;padding:9px 13px;font-size:12px;letter-spacing:.4px}
+td{border:1px solid var(--line);padding:10px 13px;vertical-align:top;line-height:1.65}
+tbody tr:nth-child(even) td{background:#fafbfc}
+td.ok{color:var(--green);font-weight:800}
+td.gap{color:var(--red);font-weight:700}
+
+/* 액션 체크리스트 */
+.todo{border:1px solid var(--line);margin:10px 0}
+.todo label{display:flex;gap:12px;align-items:flex-start;padding:13px 18px;border-bottom:1px solid #f0f2f4;cursor:pointer}
+.todo label:last-child{border-bottom:0}
+.todo label:hover{background:var(--blue-l)}
+.todo input{width:16px;height:16px;margin-top:4px;accent-color:var(--navy);flex-shrink:0;cursor:pointer}
+.todo .tx{font-size:14px;line-height:1.6}
+.todo .tx em{display:block;font-style:normal;font-size:12px;color:var(--dim);margin-top:2px}
+.todo label.done .tx{color:var(--dim);text-decoration:line-through;text-decoration-color:#c9ced6}
+.pbadge{font-size:10.5px;font-weight:900;padding:2px 8px;border-radius:4px;margin-top:4px;flex-shrink:0;letter-spacing:.5px}
+.pbadge.p0{background:var(--red);color:#fff}
+.pbadge.p1{background:var(--amber);color:#fff}
+.pbadge.p2{background:#7e8691;color:#fff}
+.todo-head{display:flex;align-items:center;gap:10px;margin:26px 0 8px}
+.todo-head h3{margin:0}
+.todo-head .time{font-size:12px;color:var(--dim);font-weight:600}
+
+/* 등급 순위 리더보드 */
+.tiers{margin:18px 0}
+.tier{border:1px solid var(--line);margin-bottom:12px}
+.tier-h{display:flex;align-items:center;gap:12px;padding:11px 16px;background:#fafbfc;border-bottom:1px solid var(--line)}
+.tier-badge{font-size:15px;font-weight:900;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff}
+.t-s .tier-badge{background:#1c7c46}.t-a .tier-badge{background:var(--navy)}.t-b .tier-badge{background:#c98a1e}.t-c .tier-badge{background:#9aa0a8}
+.tier-h .tn{font-size:14px;font-weight:800}
+.tier-h .td{font-size:12.5px;color:var(--sub)}
+.tier-b{padding:6px 0}
+.doc{display:grid;grid-template-columns:1fr auto;gap:4px 14px;padding:9px 16px;border-bottom:1px dotted #eef0f3;align-items:center}
+.doc:last-child{border-bottom:0}
+.doc .nm{font-size:13.5px;font-weight:700}
+.doc .nm span{font-weight:500;color:var(--sub);font-size:12.5px}
+.doc .why{grid-column:1;font-size:12px;color:var(--sub);line-height:1.55}
+.doc .sc{font-size:12px;font-weight:800;color:var(--navy);white-space:nowrap;font-variant-numeric:tabular-nums}
+.doc.mine{background:#fffbe9;border-left:3px solid #e0a800;margin:4px 0}
+.doc.mine .nm{color:#8a6100}
+.doc.mine .sc{color:#8a6100}
+.mine-tag{display:inline-block;background:#e0a800;color:#fff;font-size:10px;font-weight:900;padding:1.5px 7px;border-radius:99px;margin-left:7px;vertical-align:2px}
+
+/* 마무리 */
+.final{background:var(--navy);color:#dfe7f2;padding:36px 44px;border:0}
+.final h2{color:#fff}
+.final .sec-no{color:#9db8dd}
+.final p{font-size:15px}
+.final b{color:#ffd166}
+
+.progress-float{position:fixed;bottom:20px;right:20px;background:var(--navy);color:#fff;font-size:12.5px;font-weight:800;padding:9px 16px;border-radius:99px;box-shadow:0 6px 20px rgba(31,56,100,.35);z-index:40}
+
+@media (max-width:720px){
+  .wrap{padding:84px 12px 60px}
+  section,.hero{padding:26px 20px}
+  .grades,.ba{grid-template-columns:1fr}
+  .ba .b{border-right:0;border-bottom:1px solid var(--line)}
+  .score{grid-template-columns:1fr;gap:4px}
+  .score .k{text-align:left}
+  .clash{grid-template-columns:1fr}
+  .clash .vs{justify-self:start}
+  .order .row{grid-template-columns:1fr}
+  .order .lab{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <span class="t">평가 리포트</span>
+  <a href="#clash">① 교차검증</a><a href="#resume">② 이력서</a><a href="#portfolio">③ 포트폴리오</a><a href="#compare">④ 합격사례 대조</a><a href="#rank">⑤ 등급 순위</a><a href="#action">⑥ 액션플랜</a>
+  <a href="/team/hyeonsu/resume" style="margin-left:auto">이력서 열기</a><a href="/choi/index.html">포트폴리오 열기</a>
+</nav>
+
+<div class="wrap">
+
+<!-- 히어로 -->
+<div class="hero">
+  <div class="kicker">Evaluation Report · 2026.08.17</div>
+  <h1>원본 이력서 · 포트폴리오<br>전수 평가 리포트</h1>
+  <p class="lead">
+    실제 대기업·중견기업 합격 서류 <b>151건</b>(교차 검증 A급 22건 포함), 현직자 첨삭 규칙 12개,
+    서류탈락 4대 오류를 기준으로 두 문서를 문장 단위까지 분석했습니다.
+    포트폴리오는 렌더링 화면과 본문 전체 텍스트를 추출해 케이스 단위로 평가했습니다.
+  </p>
+  <div class="grades">
+    <div class="grade resume">
+      <div class="what">이력서 — <a href="/team/hyeonsu/resume">/team/hyeonsu/resume</a></div>
+      <div class="g">B+</div>
+      <div class="arrow">수정 시 A- 확실</div>
+      <div class="one">디자인·I-Poten 서술은 상위권. 최대 자산(엔코아 장애 분석)이 통째로 빠졌고, 첫 화면과 배치가 스캔 순서와 어긋난다.</div>
+    </div>
+    <div class="grade portfolio">
+      <div class="what">포트폴리오 — <a href="/choi/index.html">/choi/index.html</a></div>
+      <div class="g">A-</div>
+      <div class="arrow">케이스 품질 상위 5%</div>
+      <div class="one">케이스 서술 문법은 아카이브 최상위권. 첫 화면 공백·수치 불일치·커버리지만 발목을 잡는다.</div>
+    </div>
+  </div>
+  <div class="meta-line">평가 기준 원문: <code>hjob/전략/</code> 01·02·05·06·07 · 사실 대조: hjob 실제 작업 기록 · 전문(마크다운): <code>20_평가리포트_원본이력서-포트폴리오.md</code></div>
+</div>
+
+<!-- 1. 교차검증 -->
+<section id="clash">
+  <div class="sec-no">SECTION 01</div>
+  <h2>교차 검증 — 두 문서를 나란히 놓으면 보이는 것</h2>
+  <p class="sec-lead">
+    서류 검토는 이력서를 읽다가 포트폴리오 링크를 누르는 순서로 일어납니다.
+    그 순간 두 문서는 <b>서로의 검증 자료</b>가 됩니다. 지금 상태에서 발견되는 불일치 3건 — 이것이 개별 문서의 어떤 문제보다 큽니다.
+  </p>
+
+  <div class="clash">
+    <div class="side"><span class="src">이력서</span>I-Poten <b>MAU 600+</b></div>
+    <div class="vs">불일치</div>
+    <div class="side"><span class="src">포트폴리오 (3곳)</span>I-Poten <b>MAU 500+</b></div>
+    <div class="why">숫자 하나가 어긋나면 나머지 좋은 수치(평균 2ms, 71곳, 120ms→11ms)까지 전부 의심받습니다. 아카이브에서 신뢰도 A급을 받은 문서들의 공통점은 "모든 수치가 어느 문서에서나 같다"였고, 반대로 주장과 내용이 어긋난 자료는 C급으로 격리됐습니다.</div>
+  </div>
+
+  <div class="clash">
+    <div class="side"><span class="src">이력서</span>Choi <b>HyenSoo</b></div>
+    <div class="vs">3종 혼재</div>
+    <div class="side"><span class="src">포트폴리오 로고 · 지원서 문서</span><b>Hyeon Su</b> · <b>Hyunsoo</b></div>
+    <div class="why">영문 이름이 문서마다 다릅니다. 사소해 보이지만 "디테일을 챙기는 사람인가"를 보는 검토자에게는 즉시 걸립니다. 여권 표기 하나로 통일이 필요합니다.</div>
+  </div>
+
+  <div class="clash">
+    <div class="side"><span class="src">이력서 교육란</span>플레이데이터 과정 <b>수료</b> (한 줄)</div>
+    <div class="vs">둘 다 누락</div>
+    <div class="side"><span class="src">실제 사실</span><b>최우수 팀 · 최우수 수료생</b> 선정</div>
+    <div class="why">신입~주니어가 가진 몇 안 되는 <b>제3자 검증 수상</b>인데 두 문서 모두에서 버려져 있습니다. 오늘의집 합격자도 "경진대회 수상"을 소개문 첫 화면에 올렸습니다.</div>
+  </div>
+</section>
+
+<!-- 2. 이력서 -->
+<section id="resume">
+  <div class="sec-no">SECTION 02</div>
+  <h2>이력서 평가 — B+</h2>
+  <p class="sec-lead">한 줄 요약: <b>글은 잘 쓰는데, 가장 좋은 재료가 냉장고에 있다.</b> 7월 작성 이후 실력(엔코아 장애 분석)이 문서를 앞질렀고 문서가 따라가지 못한 상태입니다.</p>
+
+  <h3>2-1. 6~10초 테스트 <span class="chip warn">5/10</span></h3>
+  <p>채용담당자가 이력서 한 건에 쓰는 시간은 평균 6~10초입니다. 그 시간에 지금 첫 화면에서 읽히는 것:</p>
+  <p style="font-size:16px;font-weight:700;color:var(--sub)">"이유를 찾고 이유를 만들어가는 개발자"</p>
+  <p>
+    이 문장은 서류탈락 4대 오류 중 <b>오류 1 — 치환 가능한 문장</b>에 걸립니다. 디자이너·기획자·영업 이력서에
+    붙여도 성립하고, 무슨 역량인지·무슨 직무인지 아무것도 못박지 못합니다. 비교해 보면:
+  </p>
+  <div class="ba">
+    <div class="b"><span class="lab">현재</span>"이유를 찾고 이유를 만들어가는 개발자" — 태도의 은유. 6초 안에 남는 정보 0개.</div>
+    <div class="a"><span class="lab">합격 사례 (오늘의집)</span>"문제 식별 및 구체화에 강점을 가진 데이터 분석가입니다" — <b>역량(문제 식별) + 직무(데이터 분석가)</b>를 첫 문장에 못박음.</div>
+    <div class="diag">같은 '한 문장 헤드라인' 형식인데 정보량이 다릅니다. 교체 후보: <b>"문제의 발생 지점과 원인 지점을 구분하는 백엔드 개발자"</b> — 실제 엔코아 성과가 이 문장을 증명합니다.</div>
+  </div>
+  <p>소개 2~3문단에 좋은 수치(MAU 600+, 백로그 500)가 있지만 <b>문단 속에 파묻혀</b> 있습니다. 빗썸 합격자는 같은 정보를 "줄 단위 5줄"로 세웠습니다 — 문단은 읽어야 하고, 줄은 스캔됩니다. 그리고 "실서비스 3회 배포"는 3회가 왜 성과인지 알 수 없습니다. 이미 "운영 중(MAU 600)"이 상위 호환입니다.</p>
+
+  <h3>2-2. 프로젝트 배치가 거꾸로다 <span class="chip bad">문제</span></h3>
+  <p>스캔은 위에서 아래로 두 항목쯤 읽고 끝납니다. 그런데 지금 최상단 두 자리를 <b>성과 수치가 없는 개인 도구</b>가 차지하고, 검증 가능한 최대 성과(I-Poten)는 세 번째에 있습니다.</p>
+  <div class="order">
+    <div class="row"><div class="lab">현재 순서</div><div class="seq">
+      <span class="pill weak">Claude Control</span><span class="pill weak">Content Engine</span><span class="pill hot">I-Poten ★</span><span class="pill">I-Fence</span><span class="pill">TTP</span><span class="pill">IntellyCosm</span>
+    </div></div>
+    <div class="row"><div class="lab">권장 순서</div><div class="seq">
+      <span class="pill hot">I-Poten ★</span><span class="pill hot">엔코아 상세 ★</span><span class="pill">IntellyCosm</span><span class="pill">TTP</span><span class="pill">I-Fence</span><span class="pill">개인도구 → 한 줄</span>
+    </div></div>
+  </div>
+  <p>개인 도구 2개의 불릿 8개는 전부 "~하기 위해 만든", "~를 제공" — <b>기능 설명이지 성과가 아닙니다</b> (첨삭 규칙: 어필할 내용이 없으면 어필하지 않는 게 낫다). 버리라는 게 아니라 <b>"필요한 도구는 직접 만듭니다" 한 줄 + 링크</b>로 압축하면 오히려 강해집니다.</p>
+
+  <h3>2-3. 엔코아 섹션 — 최대 문제 구역 <span class="chip bad">킬러 성과 0건 반영</span></h3>
+  <p>hjob 작업 기록에는 완료된 킬러 성과가 쌓여 있는데, 이력서의 엔코아 불릿 6개에는 하나도 없습니다. 문장 단위 첨삭:</p>
+
+  <div class="ba">
+    <div class="b"><span class="lab">BEFORE</span>"기존 서비스 구조 분석을 통한 유지보수 프로세스 <u>학습</u>"</div>
+    <div class="a"><span class="lab">AFTER</span>"3개 저장소(화면 1,000+ 파일) 전수 분석 — 아키텍처 문서 93KB·96KB 작성, <b>인수인계 1종으로 업무 인계 가능한</b> 문서 체계 구축"</div>
+    <div class="diag"><b>학습 프레이밍(탈락 오류 2)</b> — "배우는 중"은 "즉시 투입 불가"로 읽힙니다. 회사는 학생이 아니라 동료를 찾습니다. 같은 행동을 결과로 서술하면 이렇게 달라집니다.</div>
+  </div>
+
+  <div class="ba">
+    <div class="b"><span class="lab">BEFORE</span>"멀티 작업·DB 환경의 집계 정합성 정책 설계 및 대시보드 구현"</div>
+    <div class="a"><span class="lab">AFTER</span>"[개선활동 상태] 3계층 트리 화면·API를 <b>프론트·백엔드·엔진 3개 저장소에 걸쳐 단독 개발</b> (진행상태 5분류 · 필터 12종 · 권한 4역할 조회범위)"</div>
+    <div class="diag">"정합성 정책"이 무엇을 해결했는지 독자는 모릅니다. 실제로 한 일(신규 화면 2건)이 훨씬 구체적이고 큽니다.</div>
+  </div>
+
+  <div class="ba">
+    <div class="b"><span class="lab">BEFORE</span>(해당 불릿 없음 — 최대 누락 ①)</div>
+    <div class="a"><span class="lab">추가</span>"<b>JVM OOM 근본 원인 규명</b> — 초기 분석의 오진을 교정하고 '0=무제한' 회귀 커밋을 git 이력으로 특정, 결과 버퍼를 모든 경우 100건 이하 보장"</div>
+    <div class="diag">기술면접에서 30분을 끌고 갈 수 있는 <b>1순위 소재</b>가 이력서에 존재하지 않습니다.</div>
+  </div>
+
+  <div class="ba">
+    <div class="b"><span class="lab">BEFORE</span>(해당 불릿 없음 — 최대 누락 ②)</div>
+    <div class="a"><span class="lab">추가</span>"운영 PostgreSQL <b>300GB 부풀림</b>을 스캔 없이 메타데이터(relpages 3,662만 : 행 31만)로 확정·회수, 재발 감시 화면까지 직접 구현"</div>
+    <div class="diag">'개인 프로젝트만 있는 주니어'와 '운영 장애를 다뤄본 주니어'를 가르는 한 줄입니다.</div>
+  </div>
+
+  <div class="ba">
+    <div class="b"><span class="lab">BEFORE</span>"I-Fence: 실사용 중인 2인 팀의 협업 속도 <u>실질 개선</u>"</div>
+    <div class="a"><span class="lab">AFTER</span>"팀이 매일 사용 중" (사실만 남김)</div>
+    <div class="diag"><b>측정 없는 주장</b> — 현직자 첨삭 최다 지적 항목입니다. 측정하지 않은 것을 개선했다고 쓰면, 측정한 수치까지 의심받습니다.</div>
+  </div>
+
+  <h3>2-4. 작지만 걸리는 것들</h3>
+  <p>
+    <b>Skills:</b> PROFICIENT에 MySQL/MariaDB뿐 — 엔코아에서 매일 다루는 <b>PostgreSQL·Oracle이 스킬표에 없습니다</b>. 실무 6개월의 흔적이 없는 역설.
+    백엔드 지원 기준으로 Flutter는 신호 희석.<br>
+    <b>링크:</b> I-Poten 제목줄에 인라인 링크 6개 나열 — 당근 JSpiner처럼 배지형으로 분리하면 가독성이 삽니다.<br>
+    <b>디자인:</b> 타이포·포인트 컬러·여백은 아카이브 실물 대비 <b>상위권</b>입니다. 인쇄 CSS까지 갖춤. 여기는 손댈 필요 없습니다.
+  </p>
+
+  <h3>2-5. 축별 점수</h3>
+  <div class="scores">
+    <div class="score"><div class="k">첫 화면 정보 설계</div><div class="bar"><i class="low" style="width:50%"></i></div><div class="v">5/10</div></div>
+    <div class="score"><div class="k">3WHY (배경→방식→결과)</div><div class="bar"><i style="width:70%"></i></div><div class="v">7/10</div></div>
+    <div class="score"><div class="k">근거·수치</div><div class="bar"><i style="width:70%"></i></div><div class="v">7/10</div></div>
+    <div class="score"><div class="k">프레이밍 (기여형 어조)</div><div class="bar"><i class="low" style="width:60%"></i></div><div class="v">6/10</div></div>
+    <div class="score"><div class="k">덜어내기</div><div class="bar"><i class="low" style="width:60%"></i></div><div class="v">6/10</div></div>
+    <div class="score"><div class="k">일관성·정확성</div><div class="bar"><i class="low" style="width:40%"></i></div><div class="v">4/10</div></div>
+    <div class="score"><div class="k">디자인·가독성</div><div class="bar"><i style="width:90%"></i></div><div class="v">9/10</div></div>
+  </div>
+  <div class="note"><b>결론</b> — 새로 쓸 필요가 없습니다. hjob에 이미 문장까지 준비된 재료(<code>10_경력기술서_요약.md</code>)를 <b>이식하고, 순서를 뒤집고, 수치를 맞추면</b> A-입니다. 예상 작업량: 반나절.</div>
+</section>
+
+<!-- 3. 포트폴리오 -->
+<section id="portfolio">
+  <div class="sec-no">SECTION 03</div>
+  <h2>포트폴리오 평가 — A-</h2>
+  <p class="sec-lead">한 줄 요약: <b>본문은 이미 합격권이다. 첫 화면과 동기화가 못 따라올 뿐.</b></p>
+
+  <h3>3-1. 먼저, 잘한 것부터 <span class="chip good">아카이브 상위 5%</span></h3>
+  <p>케이스 4건(인증 트래픽 절감 · Strategy 리팩토링 · 인증 책임 재배치 · MSA→모노 재설계)의 서술 구조를 추출해 보면:</p>
+  <div class="flow">
+    <span class="st">문제 상황 (정량)</span><span class="ar">→</span>
+    <span class="st">대안 (1)(2)(3) + 탈락 사유</span><span class="ar">→</span>
+    <span class="st">채택 근거</span><span class="ar">→</span>
+    <span class="st">구현 ①②③</span><span class="ar">→</span>
+    <span class="st">측정 결과</span><span class="ar">→</span>
+    <span class="st">배움</span>
+  </div>
+  <p>이건 2026 합격 자소서(GS네오텍)의 "판단→조치→수치" 공식, 빗썸 이력서의 "문제 해결 과정" 템플릿과 <b>같은 급이고 일부는 그 이상</b>입니다. 실제 본문에서:</p>
+  <div class="quote">
+    "(1) 클라이언트 메모리 캐싱 → XSS 노출 위험 및 서버 측 강제 무효화 어려움으로 제외 (2) 토큰 TTL 단축 + Refresh Token 재발급 → 근본 해결책이나 인증 체계 변경이 수반되어 일정상 후순위로 분리 (3) Nginx 레벨 사전 차단 → 즉각적 효과와 구조 단순성으로 1차 채택"
+    <span class="who">— 포트폴리오 '인증 트래픽 절감' 케이스. 대안을 탈락 사유와 함께 나열하는 서술은 아카이브 151건 전체에서도 드문 상위 문법입니다.</span>
+  </div>
+  <div class="quote">
+    "단, 본 처리는 UI 초기 상태 판단 목적의 비-인가 보조 경로에 한정 적용되며, 실제 보호 리소스에 대한 인증·권한 검증은 애플리케이션 계층에서 수행되도록 유지하여 보안 경계를 분리했습니다."
+    <span class="who">— 최적화 사례에서 나올 보안 반론을 <b>선제 방어</b>. 시니어 면접관이 던질 질문에 미리 답해 둔 문장입니다.</span>
+  </div>
+  <div class="quote">
+    "모노로 다시 설계했습니다 — 처음의 모노로 되돌아간 게 아니라, MSA에서 도메인 경계를 한 번 명확히 그어본 경험을 그대로 가져와 도메인 단위 모듈로 나눈 새로운 모노였습니다."
+    <span class="who">— 유행(MSA)을 거스른 결정을 원칙("지금 이 맥락에 무엇이 맞는가")으로 정당화. 주니어에게서 보기 드문 성숙한 서사입니다.</span>
+  </div>
+
+  <h3>3-2. 문제점</h3>
+  <p><b>① 첫 화면의 절반 이상이 빈 공간 <span class="chip warn">P1</span></b><br>
+  1280×2400 캡처 기준 상단 약 60%가 여백이고 히어로 텍스트는 화면 중하단에서 시작합니다(스크롤 유도 애니메이션 구조).
+  노트북 화면(1440×900)이라면 첫 뷰에 들어오는 정보가 로고뿐일 수 있습니다. <b>서류 검토자는 스크롤을 보장하지 않습니다</b> — 6~10초 원칙은 웹에도 그대로 적용됩니다.</p>
+  <p><b>② 히어로 문구가 이력서와 같은 약점 공유 <span class="chip warn">P1</span></b><br>
+  "이유를 찾고 이유를 만들어가는 개발자" — 본문 케이스들이 실제로 증명하는 것은 <b>"대안을 비교하고 근거로 선택하는 개발자"</b>입니다. 본문이 이미 증명한 것을 히어로가 말하지 못하고 있습니다.</p>
+  <p><b>③ 엔코아 실무 케이스 부재 <span class="chip warn">P1</span></b><br>
+  현재 케이스는 I-Poten 3건 + I-Fence 1건. OOM 오진 교정과 300GB 진단은 이 포트폴리오의 기존 문법(대안 비교→측정)에 <b>정확히 들어맞는 소재</b>이고, 사내 코드 공개 없이도 서술 가능합니다(과정·수치는 이미 문서화됨).</p>
+  <p><b>④ 커버리지·기타 <span class="chip warn">P2</span></b><br>
+  TTP(실사용자 220명)·IntellyCosm(120→11ms)·AsianMart가 흔적도 없음 — 케이스 집중 전략은 옳으나 하단에 "그 외 프로젝트" 한 줄은 필요.
+  수상(최우수) 누락. 그리고 한글 도메인(최씨네.com)은 메일·ATS에서 퓨니코드(<code>xn--…</code>)로 보여 스팸처럼 보일 위험 — 영문 미러 URL 병기 권장.</p>
+
+  <h3>3-3. 축별 점수</h3>
+  <div class="scores">
+    <div class="score"><div class="k">케이스 서술 깊이</div><div class="bar"><i style="width:95%"></i></div><div class="v">9.5</div></div>
+    <div class="score"><div class="k">첫 화면 정보 설계</div><div class="bar"><i class="low" style="width:50%"></i></div><div class="v">5/10</div></div>
+    <div class="score"><div class="k">증거성 (스크린샷·링크)</div><div class="bar"><i style="width:80%"></i></div><div class="v">8/10</div></div>
+    <div class="score"><div class="k">커버리지</div><div class="bar"><i class="low" style="width:60%"></i></div><div class="v">6/10</div></div>
+    <div class="score"><div class="k">일관성·정확성</div><div class="bar"><i class="low" style="width:50%"></i></div><div class="v">5/10</div></div>
+    <div class="score"><div class="k">디자인</div><div class="bar"><i style="width:85%"></i></div><div class="v">8.5</div></div>
+  </div>
+</section>
+
+<!-- 4. 대조 -->
+<section id="compare">
+  <div class="sec-no">SECTION 04</div>
+  <h2>실제 합격 사례와의 1:1 대조</h2>
+  <p class="sec-lead">아카이브의 검증된 문서들과 같은 축에서 비교하면, 어디가 이미 좋고 어디에 갭이 있는지가 분명해집니다.</p>
+  <table>
+    <thead><tr><th style="width:120px">비교축</th><th>합격 사례가 하는 것</th><th>원본 문서 현황</th><th style="width:90px">판정</th></tr></thead>
+    <tbody>
+      <tr><td><b>첫 화면</b></td><td>빗썸 — 요약 5줄 전부가 정보(연차·현직·최대성과·차별활동·학력)</td><td>은유 캐치프레이즈 + 3문단</td><td class="gap">갭</td></tr>
+      <tr><td><b>헤드라인</b></td><td>오늘의집 — "문제 식별에 강점을 가진 데이터 분석가"</td><td>"이유를 찾고 이유를 만들어가는 개발자"</td><td class="gap">갭</td></tr>
+      <tr><td><b>증거 처리</b></td><td>당근 JSpiner — 주장 옆 검증 링크 배지</td><td>링크는 있으나 인라인 6개 나열</td><td class="gap">형식만</td></tr>
+      <tr><td><b>실무 서술</b></td><td>카카오 경력기술서 — 담당업무 요약 → 상세 계층</td><td>"신규 서비스 개발 담당" 수준 1줄</td><td class="gap">갭 큼</td></tr>
+      <tr><td><b>기술 선택 Why</b></td><td>GS네오텍 — 판단→조치→수치 반복</td><td>포트폴리오 케이스 4건이 동급 이상</td><td class="ok">이미 우위</td></tr>
+      <tr><td><b>아키텍처 판단</b></td><td>향로 — 역량 축 재편집, 트레이드오프 서사</td><td>MSA→모노 재설계 서사</td><td class="ok">이미 우위</td></tr>
+      <tr><td><b>수치 일관성</b></td><td>unluckyjung — 전 문서 동일 수치 + 스크린샷 증거</td><td>MAU 600 vs 500, 영문명 3종</td><td class="gap">즉시 수정</td></tr>
+    </tbody>
+  </table>
+  <div class="note">패턴이 보입니다 — <b>'생각을 서술하는 능력'은 이미 합격권 위</b>인데, <b>'문서 관리(동기화·배치·최신화)'가 그 실력을 가리고 있습니다.</b> 고치기 쉬운 쪽이 남아 있다는 뜻이기도 합니다.</div>
+</section>
+
+
+<!-- 5. 등급 순위 -->
+<section id="rank">
+  <div class="sec-no">SECTION 05</div>
+  <h2>실제 합격 문서들의 등급과 내 위치</h2>
+  <p class="sec-lead">
+    아카이브 151건 중 <b>디자인·본문 실물을 확인한 문서</b>만 골라 같은 잣대(첫 화면 · 서술 깊이 · 증거 · 일관성)로 등급을 매겼습니다.
+    아래 노란 줄이 현재 내 문서 위치입니다.
+  </p>
+
+  <div class="tiers">
+    <div class="tier t-s">
+      <div class="tier-h"><span class="tier-badge">S</span><span><span class="tn">최상위 — 그대로 베껴도 되는 표본</span><br><span class="td">첫 화면·서술·증거·일관성 모두 결점 없음</span></span></div>
+      <div class="tier-b">
+        <div class="doc"><div class="nm">빗썸 백엔드 · 고정완 <span>— GitHub 이력서 (신뢰도 A)</span></div><div class="sc">9.2</div>
+          <div class="why">요약 5줄 전부 정보 · 전후 대비 수치(8초→0.1초, 비용 82%↓) · 요약/상세 2단 구조 · PR 링크로 협업 증거</div></div>
+        <div class="doc"><div class="nm">이동욱(향로) · 우아한형제들→인프랩 CTO <span>— 공개 이력서</span></div><div class="sc">9.0</div>
+          <div class="why">경력을 시간순이 아닌 <b>역량 3축</b>으로 재편집 · 트레이드오프 서사 · 시니어 관점의 선택 근거</div></div>
+        <div class="doc"><div class="nm">정성민(JSpiner) · 당근 백엔드 <span>— GitHub 이력서</span></div><div class="sc">8.9</div>
+          <div class="why">동료평가 PR을 증거로 첨부 — 아카이브에서 유일하게 <b>'신뢰'를 문서 장치로 설계</b>한 사례</div></div>
+      </div>
+    </div>
+
+    <div class="tier t-a">
+      <div class="tier-h"><span class="tier-badge">A</span><span><span class="tn">상위 — 합격 문서의 표준</span><br><span class="td">한두 축이 아쉽지만 전체적으로 완성됨</span></span></div>
+      <div class="tier-b">
+        <div class="doc"><div class="nm">오늘의집 데이터분석가 <span>— 합격 이력서 실물 (스캔 7장)</span></div><div class="sc">8.5</div>
+          <div class="why">헤드라인이 역량+직무를 못박음 · 첫 화면 수치 2개 · 미니멀 조판. 다만 링크 증거가 적음</div></div>
+        <div class="doc mine"><div class="nm">내 포트폴리오 <span>— /choi/index.html</span><span class="mine-tag">MINE</span></div><div class="sc">A- · 8.3</div>
+          <div class="why"><b>케이스 서술만 보면 S급(9.5)</b> — 대안 (1)(2)(3) 탈락 사유·보안 반론 선제 방어는 이 표 전체에서 최상위. 첫 화면 공백(5)과 수치 불일치(5)가 평균을 끌어내림</div></div>
+        <div class="doc"><div class="nm">강승현(imksh) · 카카오뱅크 <span>— 이력서 개선기 + 합격 후기</span></div><div class="sc">8.2</div>
+          <div class="why">13단계 전형 타임라인 · 이력서 개정 이력 공개. 증거성 최상, 문서 조판은 평범</div></div>
+        <div class="doc"><div class="nm">카카오 데이터분석가 <span>— 합격 이력서·경력기술서 (스캔 4장)</span></div><div class="sc">8.0</div>
+          <div class="why">담당업무 5줄 요약 → 상세 전개의 계층 설계가 모범. 익명 처리라 증거는 없음</div></div>
+        <div class="doc"><div class="nm">CJ그룹 데이터분석가 <span>— 합격 경력기술서 (스캔 5장)</span></div><div class="sc">7.9</div>
+          <div class="why">①문제정의 ②주요역할 ③주요성과 3단 반복. 형식은 완벽하나 수치 밀도가 낮음</div></div>
+      </div>
+    </div>
+
+    <div class="tier t-b">
+      <div class="tier-h"><span class="tier-badge">B</span><span><span class="tn">중위 — 붙긴 하지만 아까운 문서</span><br><span class="td">내용은 있는데 정보 설계나 최신화에서 손해</span></span></div>
+      <div class="tier-b">
+        <div class="doc mine"><div class="nm">내 이력서 <span>— /team/hyeonsu/resume</span><span class="mine-tag">MINE</span></div><div class="sc">B+ · 7.4</div>
+          <div class="why">디자인 9점으로 이 구간 최상. 그러나 <b>엔코아 킬러 성과 0건 반영</b> · 은유 헤드라인 · 개인도구가 최상단 배치 — 재료를 못 쓴 케이스</div></div>
+        <div class="doc"><div class="nm">카카오VX AI 엔지니어 <span>— 합격 이력서 실물 (스캔 6장)</span></div><div class="sc">7.2</div>
+          <div class="why">표 양식은 정석이나 성과 서술이 건조 · 수치 거의 없음. 형식 점수로 버티는 유형</div></div>
+        <div class="doc"><div class="nm">SK E&amp;S HR기획 <span>— 노션 합격 이력서</span></div><div class="sc">7.0</div>
+          <div class="why">경력·프로젝트 구조는 깔끔. 성과의 정량화가 약하고 익명이라 검증 불가</div></div>
+        <div class="doc"><div class="nm">링커리어 등재 합격 자소서 58건 <span>— 평균</span></div><div class="sc">6.5~7.5</div>
+          <div class="why">플랫폼이 합격을 검증하지만 <b>지원자 익명</b>. 문항 답변 품질 편차가 큼 (상위 GS네오텍 8.4 ~ 하위 5점대)</div></div>
+      </div>
+    </div>
+
+    <div class="tier t-c">
+      <div class="tier-h"><span class="tier-badge">C</span><span><span class="tn">하위 — 참고만, 따라 하면 손해</span><br><span class="td">검증 불가 또는 안티패턴 표본</span></span></div>
+      <div class="tier-b">
+        <div class="doc"><div class="nm">F-Lab 배포 이력서 3건 <span>— 격리됨</span></div><div class="sc">–</div>
+          <div class="why">이름 "OOO" · "무료 배포" 워터마크 · 합격 주장이 <b>파일명에만</b> 존재. 아카이브에서 _quarantine으로 분리</div></div>
+        <div class="doc"><div class="nm">현대오토에버 2023 자소서 <span>— 안티패턴 표본</span></div><div class="sc">5.0</div>
+          <div class="why">회사명을 바꿔도 성립하는 일반론 — 서류탈락 오류 1의 교과서적 사례</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>이 표에서 읽어야 할 것 세 가지</b><br>
+    ① <b>포트폴리오는 이미 A 구간 안</b>이고, 케이스 서술 하나만 떼면 S급 문서들과 같은 줄입니다.<br>
+    ② <b>이력서는 B+인데 원인이 실력이 아닙니다</b> — 디자인은 S급 수준(9점)인데 콘텐츠 최신화가 안 돼 등급이 눌렸습니다.<br>
+    ③ S급 3건의 공통점은 <b>'증거'</b>입니다(PR 링크·전형 타임라인·전후 수치). 내 문서엔 운영 서비스·스토어 배포라는 <b>더 강한 증거</b>가 이미 있는데 배치가 뒤에 있을 뿐입니다.
+  </div>
+
+  <div class="note" style="background:var(--green-l);border-left-color:var(--green);color:#1a5c37">
+    <b>수정 후 예상 위치</b> — P0·P1(수치 통일 · 엔코아 이식 · 순서 재배치 · 헤드라인 교체)만 적용하면
+    이력서는 <b>7.4 → 8.6 (A 구간 상단, 오늘의집 근처)</b>, 포트폴리오는 <b>8.3 → 9.0 (S 구간 진입)</b>으로 계산됩니다.
+    새로 만드는 게 아니라 <b>있는 재료를 제자리에 놓는 작업</b>입니다.
+  </div>
+</section>
+
+<!-- 6. 액션 플랜 -->
+<section id="action">
+  <div class="sec-no">SECTION 06</div>
+  <h2>액션 플랜 — 체크하며 진행하세요</h2>
+  <p class="sec-lead">체크 상태는 이 브라우저에 저장됩니다. P0 세 개만 끝내도 신뢰도 문제는 사라집니다.</p>
+
+  <div class="todo-head"><h3>P0 — 오늘</h3><span class="time">약 30분 · 신뢰도 직결</span></div>
+  <div class="todo" data-g="p0">
+    <label><input type="checkbox"><span class="pbadge p0">P0</span><span class="tx">MAU 수치 통일 — 최신 실측값 하나로 이력서·포트폴리오(히어로/태그/케이스 3곳)·지원서 전부<em>숫자 하나의 불일치가 모든 수치의 신뢰를 깎는다</em></span></label>
+    <label><input type="checkbox"><span class="pbadge p0">P0</span><span class="tx">영문명 통일 — 여권 표기 확인 후 HyenSoo / Hyunsoo / Hyeon Su → 1종<em>이력서 · 포트폴리오 로고 · 지원서 docx 3곳</em></span></label>
+    <label><input type="checkbox"><span class="pbadge p0">P0</span><span class="tx">"최우수 팀 · 최우수 수료생" 추가 — 이력서 교육란 + 포트폴리오<em>제3자 검증 가능한 수상을 버리지 말 것</em></span></label>
+  </div>
+
+  <div class="todo-head"><h3>P1 — 이번 주</h3><span class="time">약 반나절 · 등급 상승 구간</span></div>
+  <div class="todo" data-g="p1">
+    <label><input type="checkbox"><span class="pbadge p1">P1</span><span class="tx">엔코아 섹션 재작성 — OOM 규명 · 300GB 회수 · 신규 화면 2건 · 문서 체계<em>문장은 hjob/Encore/10_경력기술서_요약.md 에 이미 있음. 이식만 하면 됨</em></span></label>
+    <label><input type="checkbox"><span class="pbadge p1">P1</span><span class="tx">프로젝트 순서 재배치 — I-Poten 최상단, 개인 도구 2개는 한 줄 + 링크로 압축<em>스캔은 위에서 두 항목으로 끝난다</em></span></label>
+    <label><input type="checkbox"><span class="pbadge p1">P1</span><span class="tx">캐치프레이즈 교체 — 이력서·포트폴리오 동시<em>후보: "문제의 발생 지점과 원인 지점을 구분하는 백엔드 개발자" (12_문장-패턴-사전.md §1)</em></span></label>
+    <label><input type="checkbox"><span class="pbadge p1">P1</span><span class="tx">포트폴리오 히어로를 첫 뷰포트 안으로 — 인트로 지연 제거 또는 0.5초 이하<em>검토자는 스크롤을 보장하지 않는다</em></span></label>
+    <label><input type="checkbox"><span class="pbadge p1">P1</span><span class="tx">"유지보수 프로세스 학습" · "협업 속도 실질 개선" · "실서비스 3회 배포" 삭제/교체<em>학습 프레이밍 1건 + 무측정 주장 1건 + 무의미 수치 1건</em></span></label>
+  </div>
+
+  <div class="todo-head"><h3>P2 — 다음 배포 때</h3><span class="time">여유 있을 때</span></div>
+  <div class="todo" data-g="p2">
+    <label><input type="checkbox"><span class="pbadge p2">P2</span><span class="tx">포트폴리오에 엔코아 케이스 1건 추가 (OOM 오진 교정)<em>기존 케이스 문법에 그대로 들어맞는 최상급 소재</em></span></label>
+    <label><input type="checkbox"><span class="pbadge p2">P2</span><span class="tx">Skills 갱신 — PostgreSQL·Oracle 반영, Flutter 정리</span></label>
+    <label><input type="checkbox"><span class="pbadge p2">P2</span><span class="tx">링크 배지화 + "그 외 프로젝트(TTP·IntellyCosm·AsianMart)" 줄 추가</span></label>
+    <label><input type="checkbox"><span class="pbadge p2">P2</span><span class="tx">포트폴리오 영문 미러 URL — 한글 도메인 퓨니코드 문제 대응</span></label>
+  </div>
+</section>
+
+<!-- 마무리 -->
+<section class="final">
+  <div class="sec-no">CLOSING</div>
+  <h2>공정하게 말하면</h2>
+  <p>
+    이 두 문서는 아카이브 151건의 중간값보다 <b>이미 위에 있습니다.</b> 특히 포트폴리오의 케이스 서술은
+    상당수의 '합격' 문서보다 낫습니다.
+  </p>
+  <p>
+    지금 부족한 것은 글쓰기 실력이 아니라 <b>동기화</b>입니다 — 지난 6개월 사이 실제 실력(엔코아 장애 분석)이
+    문서를 앞질러 버렸고, 문서가 그걸 따라잡지 못했을 뿐입니다. P0·P1만 처리하면 두 문서 모두
+    아카이브 A급 문서들과 같은 줄에 섭니다.
+  </p>
+</section>
+
+</div>
+
+<div class="progress-float" id="prog">0 / 12 완료</div>
+
+<script>
+// 체크리스트 localStorage 저장 + 진행률
+const boxes = [...document.querySelectorAll('.todo input[type=checkbox]')];
+boxes.forEach((b, i) => {
+  const k = 'report.todo.' + i;
+  if (localStorage.getItem(k) === '1') { b.checked = true; b.closest('label').classList.add('done'); }
+  b.addEventListener('change', () => {
+    localStorage.setItem(k, b.checked ? '1' : '0');
+    b.closest('label').classList.toggle('done', b.checked);
+    upd();
+  });
+});
+function upd(){
+  const done = boxes.filter(b => b.checked).length;
+  document.getElementById('prog').textContent = done + ' / ' + boxes.length + ' 완료';
+}
+upd();
+</script>
+</body>
+</html>

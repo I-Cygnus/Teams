@@ -3,6 +3,7 @@ import type { BlogPost } from '../../data';
 export const post01: BlogPost = {
   id: '1',
   package: 'choi',
+  project: 'i-poten',
   title: 'Spring Security, 정말 필요할까?',
   excerpt:
     'Spring Security 대신 5개 클래스로 인증을 직접 만들고, Nginx 설정 몇 줄로 인증 트래픽의 90%를 줄인 여정. I-Poten 백엔드 인증 아키텍처를 공유합니다.',

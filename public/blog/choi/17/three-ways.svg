@@ -1,0 +1,26 @@
+<svg width="100%" viewBox="0 0 720 344" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>같은 일을 시키는 세 가지 말투</title>
+<desc>1001번 주문을 취소하는 같은 일을 REST는 자원과 표준 메서드로, RPC는 함수 이름 호출로, gRPC는 미리 정한 계약서 기반의 바이너리 호출로 표현한다.</desc>
+
+<text x="40" y="34" font-size="12.5" font-weight="600" fill="#52514E">"1001번 주문을 취소해줘" — 같은 일, 세 가지 말투</text>
+
+<rect x="40" y="56" width="640" height="76" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="64" y="82" font-size="12.5" font-weight="600" fill="#0F6E56">REST</text>
+<text x="64" y="104" font-size="12" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" fill="#12161F">DELETE /orders/1001</text>
+<text x="404" y="104" font-size="11" fill="#52514E">주소는 <tspan font-weight="600">명사</tspan>(주문 1001번)</text>
+<text x="404" y="122" font-size="11" fill="#52514E">동작은 <tspan font-weight="600">표준 메서드</tspan>로</text>
+
+<rect x="40" y="146" width="640" height="76" rx="8" fill="#EFE9FB" stroke="#6C4EC9" stroke-width="0.5"/>
+<text x="64" y="172" font-size="12.5" font-weight="600" fill="#5B3FB5">RPC</text>
+<text x="64" y="194" font-size="12" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" fill="#12161F">POST /cancelOrder</text>
+<text x="64" y="212" font-size="11" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" fill="#898781">{ "orderId": 1001 }</text>
+<text x="404" y="194" font-size="11" fill="#52514E">주소가 곧 <tspan font-weight="600">동사</tspan>(함수 이름)</text>
+<text x="404" y="212" font-size="11" fill="#52514E">"이 함수를 실행해줘"</text>
+
+<rect x="40" y="236" width="640" height="76" rx="8" fill="#F4F3F0" stroke="#898781" stroke-width="0.5"/>
+<text x="64" y="262" font-size="12.5" font-weight="600" fill="#52514E">gRPC</text>
+<text x="64" y="284" font-size="12" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" fill="#12161F">OrderService.CancelOrder(id: 1001)</text>
+<text x="64" y="302" font-size="11" fill="#898781">사람이 못 읽는 바이너리로 전송</text>
+<text x="404" y="284" font-size="11" fill="#52514E">RPC인데 <tspan font-weight="600">계약서</tspan>를 먼저 나눠 갖는다</text>
+<text x="404" y="302" font-size="11" fill="#52514E">그래서 더 빠르고 더 엄격하다</text>
+</svg>

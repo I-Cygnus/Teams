@@ -3,6 +3,7 @@ import type { BlogPost } from '../../data';
 export const post03: BlogPost = {
     id: '3',
     package: 'min',
+    project: 'i-poten',
     title: '레이어드 아키텍처를 넘어, 프로젝트에 맞는 구조 선택하기',
     excerpt:
         'I-Poten 백엔드의 실제 구조를 분석하며 레이어드 아키텍처를 사용한 이유와 DDD의 연관성을 살펴보고, 클린 아키텍처와 헥사고날 아키텍처를 포함해 다음 프로젝트에 적합한 구조를 선택하는 기준을 정리합니다.',

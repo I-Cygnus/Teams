@@ -1,0 +1,23 @@
+<svg width="100%" viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,system-ui,'Apple SD Gothic Neo',sans-serif">
+  <rect width="680" height="230" fill="#FEF9F8"/>
+  <text x="24" y="32" font-size="15" font-weight="700" fill="#7F1D1D">운영 SQL 세 가지 원칙 — 조심성 대신 구조</text>
+  <g font-size="12">
+    <rect x="24" y="54" width="200" height="120" rx="8" fill="#fff" stroke="#FCA5A5"/>
+    <text x="40" y="80" font-size="13" font-weight="700" fill="#991B1B">① SELECT 리허설</text>
+    <text x="40" y="104" fill="#7F1D1D">같은 WHERE로 먼저 조회</text>
+    <text x="40" y="122" fill="#7F1D1D">영향 건수를 눈으로 확인</text>
+    <text x="40" y="140" fill="#7F1D1D">WHERE는 복사 재사용</text>
+    <rect x="240" y="54" width="200" height="120" rx="8" fill="#fff" stroke="#FCA5A5"/>
+    <text x="256" y="80" font-size="13" font-weight="700" fill="#991B1B">② 멱등성</text>
+    <text x="256" y="104" fill="#7F1D1D">두 번 실행해도 같은 결과</text>
+    <text x="256" y="122" fill="#7F1D1D">NOT EXISTS 가드</text>
+    <text x="256" y="140" fill="#7F1D1D">"한 번만" 주석은 방어 아님</text>
+    <rect x="456" y="54" width="200" height="120" rx="8" fill="#fff" stroke="#FCA5A5"/>
+    <text x="472" y="80" font-size="13" font-weight="700" fill="#991B1B">③ 롤백문 동봉</text>
+    <text x="472" y="104" fill="#7F1D1D">적용문과 같은 파일에</text>
+    <text x="472" y="122" fill="#7F1D1D">원래 값을 아는 시점은</text>
+    <text x="472" y="140" fill="#7F1D1D">"지금"뿐이다</text>
+  </g>
+  <rect x="24" y="192" width="632" height="26" rx="5" fill="#FEE2E2"/>
+  <text x="38" y="210" font-size="12.5" fill="#7F1D1D">+ 도구 이중화: autocommit off · 트랜잭션 템플릿 · safe updates · 계정 분리</text>
+</svg>

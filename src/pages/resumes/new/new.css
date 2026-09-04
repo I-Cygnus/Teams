@@ -1,0 +1,194 @@
+/* 신규 이력서 5종 — 버전마다 독립된 시각 언어 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+.n-root {
+  --ink: #16181d;
+  --sub: #5b6270;
+  --dim: #949aa6;
+  --line: #dfe2e7;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  padding-top: 44px;
+  -webkit-font-smoothing: antialiased;
+}
+.n-root * { box-sizing: border-box; }
+.n-root a { color: inherit; }
+
+/* ── 상단 네비 ── */
+.n-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: #12151b; display: flex; align-items: center; gap: 2px; padding: 7px 14px; overflow-x: auto; }
+.n-tab { color: #c3cbd8; font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 3px; text-decoration: none; white-space: nowrap; border: 0; background: none; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 5px; }
+.n-tab:hover { color: #fff; background: rgba(255,255,255,.08); }
+.n-tab.on { background: #fff; color: #12151b; font-weight: 800; }
+.n-tab-sub { color: #656d7d; font-size: 11.5px; }
+.n-print { margin-left: auto; border: 1px solid rgba(255,255,255,.22); color: #fff; }
+
+.n-sheet { background: #fff; margin: 22px auto 60px; box-shadow: 0 8px 28px rgba(20,25,35,.10); }
+
+/* ════════ ① 원페이지 — A4 1장 극한 압축 ════════ */
+.np-one { max-width: 820px; padding: 30px 34px; font-size: 10.9px; line-height: 1.5; }
+.np-one .h-top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2.5px solid #16181d; padding-bottom: 9px; margin-bottom: 11px; }
+.np-one .h-name { font-size: 25px; font-weight: 900; letter-spacing: -1px; line-height: 1; }
+.np-one .h-name span { font-size: 12.5px; font-weight: 600; color: var(--sub); margin-left: 9px; letter-spacing: 0; }
+.np-one .h-contact { text-align: right; font-size: 10.2px; color: var(--sub); line-height: 1.65; }
+.np-one .h-contact a { color: #1a5fb4; text-decoration: none; }
+.np-one .lead { font-size: 12.4px; font-weight: 700; line-height: 1.55; margin-bottom: 12px; }
+.np-one .lead b { color: #1a5fb4; }
+.np-one .cols { display: grid; grid-template-columns: 1fr 232px; gap: 22px; align-items: start; }
+.np-one h2 { font-size: 10.5px; font-weight: 800; letter-spacing: 1.4px; color: #1a5fb4; text-transform: uppercase; border-bottom: 1px solid var(--line); padding-bottom: 3px; margin: 13px 0 7px; }
+.np-one h2:first-child { margin-top: 0; }
+.np-one .item { margin-bottom: 9px; }
+.np-one .it-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.np-one .it-t { font-weight: 800; font-size: 11.6px; }
+.np-one .it-t em { font-style: normal; font-weight: 600; color: var(--sub); font-size: 10.3px; margin-left: 6px; }
+.np-one .it-d { color: var(--dim); font-size: 9.8px; white-space: nowrap; }
+.np-one ul { margin: 3px 0 0; padding-left: 13px; }
+.np-one li { margin: 1.5px 0; }
+.np-one li b { color: #10386e; }
+.np-one .metric { display: flex; justify-content: space-between; padding: 3.5px 0; border-bottom: 1px dotted var(--line); }
+.np-one .metric b { font-size: 12.5px; color: #1a5fb4; font-variant-numeric: tabular-nums; }
+.np-one .metric span { color: var(--sub); font-size: 10.2px; align-self: center; }
+.np-one .sk { margin-bottom: 6px; }
+.np-one .sk .lv { font-size: 9.3px; font-weight: 800; color: var(--dim); letter-spacing: .6px; }
+.np-one .sk .vs { font-size: 10.4px; line-height: 1.55; }
+.np-one .edu-r { display: flex; justify-content: space-between; gap: 6px; padding: 2.5px 0; }
+.np-one .edu-r span { color: var(--dim); font-size: 9.8px; white-space: nowrap; }
+
+/* ════════ ② 케이스북 — 컨설팅 리포트 ════════ */
+.np-case { max-width: 900px; padding: 54px 64px 70px; font-size: 14px; line-height: 1.8; color: #23262c; }
+.np-case .cb-top { border-bottom: 1px solid #cfc9bd; padding-bottom: 22px; margin-bottom: 34px; }
+.np-case .cb-kicker { font-size: 11px; letter-spacing: 3px; color: #a08d6a; font-weight: 700; text-transform: uppercase; }
+.np-case h1 { font-size: 30px; font-weight: 800; letter-spacing: -1px; margin: 8px 0 10px; line-height: 1.25; }
+.np-case .cb-sub { color: #6a6459; font-size: 13.5px; line-height: 1.75; max-width: 640px; }
+.np-case .cb-meta { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px; font-size: 12px; color: #6a6459; }
+.np-case .cb-meta a { color: #8a6d3b; }
+.np-case .case { margin: 40px 0; padding-top: 26px; border-top: 3px solid #23262c; }
+.np-case .case-no { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; color: #a08d6a; }
+.np-case .case h2 { font-size: 22px; font-weight: 800; margin: 6px 0 4px; letter-spacing: -.6px; line-height: 1.35; }
+.np-case .case-tag { font-size: 11.5px; color: #8a8478; margin-bottom: 18px; }
+.np-case .scq { display: grid; grid-template-columns: 96px 1fr; gap: 3px 20px; margin: 16px 0; }
+.np-case .scq dt { font-size: 11px; font-weight: 800; letter-spacing: .8px; color: #a08d6a; padding-top: 5px; text-transform: uppercase; }
+.np-case .scq dd { margin: 0 0 12px; line-height: 1.82; }
+.np-case .scq dd:last-child { margin-bottom: 0; }
+.np-case code { background: #efece6; padding: 1px 5px; border-radius: 2px; font-size: 12.4px; color: #8a4a2b; }
+.np-case .proof { background: #f7f5f0; border-left: 3px solid #a08d6a; padding: 13px 18px; margin-top: 18px; font-size: 13px; line-height: 1.75; }
+.np-case .proof b { color: #7a6437; }
+.np-case .cb-appendix { margin-top: 46px; padding-top: 22px; border-top: 1px solid #cfc9bd; font-size: 13px; }
+.np-case .cb-appendix h3 { font-size: 12px; letter-spacing: 2px; color: #a08d6a; font-weight: 800; text-transform: uppercase; margin: 0 0 12px; }
+.np-case .cb-rows { display: grid; grid-template-columns: 150px 1fr; gap: 7px 18px; }
+.np-case .cb-rows dt { font-weight: 700; color: #4a4640; }
+.np-case .cb-rows dd { margin: 0; color: #5c574e; }
+
+/* ════════ ③ 아키텍트 — 다크 · 기술문서 ════════ */
+.np-arch { max-width: 940px; padding: 50px 56px 70px; background: #11161d; color: #cdd6e3; font-size: 13.6px; line-height: 1.75; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+.np-arch .ar-top { border-bottom: 1px solid #262d38; padding-bottom: 24px; margin-bottom: 32px; }
+.np-arch .ar-name { font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -.6px; }
+.np-arch .ar-name span { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #58c98a; margin-left: 12px; font-weight: 500; letter-spacing: 0; }
+.np-arch .ar-sub { color: #8b97a8; margin-top: 10px; max-width: 660px; line-height: 1.8; }
+.np-arch .ar-sub b { color: #cdd6e3; }
+.np-arch .ar-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; font-family: ui-monospace, monospace; font-size: 11.8px; }
+.np-arch .ar-links a { color: #58c98a; text-decoration: none; }
+.np-arch .ar-links a:hover { text-decoration: underline; }
+.np-arch h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.2px; color: #58c98a; text-transform: uppercase; margin: 40px 0 16px; font-family: ui-monospace, monospace; }
+.np-arch h3 { font-size: 16px; font-weight: 800; color: #fff; margin: 26px 0 6px; }
+.np-arch .ar-meta { font-family: ui-monospace, monospace; font-size: 11.5px; color: #6f7c8f; margin-bottom: 12px; }
+.np-arch .diagram { background: #0b1017; border: 1px solid #232b36; border-radius: 6px; padding: 18px 20px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 11.9px; line-height: 1.85; color: #9fb0c6; white-space: pre; overflow-x: auto; margin: 12px 0 16px; }
+.np-arch .diagram b { color: #58c98a; font-weight: 600; }
+.np-arch .diagram i { color: #e0a458; font-style: normal; }
+.np-arch ul { padding-left: 17px; margin: 8px 0; }
+.np-arch li { margin: 5px 0; }
+.np-arch li b { color: #fff; }
+.np-arch code { background: #1b2029; color: #e0a458; padding: 1px 6px; border-radius: 3px; font-size: 12.2px; }
+.np-arch table { width: 100%; border-collapse: collapse; font-size: 12.6px; margin: 12px 0; }
+.np-arch th { background: #1a212b; color: #8b97a8; text-align: left; padding: 8px 12px; font-weight: 700; border: 1px solid #262d38; font-size: 11.5px; letter-spacing: .4px; }
+.np-arch td { border: 1px solid #232a35; padding: 8px 12px; vertical-align: top; line-height: 1.7; }
+.np-arch td b { color: #58c98a; }
+.np-arch .ar-foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid #262d38; font-size: 12.5px; color: #8b97a8; display: grid; grid-template-columns: 130px 1fr; gap: 6px 16px; }
+.np-arch .ar-foot dt { color: #6f7c8f; font-family: ui-monospace, monospace; font-size: 11.5px; }
+.np-arch .ar-foot dd { margin: 0; }
+
+/* ════════ ④ 매트릭스 — 대조표 ════════ */
+.np-matrix { max-width: 1020px; padding: 44px 50px 64px; font-size: 13px; }
+.np-matrix .mx-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; margin-bottom: 22px; }
+.np-matrix .mx-name { font-size: 24px; font-weight: 900; letter-spacing: -.7px; }
+.np-matrix .mx-name span { font-size: 13px; font-weight: 600; color: var(--sub); margin-left: 10px; letter-spacing: 0; }
+.np-matrix .mx-lead { color: var(--sub); margin-top: 7px; font-size: 13px; line-height: 1.7; max-width: 560px; }
+.np-matrix .mx-contact { font-size: 11.8px; color: var(--sub); text-align: right; line-height: 1.8; }
+.np-matrix .mx-contact a { color: #1a5fb4; text-decoration: none; }
+.np-matrix .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0 26px; }
+.np-matrix .stat { background: #f6f8fb; border: 1px solid #e2e7ee; border-left: 3px solid #1a5fb4; padding: 11px 14px; }
+.np-matrix .stat b { display: block; font-size: 20px; font-weight: 900; color: #10386e; letter-spacing: -.7px; font-variant-numeric: tabular-nums; }
+.np-matrix .stat span { font-size: 11.2px; color: var(--sub); }
+.np-matrix h2 { font-size: 12px; font-weight: 800; letter-spacing: 1.6px; color: #10386e; text-transform: uppercase; margin: 28px 0 10px; }
+.np-matrix table { width: 100%; border-collapse: collapse; font-size: 12.4px; }
+.np-matrix thead th { background: #10386e; color: #fff; text-align: left; padding: 8px 12px; font-weight: 700; font-size: 11.5px; letter-spacing: .5px; }
+.np-matrix td { border: 1px solid #dde2ea; padding: 9px 12px; vertical-align: top; line-height: 1.65; }
+.np-matrix tbody tr:nth-child(even) td { background: #fafbfd; }
+.np-matrix .c-cap { font-weight: 800; color: #10386e; width: 132px; }
+.np-matrix .c-lv { width: 74px; text-align: center; }
+.np-matrix .lv { display: inline-block; font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 2px; }
+.np-matrix .lv.a { background: #10386e; color: #fff; }
+.np-matrix .lv.b { background: #dbe6f5; color: #10386e; }
+.np-matrix .c-src { width: 118px; color: var(--dim); font-size: 11.3px; }
+.np-matrix .ev { color: #1a5fb4; text-decoration: none; border-bottom: 1px dotted #9dbde4; }
+.np-matrix .mx-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.np-matrix .mx-note { background: #fffaf0; border: 1px solid #f0dfba; padding: 11px 15px; font-size: 12.2px; color: #7a5410; margin-top: 16px; }
+.np-matrix .mini { font-size: 12.3px; line-height: 1.7; }
+.np-matrix .mini b { color: #10386e; }
+.np-matrix .mini li { margin: 3px 0; }
+
+/* ════════ ⑤ 내러티브 — 에세이 ════════ */
+.np-narr { max-width: 700px; padding: 64px 62px 80px; font-size: 16.2px; line-height: 1.95; color: #2b2823; background: #fffdfa; }
+.np-narr .nr-head { text-align: center; margin-bottom: 46px; }
+.np-narr .nr-photo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin: 0 auto 18px; display: block; filter: grayscale(.18); }
+.np-narr .nr-name { font-size: 21px; font-weight: 800; letter-spacing: -.4px; }
+.np-narr .nr-role { color: #8c8578; font-size: 13.5px; margin-top: 5px; }
+.np-narr h2 { font-size: 19px; font-weight: 800; letter-spacing: -.5px; margin: 46px 0 12px; color: #1d1b17; line-height: 1.45; }
+.np-narr h2::before { content: ''; display: block; width: 30px; height: 3px; background: #c9a55c; margin-bottom: 14px; }
+.np-narr p { margin: 15px 0; }
+.np-narr p b { font-weight: 700; color: #1d1b17; border-bottom: 2px solid #f0e2c4; }
+.np-narr .pull { font-size: 18px; font-weight: 700; line-height: 1.7; color: #1d1b17; margin: 26px 0; padding-left: 20px; border-left: 3px solid #c9a55c; }
+.np-narr .nr-facts { margin-top: 56px; padding-top: 26px; border-top: 1px solid #e6ded0; font-size: 13.4px; line-height: 1.75; color: #5c564c; }
+.np-narr .nr-facts h3 { font-size: 11.5px; letter-spacing: 2px; color: #a89468; font-weight: 800; text-transform: uppercase; margin: 0 0 14px; }
+.np-narr .nr-facts dl { display: grid; grid-template-columns: 96px 1fr; gap: 8px 16px; margin: 0; }
+.np-narr .nr-facts dt { font-weight: 700; color: #3d3830; }
+.np-narr .nr-facts dd { margin: 0; }
+.np-narr .nr-facts a { color: #8a6d3b; }
+
+/* ════════ 허브 ════════ */
+.np-hub { max-width: 900px; padding: 46px 52px 60px; }
+.np-hub h1 { font-size: 25px; font-weight: 900; letter-spacing: -.8px; margin: 0 0 8px; }
+.np-hub .hub-lead { color: var(--sub); line-height: 1.75; font-size: 13.6px; max-width: 620px; }
+.np-hub .hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 26px; }
+.np-hub .hub-card { border: 1px solid var(--line); padding: 20px 22px; text-decoration: none; color: inherit; display: block; transition: .14s; background: #fff; }
+.np-hub .hub-card:hover { border-color: #10386e; box-shadow: 0 6px 20px rgba(16,56,110,.12); transform: translateY(-2px); }
+.np-hub .hub-card .num { font-size: 10.5px; font-weight: 800; letter-spacing: 1.6px; color: #a3aab7; }
+.np-hub .hub-card h3 { font-size: 16px; margin: 5px 0 6px; color: #10386e; font-weight: 800; }
+.np-hub .hub-card p { margin: 0; font-size: 12.7px; color: var(--sub); line-height: 1.65; }
+.np-hub .hub-card .when { margin-top: 11px; font-size: 11.5px; color: #1a5fb4; font-weight: 700; }
+.np-hub .hub-tbl { width: 100%; border-collapse: collapse; font-size: 12.6px; margin-top: 26px; }
+.np-hub .hub-tbl td { border: 1px solid var(--line); padding: 8px 13px; }
+.np-hub .hub-tbl td:first-child { font-weight: 700; color: #10386e; width: 42%; background: #f7f9fc; }
+
+/* ── 인쇄 ── */
+@media print {
+  .no-print { display: none !important; }
+  .n-root { padding-top: 0; }
+  .n-sheet { box-shadow: none; margin: 0; max-width: 100%; }
+  .np-one { padding: 0; font-size: 9.6px; }
+  .np-one .h-name { font-size: 21px; }
+  .np-case, .np-matrix, .np-narr { padding: 0; }
+  .np-arch { padding: 0; background: #fff; color: #16181d; }
+  .np-arch .ar-name, .np-arch h3, .np-arch li b { color: #000; }
+  .np-arch .diagram { background: #f6f8fa; border-color: #ccc; color: #333; }
+  .np-arch h2 { color: #0a5c34; }
+  @page { size: A4; margin: 12mm; }
+}
+@media (max-width: 860px) {
+  .np-one { padding: 22px; }
+  .np-one .cols { grid-template-columns: 1fr; }
+  .np-case, .np-arch, .np-matrix, .np-narr, .np-hub { padding: 30px 20px 50px; }
+  .np-matrix .stats, .np-hub .hub-grid, .np-matrix .mx-2col { grid-template-columns: 1fr; }
+  .np-case .scq, .np-narr .nr-facts dl, .np-arch .ar-foot, .np-case .cb-rows { grid-template-columns: 1fr; gap: 2px; }
+  .np-matrix table, .np-matrix thead { font-size: 11.5px; }
+}

@@ -3,6 +3,7 @@ import type { BlogPost } from '../../data';
 export const post01: BlogPost = {
     id: '1',
     package: 'min',
+    project: 'i-poten',
     title: 'Term은 단어 테이블이 아니라 기준 데이터다',
     excerpt:
         'I-Poten의 Term 도메인을 단어, 카테고리, 태그, 조인 엔티티로 분리한 이유와 이 구조가 검색, 단어장, 퀴즈, 추천 확장에 어떤 기반이 되었는지 공유합니다.',

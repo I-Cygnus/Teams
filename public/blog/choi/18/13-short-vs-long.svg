@@ -1,0 +1,24 @@
+<svg width="100%" viewBox="0 0 720 288" role="img" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',sans-serif">
+<title>단기 효과와 장기 효과는 다르다</title>
+<desc>첫 주에는 B가 A보다 높지만 몇 달이 지나면 신기함이 사라져 B가 A보다 낮아질 수 있다.</desc>
+<line x1="80" y1="48" x2="80" y2="200" stroke="#898781" stroke-width="1"/>
+<line x1="80" y1="200" x2="650" y2="200" stroke="#898781" stroke-width="1"/>
+<text x="62" y="54" text-anchor="end" font-size="10.5" fill="#898781">전환율</text>
+<text x="120" y="222" text-anchor="middle" font-size="10.5" fill="#52514E">1주</text>
+<text x="270" y="222" text-anchor="middle" font-size="10.5" fill="#52514E">1개월</text>
+<text x="430" y="222" text-anchor="middle" font-size="10.5" fill="#52514E">2개월</text>
+<text x="590" y="222" text-anchor="middle" font-size="10.5" fill="#52514E">3개월</text>
+<polyline points="120,150 270,145 430,140 590,134" fill="none" stroke="#898781" stroke-width="2"/>
+<circle cx="120" cy="150" r="4" fill="#898781"/>
+<circle cx="590" cy="134" r="4" fill="#898781"/>
+<text x="606" y="138" font-size="11" fill="#52514E">A</text>
+<polyline points="120,96 270,110 430,132 590,152" fill="none" stroke="#6C4EC9" stroke-width="2"/>
+<circle cx="120" cy="96" r="4" fill="#6C4EC9"/>
+<circle cx="590" cy="152" r="4" fill="#6C4EC9"/>
+<text x="606" y="156" font-size="11" fill="#5B3FB5">B</text>
+<line x1="120" y1="72" x2="120" y2="208" stroke="#0F6E56" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="132" y="72" font-size="11" font-weight="600" fill="#0F6E56">여기서 실험 종료 → "B 승!"</text>
+<line x1="590" y1="120" x2="590" y2="208" stroke="#A32D2D" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="578" y="112" text-anchor="end" font-size="11" font-weight="600" fill="#A32D2D">석 달 뒤엔 역전</text>
+<text x="360" y="262" text-anchor="middle" font-size="12" fill="#52514E">새것이라 눌러본 것인지, 정말 더 나은 것인지 — 첫 주로는 구분되지 않는다</text>
+</svg>
